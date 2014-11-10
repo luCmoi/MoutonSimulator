@@ -9,6 +9,7 @@ public class FenetrePrincipale extends JFrame {
         super("Mouton Simulator");
         setLayout(new BorderLayout());
         setSize(800, 600);
-        this.add(new PanelPartie());
+        this.setContentPane(new PanelPartie());
+        this.setVisible(true);
     }
 }

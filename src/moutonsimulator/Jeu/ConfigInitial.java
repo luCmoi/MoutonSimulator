@@ -2,8 +2,8 @@ package moutonsimulator.Jeu;
 
 public class ConfigInitial {
     
-    public int width;
-    public int heigth;
+    public int width = 50;
+    public int heigth = 50;
 
     public int getWidth() {
         return width;
