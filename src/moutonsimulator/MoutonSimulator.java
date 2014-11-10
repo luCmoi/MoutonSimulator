@@ -7,7 +7,7 @@ import javax.swing.UIManager;
 
 public class MoutonSimulator {
         public static void main(String[] args) {
-            //kjdfuibdfgi
+
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
