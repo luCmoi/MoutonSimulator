@@ -5,7 +5,7 @@ import moutonsimulator.Config;
 import moutonsimulator.IntValMax;
 import moutonsimulator.Jeu.Case;
 
-public abstract class Animal {
+public abstract class Animal extends ElementDynamique{
 
     private IntValMax vie;
     private IntValMax age;
