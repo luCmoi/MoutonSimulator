@@ -1,5 +1,6 @@
 package moutonsimulator.Jeu;
 
+import java.awt.Graphics2D;
 import moutonsimulator.Elements.Animal;
 import moutonsimulator.Elements.Plante;
 
@@ -9,7 +10,7 @@ public class Case {
     private int y;
     private Animal animal;
     private Plante plante;
-    public Grille container;
+    private Grille container;
 
     Case(int x, int y) {
         this.x = x;
@@ -19,10 +20,23 @@ public class Case {
     }
 
     void update() {
-        this.animal.update();
-        this.plante.update();
+        if (this.getAnimal() != null) {
+            this.getAnimal().update();
+        }
+        if (this.getPlante() != null) {
+            this.getPlante().update();
+        }
     }
 
+    public void render(Graphics2D batch) {
+        if (this.getAnimal() != null) {
+            this.getAnimal().render(batch);
+        }
+        if (this.getPlante() != null) {
+            this.getPlante().render(batch);
+        }
+    }
+    
     public int getX() {
         return x;
     }
@@ -45,6 +59,18 @@ public class Case {
 
     public Grille getContainer() {
         return container;
+    }
+
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
+
+    public void setPlante(Plante plante) {
+        this.plante = plante;
     }
 
 }
