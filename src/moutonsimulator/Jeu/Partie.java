@@ -1,5 +1,7 @@
 package moutonsimulator.Jeu;
 
+import java.awt.Graphics2D;
+
 
 public class Partie {
     
@@ -14,5 +16,9 @@ public class Partie {
     public void update(){
         plateau.update();
         jours++;
+    }
+    
+    public void render(Graphics2D batch){
+        plateau.render(batch);
     }
 }
