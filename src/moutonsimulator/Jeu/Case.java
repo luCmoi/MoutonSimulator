@@ -1,5 +1,6 @@
 package moutonsimulator.Jeu;
 
+import GUI.Images;
 import java.awt.Graphics2D;
 import moutonsimulator.Elements.Animal;
 import moutonsimulator.Elements.Plante;
@@ -29,6 +30,7 @@ public class Case {
     }
 
     public void render(Graphics2D batch) {
+        batch.drawImage(Images.herbe, x*32, y*32,32,32,null);
         if (this.getAnimal() != null) {
             this.getAnimal().render(batch);
         }

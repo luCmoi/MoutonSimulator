@@ -1,5 +1,7 @@
 package GUI;
 
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import javax.swing.JPanel;
 import moutonsimulator.Jeu.ConfigInitial;
 import moutonsimulator.Jeu.Partie;
@@ -13,7 +15,14 @@ public class PanelPartie extends JPanel {
         this.partie = new Partie(new ConfigInitial());
         while (true) {
             partie.update();
-            partie.render(batch);
+            
         }
+    }
+    
+    @Override
+    public void paintComponent(Graphics g) {
+        //Dessein de l'image en fonction du zoom appliqué
+        Graphics2D g2d = (Graphics2D) g;
+        partie.render(g2d);
     }
 }
