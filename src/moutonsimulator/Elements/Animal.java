@@ -11,7 +11,6 @@ public abstract class Animal extends ElementDynamique{
     private IntValMax age;
     private HashSet<Integer> setComp;
     private Arbre arbreGene;
-    private Case conteneur;
 
     public void update() {
         mouvementBasique();
