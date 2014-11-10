@@ -18,6 +18,11 @@ public class Case {
         this.plante = null;
     }
 
+    void update() {
+        this.animal.update();
+        this.plante.update();
+    }
+
     public int getX() {
         return x;
     }
@@ -32,10 +37,6 @@ public class Case {
 
     public void setY(int y) {
         this.y = y;
-    }
-
-    void update() {
-        this.animal.update();
     }
 
     public Plante getPlante() {
