@@ -38,9 +38,8 @@ public class PanelPartie extends JPanel {
             } catch (InterruptedException ex) {
                 Logger.getLogger(PanelPartie.class.getName()).log(Level.SEVERE, null, ex);
             }
-           this.partie.update();
-           this.repaint();
-           System.out.println("Je tourne salop");
+            this.partie.update();
+            this.repaint();
         }
     }
 }
