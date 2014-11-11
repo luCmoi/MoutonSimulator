@@ -33,11 +33,22 @@ public class PanelPartie extends JPanel {
     }
 
     public void execution() {
+<<<<<<< HEAD
 
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
             Logger.getLogger(PanelPartie.class.getName()).log(Level.SEVERE, null, ex);
+=======
+        while (true) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PanelPartie.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.partie.update();
+            this.repaint();
+>>>>>>> origin/master
         }
         this.partie.update();
         System.out.println("Epaint");
