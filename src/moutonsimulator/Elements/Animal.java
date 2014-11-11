@@ -17,17 +17,16 @@ public abstract class Animal extends ElementDynamique {
     }
 
     public void mouvementBasique() {
-        if (this.conteneur.getX() == 0) {
-
-        }
-        if (this.conteneur.getX() == Config.dimensionX - 1) {
-
-        }
-        if (this.conteneur.getY() == 0) {
-
-        }
-        if (this.conteneur.getY() == Config.dimensionY - 1) {
-
+        int nX, nY;
+        while (true) {
+            nX = (conteneur.getX() - 1) + (int) (Math.random() * 3);
+            nY = (conteneur.getY() - 1) + (int) (Math.random() * 3);
+            try{
+                conteneur = conteneur.getContainer().getPlateau()[nX][nY];
+                break;
+            }catch(Exception e){
+                
+            }
         }
     }
 

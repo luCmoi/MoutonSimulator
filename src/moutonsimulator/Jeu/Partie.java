@@ -1,6 +1,7 @@
 package moutonsimulator.Jeu;
 
 import java.awt.Graphics2D;
+import javax.swing.JPanel;
 import moutonsimulator.Elements.Loup;
 import moutonsimulator.Elements.Mouton;
 import moutonsimulator.Elements.Plante;
@@ -9,10 +10,12 @@ public class Partie {
     
     private final Grille plateau;
     private int jours;
+    private JPanel pan;
     
-    public Partie(ConfigInitial init) {
+    public Partie(ConfigInitial init,JPanel pan) {
         this.plateau = initPlateau(init);
         this.jours = 0;
+        this.pan=pan;
     }
     
     public Grille initPlateau(ConfigInitial init) {
