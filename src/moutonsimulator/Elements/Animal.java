@@ -18,20 +18,25 @@ public abstract class Animal extends ElementDynamique {
     }
 
     public void mouvementBasique() {
-        /*
+
         int nX, nY;
-        while (true) {
+        int cmp = 0;
+        while (cmp < 5) {
             nX = (conteneur.getX() - 1) + (int) (Math.random() * 3);
             nY = (conteneur.getY() - 1) + (int) (Math.random() * 3);
+            //System.out.println("x : "+nX+"  y : "+nY);
+            cmp++;
             try {
+                conteneur.getContainer().getPlateau();
                 if (conteneur.getContainer().getPlateau()[nX][nY].getAnimal() == null) {
                     conteneur = conteneur.getContainer().getPlateau()[nX][nY];
+                    System.out.println("MOOVE");
                     break;
                 }
-            } catch (Exception e) {
-
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println("NOT MOOVE");
             }
-        }*/
+        }
     }
 
     public Animal(int vieMax, int ageMax, Arbre arbre, Case c) {
