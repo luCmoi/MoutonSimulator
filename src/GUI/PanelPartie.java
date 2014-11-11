@@ -12,9 +12,9 @@ public class PanelPartie extends JPanel {
 
     public PanelPartie() {
         super();
-        this.partie = new Partie(new ConfigInitial(),this);
+        this.partie = new Partie(new ConfigInitial(), this);
     }
-    
+
     @Override
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
@@ -27,5 +27,12 @@ public class PanelPartie extends JPanel {
 
     public void setPartie(Partie partie) {
         this.partie = partie;
+    }
+
+    public void execution() {
+        while (true) {
+           this.partie.update();
+           this.repaint();
+        }
     }
 }
