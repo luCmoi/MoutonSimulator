@@ -15,7 +15,7 @@ public class MoutonSimulator {
             public void run() {
                 UIManager.put("swing.boldMetal", Boolean.FALSE);
                 creerEtAfficherGUI();
-
+                
             }
         });
     }
