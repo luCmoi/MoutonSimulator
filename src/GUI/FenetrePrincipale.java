@@ -28,8 +28,19 @@ public class FenetrePrincipale extends JFrame {
     }
 
     public void execution() {
-        while (true) {
-            this.pan.execution();
-        }
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        pan.execution();
+                        Thread.sleep(500);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(PanelPartie.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            }
+        });
+        thread.start();
     }
 }

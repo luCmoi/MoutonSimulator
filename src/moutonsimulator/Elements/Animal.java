@@ -1,7 +1,6 @@
 package moutonsimulator.Elements;
 
 import java.util.HashSet;
-import moutonsimulator.Config;
 import moutonsimulator.IntValMax;
 import moutonsimulator.Jeu.Case;
 
@@ -30,7 +29,6 @@ public abstract class Animal extends ElementDynamique {
                 conteneur.getContainer().getPlateau();
                 if (conteneur.getContainer().getPlateau()[nX][nY].getAnimal() == null) {
                     conteneur = conteneur.getContainer().getPlateau()[nX][nY];
-                    System.out.println("MOOVE");
                     break;
                 }
             } catch (IndexOutOfBoundsException e) {

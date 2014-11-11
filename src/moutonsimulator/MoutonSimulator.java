@@ -8,7 +8,12 @@ public class MoutonSimulator {
 
     public static void main(String[] args) {
         Images.init();
-        creerEtAfficherGUI();
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                creerEtAfficherGUI();
+            }
+        });
     }
 
     private static void creerEtAfficherGUI() {
