@@ -9,7 +9,7 @@ public class Grille {
     public Grille(int width, int height) {
         this.plateau = new Case[width][height];
         for (int x = 0; x < plateau.length; x++) {
-            for (int y = 0; y < plateau.length; y++) {
+            for (int y = 0; y < plateau[0].length; y++) {
                 this.plateau[x][y] = new Case(x, y,this);
             }
         }

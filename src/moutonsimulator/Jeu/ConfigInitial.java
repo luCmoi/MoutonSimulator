@@ -3,7 +3,7 @@ package moutonsimulator.Jeu;
 public class ConfigInitial {
     
     public int width = 50;
-    public int heigth = 50;
+    public int heigth = 30;
     public int nbMouton = 10;
     public int nbLoup = 5;
 
