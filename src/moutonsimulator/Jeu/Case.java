@@ -14,11 +14,12 @@ public class Case {
     private Plante plante;
     private Grille container;
 
-    Case(int x, int y) {
+    Case(int x, int y,Grille cont) {
         this.x = x;
         this.y = y;
         this.animal = null;
         this.plante = null;
+        this.container = cont;
     }
 
     void update() {
