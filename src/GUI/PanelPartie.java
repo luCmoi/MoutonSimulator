@@ -2,6 +2,8 @@ package GUI;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import moutonsimulator.Jeu.ConfigInitial;
 import moutonsimulator.Jeu.Partie;
@@ -31,8 +33,14 @@ public class PanelPartie extends JPanel {
 
     public void execution() {
         while (true) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(PanelPartie.class.getName()).log(Level.SEVERE, null, ex);
+            }
            this.partie.update();
            this.repaint();
+           System.out.println("Je tourne salop");
         }
     }
 }

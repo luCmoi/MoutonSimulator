@@ -24,6 +24,7 @@ public class MoutonSimulator {
         FenetrePrincipale fenetrePrincipale = new FenetrePrincipale();
         fenetrePrincipale.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         fenetrePrincipale.setVisible(true);
+        fenetrePrincipale.execution();
     }
 
 }

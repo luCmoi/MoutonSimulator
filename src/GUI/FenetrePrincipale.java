@@ -14,7 +14,6 @@ public class FenetrePrincipale extends JFrame {
         pan = new PanelPartie();
         this.setContentPane(pan);
         this.setVisible(true);
-        pan.execution();
     }
 
     public PanelPartie getPan() {
@@ -23,5 +22,9 @@ public class FenetrePrincipale extends JFrame {
 
     public void setPan(PanelPartie pan) {
         this.pan = pan;
+    }
+
+    public void execution() {
+        this.pan.execution();
     }
 }
