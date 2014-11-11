@@ -25,6 +25,8 @@ public class FenetrePrincipale extends JFrame {
     }
 
     public void execution() {
-        this.pan.execution();
+        while (true) {
+            this.pan.execution();
+        }
     }
 }

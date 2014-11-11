@@ -19,6 +19,7 @@ public class PanelPartie extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
+        System.out.println("paint");
         Graphics2D g2d = (Graphics2D) g;
         partie.render(g2d);
     }
@@ -32,15 +33,15 @@ public class PanelPartie extends JPanel {
     }
 
     public void execution() {
-        while (true) {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(PanelPartie.class.getName()).log(Level.SEVERE, null, ex);
-            }
-           this.partie.update();
-           this.repaint();
-           System.out.println("Je tourne salop");
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(PanelPartie.class.getName()).log(Level.SEVERE, null, ex);
         }
+        this.partie.update();
+        System.out.println("Epaint");
+        this.repaint();
+        System.out.println("Je tourne salop");
     }
 }

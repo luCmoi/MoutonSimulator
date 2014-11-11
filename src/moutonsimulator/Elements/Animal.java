@@ -18,6 +18,7 @@ public abstract class Animal extends ElementDynamique {
     }
 
     public void mouvementBasique() {
+        /*
         int nX, nY;
         while (true) {
             nX = (conteneur.getX() - 1) + (int) (Math.random() * 3);
@@ -30,7 +31,7 @@ public abstract class Animal extends ElementDynamique {
             } catch (Exception e) {
 
             }
-        }
+        }*/
     }
 
     public Animal(int vieMax, int ageMax, Arbre arbre, Case c) {
