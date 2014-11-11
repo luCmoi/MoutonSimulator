@@ -12,6 +12,7 @@ public abstract class Animal extends ElementDynamique {
     private HashSet<Integer> setComp;
     private Arbre arbreGene;
 
+    @Override
     public void update() {
         mouvementBasique();
     }
@@ -21,11 +22,13 @@ public abstract class Animal extends ElementDynamique {
         while (true) {
             nX = (conteneur.getX() - 1) + (int) (Math.random() * 3);
             nY = (conteneur.getY() - 1) + (int) (Math.random() * 3);
-            try{
-                conteneur = conteneur.getContainer().getPlateau()[nX][nY];
-                break;
-            }catch(Exception e){
-                
+            try {
+                if (conteneur.getContainer().getPlateau()[nX][nY].getAnimal() == null) {
+                    conteneur = conteneur.getContainer().getPlateau()[nX][nY];
+                    break;
+                }
+            } catch (Exception e) {
+
             }
         }
     }
