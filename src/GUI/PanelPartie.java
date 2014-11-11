@@ -40,12 +40,9 @@ public class PanelPartie extends JPanel {
             Logger.getLogger(PanelPartie.class.getName()).log(Level.SEVERE, null, ex);
         }
         this.partie.update();
-<<<<<<< HEAD
         System.out.println("Epaint");
         this.repaint();
         System.out.println("Je tourne salop");
-=======
         this.repaint();
->>>>>>> 2403b66ca8afbfee817ff495cc32c6fa5e90b6dd
     }
 }
