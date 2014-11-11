@@ -5,7 +5,7 @@ import moutonsimulator.Config;
 import moutonsimulator.IntValMax;
 import moutonsimulator.Jeu.Case;
 
-public abstract class Animal extends ElementDynamique{
+public abstract class Animal extends ElementDynamique {
 
     private IntValMax vie;
     private IntValMax age;
@@ -27,15 +27,16 @@ public abstract class Animal extends ElementDynamique{
 
         }
         if (this.conteneur.getY() == Config.dimensionY - 1) {
-            
+
         }
     }
 
-    public Animal(int vieMax, int ageMax, Arbre arbre) {
+    public Animal(int vieMax, int ageMax, Arbre arbre, Case c) {
         this.vie = new IntValMax(vieMax);
         this.age = new IntValMax(0, ageMax);
         this.setComp = new HashSet<>();
         this.arbreGene = arbre;
+        this.conteneur = c;
     }
 
     public IntValMax getVie() {

@@ -1,5 +1,6 @@
 package moutonsimulator.Elements;
 
+import GUI.Images;
 import moutonsimulator.IntValMax;
 import moutonsimulator.Jeu.Case;
 
@@ -9,13 +10,14 @@ public class Plante extends ElementDynamique{
     public IntValMax vie;
     public IntValMax age;
     public int dureePousse;
-    public Case container;
+  
     
-    public Plante(int ageMax,int vie,int dureePousse){
+    public Plante(int ageMax,int vie,int dureePousse,Case c){
         this.age = new IntValMax(0, ageMax);
         this.vie = new IntValMax(vie);
         this.dureePousse = dureePousse;
-        
+        this.image = Images.buisson;
+        this.conteneur = c;
     }
 
     @Override
@@ -47,12 +49,4 @@ public class Plante extends ElementDynamique{
         this.dureePousse = dureePousse;
     }
 
-    public Case getContainer() {
-        return container;
-    }
-
-    public void setContainer(Case container) {
-        this.container = container;
-    }
-    
 }

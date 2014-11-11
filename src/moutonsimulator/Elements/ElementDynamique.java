@@ -13,6 +13,14 @@ public abstract class ElementDynamique {
     abstract public void update();
 
     public void render(Graphics2D batch) {
-        batch.drawImage(image, conteneur.getX(), conteneur.getY(), Config.coteCase, Config.coteCase,null);
+        batch.drawImage(image, conteneur.getX()*Config.coteCase, conteneur.getY()*Config.coteCase, Config.coteCase, Config.coteCase,null);
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 }
