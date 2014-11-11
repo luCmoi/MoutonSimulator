@@ -10,14 +10,7 @@ public class MoutonSimulator {
 
     public static void main(String[] args) {
         Images.init();
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                UIManager.put("swing.boldMetal", Boolean.FALSE);
-                creerEtAfficherGUI();
-                
-            }
-        });
+        creerEtAfficherGUI();
     }
 
     private static void creerEtAfficherGUI() {
