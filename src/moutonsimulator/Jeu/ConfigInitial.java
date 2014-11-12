@@ -12,7 +12,7 @@ public class ConfigInitial {
     }
 
     public void setWidth(int width) {
-        this.width = width;
+        ConfigInitial.width = width;
     }
 
     public int getHeigth() {
@@ -20,7 +20,7 @@ public class ConfigInitial {
     }
 
     public void setHeigth(int heigth) {
-        this.heigth = heigth;
+        ConfigInitial.heigth = heigth;
     }
 
     public int getNbMouton() {

@@ -13,9 +13,9 @@ public class Case {
     private int y;
     private Animal animal;
     private Plante plante;
-    private Grille container;
+    private final Grille container;
 
-    Case(int x, int y,Grille cont) {
+    Case(int x, int y, Grille cont) {
         this.x = x;
         this.y = y;
         this.animal = null;
@@ -33,15 +33,15 @@ public class Case {
     }
 
     public void render(Graphics2D batch) {
-        batch.drawImage(Images.herbe, (x*Config.coteCase)-(ViewPort.x), (y*Config.coteCase)-(ViewPort.y),Config.coteCase,Config.coteCase,null);
-        if (this.getAnimal() != null) {
-            this.getAnimal().render(batch);
-        }
+        batch.drawImage(Images.herbe, (x * Config.coteCase) - (ViewPort.x), (y * Config.coteCase) - (ViewPort.y), Config.coteCase, Config.coteCase, null);
         if (this.getPlante() != null) {
             this.getPlante().render(batch);
         }
+        if (this.getAnimal() != null) {
+            this.getAnimal().render(batch);
+        }
     }
-    
+
     public int getX() {
         return x;
     }
