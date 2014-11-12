@@ -23,16 +23,15 @@ public abstract class Animal extends ElementDynamique {
         while (cmp < 5) {
             nX = (conteneur.getX() - 1) + (int) (Math.random() * 3);
             nY = (conteneur.getY() - 1) + (int) (Math.random() * 3);
-            //System.out.println("x : "+nX+"  y : "+nY);
             cmp++;
             try {
-                conteneur.getContainer().getPlateau();
                 if (conteneur.getContainer().getPlateau()[nX][nY].getAnimal() == null) {
+                    conteneur.setAnimal(null);
                     conteneur = conteneur.getContainer().getPlateau()[nX][nY];
+                    conteneur.setAnimal(this);
                     break;
                 }
             } catch (IndexOutOfBoundsException e) {
-                System.out.println("NOT MOOVE");
             }
         }
     }

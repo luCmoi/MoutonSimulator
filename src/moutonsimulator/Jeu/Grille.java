@@ -1,6 +1,8 @@
 package moutonsimulator.Jeu;
 
+import GUI.ViewPort;
 import java.awt.Graphics2D;
+import moutonsimulator.Config;
 
 public class Grille {
 
@@ -10,7 +12,7 @@ public class Grille {
         this.plateau = new Case[width][height];
         for (int x = 0; x < plateau.length; x++) {
             for (int y = 0; y < plateau[0].length; y++) {
-                this.plateau[x][y] = new Case(x, y,this);
+                this.plateau[x][y] = new Case(x, y, this);
             }
         }
     }
@@ -24,9 +26,9 @@ public class Grille {
     }
 
     public void render(Graphics2D batch) {
-        for (Case[] plateau1 : plateau) {
-            for (Case caseTmp : plateau1) {
-                caseTmp.render(batch);
+        for (int x = ViewPort.x / Config.coteCase; x <= (ViewPort.width / Config.coteCase) + 1 + (ViewPort.x / Config.coteCase); x++) {
+            for (int y = ViewPort.y / Config.coteCase; y <= (ViewPort.height / Config.coteCase) + 1 + (ViewPort.y / Config.coteCase); y++) {
+                plateau[x][y].render(batch);
             }
         }
     }

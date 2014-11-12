@@ -17,7 +17,7 @@ public class Images {
     public static void init() {
         try {
             Images.herbe = ImageIO.read(new File("Ressources/Images/herbe.jpg"));
-            Images.mouton = ImageIO.read(new File("Ressources/Images/mouton.gif"));
+            Images.mouton = ImageIO.read(new File("Ressources/Images/mouton.png"));
             Images.loup = ImageIO.read(new File("Ressources/Images/loup.gif"));
             Images.buisson = ImageIO.read(new File("Ressources/Images/buisson.png"));
         } catch (IOException ex) {

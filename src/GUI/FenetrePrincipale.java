@@ -28,7 +28,7 @@ public class FenetrePrincipale extends JFrame {
     }
 
     public void execution() {
-        Thread thread = new Thread(new Runnable() {
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 while (true) {
@@ -40,7 +40,6 @@ public class FenetrePrincipale extends JFrame {
                     }
                 }
             }
-        });
-        thread.start();
+        }).start();
     }
 }
