@@ -4,15 +4,13 @@ import GUI.Images;
 import moutonsimulator.IntValMax;
 import moutonsimulator.Jeu.Case;
 
+public class Plante extends ElementDynamique {
 
-public class Plante extends ElementDynamique{
-    
     public IntValMax vie;
     public IntValMax age;
     public int dureePousse;
-  
-    
-    public Plante(int ageMax,int vie,int dureePousse,Case c){
+
+    public Plante(int ageMax, int vie, int dureePousse, Case c) {
         this.age = new IntValMax(0, ageMax);
         this.vie = new IntValMax(vie);
         this.dureePousse = dureePousse;
@@ -21,8 +19,16 @@ public class Plante extends ElementDynamique{
     }
 
     @Override
+    public void mort() {
+        this.conteneur.setPlante(null);
+        this.image = null;
+    }
+
+    @Override
     public void update() {
-        
+        if (this.vie.plusPlus()) {
+            this.mort();
+        }
     }
 
     public IntValMax getVie() {

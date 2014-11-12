@@ -1,19 +1,39 @@
 package moutonsimulator.Elements;
 
-import java.util.HashSet;
 import moutonsimulator.IntValMax;
 import moutonsimulator.Jeu.Case;
 
 public abstract class Animal extends ElementDynamique {
 
-    private IntValMax vie;
-    private IntValMax age;
-    private HashSet<Integer> setComp;
-    private Arbre arbreGene;
+    protected IntValMax vie;
+    protected IntValMax age;
+    protected Arbre arbreGene;
+    protected CompetenceAnimale competence;
+
+    public Animal(Case c, Arbre arbre) {
+        this.competence = CompetenceAnimale.randomCompetences();
+        this.arbreGene = arbre;
+        this.vie = new IntValMax(competence.getVieMax());
+        this.age = new IntValMax(0, competence.getAgeMax());
+        this.conteneur = c;
+    }
 
     @Override
     public void update() {
+        if (this.vie.plusPlus()) {
+            this.mort();
+            return;
+        }
         mouvementBasique();
+
+    }
+
+    public abstract boolean mange(ElementDynamique el);
+
+    @Override
+    public void mort() {
+        this.conteneur.setAnimal(null);
+        this.conteneur.setEngrais(this.conteneur.getEngrais() + this.competence.getEngrais());
     }
 
     public void mouvementBasique() {
@@ -25,23 +45,27 @@ public abstract class Animal extends ElementDynamique {
             nY = (conteneur.getY() - 1) + (int) (Math.random() * 3);
             cmp++;
             try {
-                if (conteneur.getContainer().getPlateau()[nX][nY].getAnimal() == null) {
+                if (conteneur.getContainer().getPlateau()[nX][nY].getAnimal() != null) {
+                    if (this.mange(conteneur.getContainer().getPlateau()[nX][nY].getAnimal())) {
+                        conteneur.getContainer().getPlateau()[nX][nY].getAnimal().mort();
+                        conteneur.setAnimal(null);
+                        conteneur = conteneur.getContainer().getPlateau()[nX][nY];
+                        conteneur.setAnimal(this);
+                        break;
+                    } else {
+                        System.out.println("1");
+                        throw new IndexOutOfBoundsException();
+                    }
+                } else {
                     conteneur.setAnimal(null);
                     conteneur = conteneur.getContainer().getPlateau()[nX][nY];
                     conteneur.setAnimal(this);
                     break;
                 }
+
             } catch (IndexOutOfBoundsException e) {
             }
         }
-    }
-
-    public Animal(int vieMax, int ageMax, Arbre arbre, Case c) {
-        this.vie = new IntValMax(vieMax);
-        this.age = new IntValMax(0, ageMax);
-        this.setComp = new HashSet<>();
-        this.arbreGene = arbre;
-        this.conteneur = c;
     }
 
     public IntValMax getVie() {
@@ -58,14 +82,6 @@ public abstract class Animal extends ElementDynamique {
 
     public void setAge(IntValMax age) {
         this.age = age;
-    }
-
-    public HashSet<Integer> getSetComp() {
-        return setComp;
-    }
-
-    public void setSetComp(HashSet<Integer> setComp) {
-        this.setComp = setComp;
     }
 
     public Arbre getArbreGene() {

@@ -13,6 +13,7 @@ public class Case {
     private int y;
     private Animal animal;
     private Plante plante;
+    private int engrais;
     private final Grille container;
 
     Case(int x, int y, Grille cont) {
@@ -21,9 +22,13 @@ public class Case {
         this.animal = null;
         this.plante = null;
         this.container = cont;
+        this.engrais = 0;
     }
 
-    void update() {
+    public void update() {
+        if(this.plante==null && this.engrais>0){
+            this.plante = new Plante(10, 20, 1, this);
+        }
         if (this.getAnimal() != null) {
             this.getAnimal().update();
         }
@@ -76,6 +81,14 @@ public class Case {
 
     public void setPlante(Plante plante) {
         this.plante = plante;
+    }
+
+    public int getEngrais() {
+        return engrais;
+    }
+
+    public void setEngrais(int engrais) {
+        this.engrais = engrais;
     }
 
 }

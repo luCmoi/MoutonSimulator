@@ -33,7 +33,7 @@ public class FenetrePrincipale extends JFrame {
                 while (true) {
                     try {
                         pan.execution();
-                        Thread.sleep(500);
+                        Thread.currentThread().sleep(500);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(PanelPartie.class.getName()).log(Level.SEVERE, null, ex);
                     }

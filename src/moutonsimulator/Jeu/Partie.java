@@ -30,7 +30,7 @@ public class Partie {
             int x = (int) (Math.random() * init.getWidth());
             int y = (int) (Math.random() * init.getHeigth());
             if (plateauTmp.getPlateau()[x][y].getAnimal() == null) {
-                plateauTmp.getPlateau()[x][y].setAnimal(new Mouton(10, 50, null,plateauTmp.getPlateau()[x][y]));
+                plateauTmp.getPlateau()[x][y].setAnimal(new Mouton(plateauTmp.getPlateau()[x][y],null));
                 mouton--;
             }
         }
@@ -38,7 +38,7 @@ public class Partie {
             int x = (int) (Math.random() * init.getWidth());
             int y = (int) (Math.random() * init.getHeigth());
             if (plateauTmp.getPlateau()[x][y].getAnimal() == null) {
-                plateauTmp.getPlateau()[x][y].setAnimal(new Loup(10, 50, null,plateauTmp.getPlateau()[x][y]));
+                plateauTmp.getPlateau()[x][y].setAnimal(new Loup(plateauTmp.getPlateau()[x][y],null));
                 loup--;
             }
         }
@@ -46,7 +46,7 @@ public class Partie {
         for (int x = 0; x < init.getWidth(); x++) {
             for (int y = 0; y < init.getHeigth(); y++) {
                 if ((int) (Math.random() * 5) < 1) {
-                    plateauTmp.getPlateau()[x][y].setPlante(new Plante(500, 10, 5,plateauTmp.getPlateau()[x][y]));
+                    plateauTmp.getPlateau()[x][y].setPlante(new Plante(50, 10, 5,plateauTmp.getPlateau()[x][y]));
                 }
             }
         }

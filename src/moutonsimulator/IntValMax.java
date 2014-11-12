@@ -13,6 +13,11 @@ public class IntValMax {
         this.val = val;
         this.max = max;
     }
+    
+    public boolean plusPlus(){
+        this.val++;
+        return this.val == this.max;
+    }
 
     public int getVal() {
         return val;

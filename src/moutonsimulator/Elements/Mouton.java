@@ -6,9 +6,12 @@ import moutonsimulator.Jeu.Case;
 
 public class Mouton extends Animal{
 
-    public Mouton(int vieMax, int ageMax, Arbre arbre,Case c) {
-        super(vieMax, ageMax, arbre,c);
+    public Mouton(Case c,Arbre arbre) {
+        super(c, arbre);
         this.image=Images.mouton;
     }
-    
+    @Override
+    public boolean mange(ElementDynamique el) {
+       return (el instanceof Plante);
+    }
 }
