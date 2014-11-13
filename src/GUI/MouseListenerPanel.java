@@ -72,8 +72,10 @@ public class MouseListenerPanel implements MouseMotionListener, MouseListener, M
     @Override
     public void mouseWheelMoved(MouseWheelEvent mwe) {
         int nC = Config.coteCase - 2 * mwe.getWheelRotation();
-        if (nC >= 16 && nC < 64 && !inMoove) {
-            Config.coteCase = nC;
+        if (nC >= 16 && nC <= 64 && !inMoove) {
+            ViewPort.x = (ViewPort.x/Config.coteCase)*nC;
+            ViewPort.y = (ViewPort.y/Config.coteCase)*nC;
+            Config.coteCase = nC;  
             ViewPort.panel.repaint();
         }
 
