@@ -26,20 +26,20 @@ public class Grille {
     }
 
     public void render(Graphics2D batch) {
-        int xModulo;
-        int yModulo;
-        if (ViewPort.x % Config.coteCase != 0) {
-            xModulo = 1;
-        } else {
-            xModulo = 0;
+        int moduloX = 0;
+        int viewXTmp = (ViewPort.width - (Config.coteCase - (ViewPort.x % Config.coteCase)));
+        int caseX = (ViewPort.x / Config.coteCase) + (viewXTmp / Config.coteCase);
+        if (viewXTmp % Config.coteCase != 0) {
+            moduloX = 1;
         }
-        if (ViewPort.y % Config.coteCase != 0) {
-            yModulo = 1;
-        } else {
-            yModulo = 0;
+        int moduloY = 0;
+        int viewYTmp = (ViewPort.height - (Config.coteCase - (ViewPort.y % Config.coteCase)));
+        int caseY = (ViewPort.y / Config.coteCase) + (viewYTmp / Config.coteCase);
+        if (viewYTmp % Config.coteCase != 0) {
+            moduloY = 1;
         }
-        for (int x = ViewPort.x / Config.coteCase; x <= (ViewPort.width / Config.coteCase) + xModulo + (ViewPort.x / Config.coteCase); x++) {
-            for (int y = ViewPort.y / Config.coteCase; y <= (ViewPort.height / Config.coteCase) + yModulo + (ViewPort.y / Config.coteCase); y++) {
+        for (int x = ViewPort.x / Config.coteCase; x <= caseX + moduloX; x++) {
+            for (int y = ViewPort.y / Config.coteCase; y <= caseY + moduloY; y++) {
                 plateau[x][y].render(batch);
             }
         }
