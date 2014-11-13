@@ -14,9 +14,12 @@ public class MouseListenerPanel implements MouseMotionListener, MouseListener, M
     public static int yPressed = 0;
     public static int xV = 0;
     public static int yV = 0;
+    public static boolean inMoove = false;
 
     @Override
+
     public void mouseDragged(MouseEvent me) {
+        if(inMoove){
         int nX = xV + (xPressed - me.getX());
         int nY = yV + (yPressed - me.getY());
 
@@ -27,6 +30,7 @@ public class MouseListenerPanel implements MouseMotionListener, MouseListener, M
             ViewPort.y = yV + (yPressed - me.getY());
         }
         ViewPort.panel.repaint();
+        }
     }
 
     @Override
@@ -46,10 +50,12 @@ public class MouseListenerPanel implements MouseMotionListener, MouseListener, M
         yPressed = me.getY();
         xV = ViewPort.x;
         yV = ViewPort.y;
+        inMoove = true;
     }
 
     @Override
     public void mouseReleased(MouseEvent me) {
+        inMoove = false;
         //System.out.println("R");
     }
 
@@ -66,8 +72,9 @@ public class MouseListenerPanel implements MouseMotionListener, MouseListener, M
     @Override
     public void mouseWheelMoved(MouseWheelEvent mwe) {
         int nC = Config.coteCase - 2 * mwe.getWheelRotation();
-        if (nC >= 16 && nC < 64) {
-            Config.coteCase =nC;
+        if (nC >= 16 && nC < 64 && !inMoove) {
+            Config.coteCase = nC;
+            ViewPort.panel.repaint();
         }
 
     }

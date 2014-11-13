@@ -10,7 +10,6 @@ public class PanelListener extends MouseAdapter implements ComponentListener {
     
     @Override
     public void componentResized(ComponentEvent e) {
-        System.out.println("Comp : "+e.getClass());
         if(e.getComponent().getWidth()>(ConfigInitial.width * Config.coteCase)-ViewPort.width ||e.getComponent().getHeight()>(ConfigInitial.heigth * Config.coteCase)-ViewPort.height){
             
         }
