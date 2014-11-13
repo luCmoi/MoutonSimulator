@@ -10,6 +10,7 @@ public class Mouton extends Animal{
         super(c, arbre);
         this.image=Images.mouton;
     }
+    
     @Override
     public boolean mange(ElementDynamique el) {
        return (el instanceof Plante);

@@ -1,13 +1,11 @@
 package GUI;
 
 import java.awt.BorderLayout;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 public class FenetrePrincipale extends JFrame {
 
-    public PanelPartie pan;
+    private PanelPartie pan;
 
     public FenetrePrincipale() {
         super("Mouton Simulator");
@@ -16,6 +14,7 @@ public class FenetrePrincipale extends JFrame {
         pan = new PanelPartie();
         this.setContentPane(pan);
         this.setVisible(true);
+        System.out.println(Thread.currentThread().getId());
     }
 
     public PanelPartie getPan() {
@@ -26,19 +25,4 @@ public class FenetrePrincipale extends JFrame {
         this.pan = pan;
     }
 
-    public void execution() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (true) {
-                    try {
-                        pan.execution();
-                        Thread.currentThread().sleep(500);
-                    } catch (InterruptedException ex) {
-                        Logger.getLogger(PanelPartie.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }
-            }
-        }).start();
-    }
 }

@@ -15,15 +15,19 @@ public class PanelKeyListener implements KeyListener {
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP && ViewPort.y != 0) {
             ViewPort.y = ViewPort.y - 1;
+            ViewPort.panel.repaint();
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN && ViewPort.y < ((ConfigInitial.heigth) * Config.coteCase) -ViewPort.height) {
             ViewPort.y = ViewPort.y + 1;
+            ViewPort.panel.repaint();
         }
         if (e.getKeyCode() == KeyEvent.VK_LEFT && ViewPort.x != 0) {
             ViewPort.x = ViewPort.x - 1;
+            ViewPort.panel.repaint();
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT && ViewPort.x < ((ConfigInitial.width) * Config.coteCase)-ViewPort.width) {
             ViewPort.x = ViewPort.x + 1;
+            ViewPort.panel.repaint();
         }
     }
 

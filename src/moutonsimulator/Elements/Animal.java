@@ -18,9 +18,8 @@ public abstract class Animal extends ElementDynamique {
 
     @Override
     public void update() {
-        super.update();
         mouvementBasique();
-
+        super.update();
     }
 
     public abstract boolean mange(ElementDynamique el);
@@ -29,6 +28,7 @@ public abstract class Animal extends ElementDynamique {
     public void mort() {
         this.conteneur.setAnimal(null);
         this.conteneur.setEngrais(this.conteneur.getEngrais() + this.competence.getEngrais());
+        this.image = null;
     }
 
     public void mouvementBasique() {
