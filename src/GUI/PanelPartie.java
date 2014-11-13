@@ -14,6 +14,9 @@ public class PanelPartie extends JPanel {
 
         this.addComponentListener(new PanelListener());
         this.addKeyListener(new PanelKeyListener());
+        MouseListenerPanel motion = new MouseListenerPanel();
+        this.addMouseListener(motion);
+        this.addMouseMotionListener(motion);
         this.setFocusable(true);
     }
 
