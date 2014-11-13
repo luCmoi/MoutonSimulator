@@ -6,8 +6,6 @@ import moutonsimulator.Jeu.Case;
 
 public class Plante extends ElementDynamique {
 
-    public IntValMax vie;
-    public IntValMax age;
     public int dureePousse;
 
     public Plante(int ageMax, int vie, int dureePousse, Case c) {
@@ -26,9 +24,7 @@ public class Plante extends ElementDynamique {
 
     @Override
     public void update() {
-        if (this.vie.plusPlus()) {
-            this.mort();
-        }
+        super.update();
     }
 
     public IntValMax getVie() {

@@ -5,8 +5,6 @@ import moutonsimulator.Jeu.Case;
 
 public abstract class Animal extends ElementDynamique {
 
-    protected IntValMax vie;
-    protected IntValMax age;
     protected Arbre arbreGene;
     protected CompetenceAnimale competence;
 
@@ -20,10 +18,7 @@ public abstract class Animal extends ElementDynamique {
 
     @Override
     public void update() {
-        if (this.vie.plusPlus()) {
-            this.mort();
-            return;
-        }
+        super.update();
         mouvementBasique();
 
     }
@@ -45,7 +40,8 @@ public abstract class Animal extends ElementDynamique {
             nY = (conteneur.getY() - 1) + (int) (Math.random() * 3);
             cmp++;
             try {
-                if (conteneur.getContainer().getPlateau()[nX][nY].getAnimal() != null) {
+                if (conteneur.getContainer().getPlateau()[nX][nY].presence()
+                        && conteneur.getContainer().getPlateau()[nX][nY].getAnimal() != this) {
                     if (this.mange(conteneur.getContainer().getPlateau()[nX][nY].getAnimal())) {
                         conteneur.getContainer().getPlateau()[nX][nY].getAnimal().mort();
                         conteneur.setAnimal(null);
@@ -53,7 +49,6 @@ public abstract class Animal extends ElementDynamique {
                         conteneur.setAnimal(this);
                         break;
                     } else {
-                        System.out.println("1");
                         throw new IndexOutOfBoundsException();
                     }
                 } else {

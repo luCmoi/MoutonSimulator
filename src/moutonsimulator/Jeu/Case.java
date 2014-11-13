@@ -24,9 +24,14 @@ public class Case {
         this.container = cont;
         this.engrais = 0;
     }
+    
+    public boolean presence(){
+        return this.animal!=null || this.plante!=null;
+    }
 
     public void update() {
         if(this.plante==null && this.engrais>0){
+            this.engrais--;
             this.plante = new Plante(10, 20, 1, this);
         }
         if (this.getAnimal() != null) {

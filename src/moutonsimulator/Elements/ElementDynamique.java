@@ -4,15 +4,24 @@ import GUI.ViewPort;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import moutonsimulator.Config;
+import moutonsimulator.IntValMax;
 import moutonsimulator.Jeu.Case;
 
 public abstract class ElementDynamique {
-    
 
+    protected IntValMax vie;
+    protected IntValMax age;
     protected Image image;
     protected Case conteneur;
 
-    abstract public void update();
+    public void update() {
+        if (this.vie.decremente()) {
+            this.mort();
+        }
+        if (this.age.incremente()) {
+            this.mort();
+        }
+    }
 
     public abstract void mort();
 

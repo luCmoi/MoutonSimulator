@@ -1,22 +1,28 @@
 package moutonsimulator;
 
 public class IntValMax {
+
     private int val;
     private int max;
-    
-    public IntValMax(int max){
+
+    public IntValMax(int max) {
         this.val = max;
         this.max = max;
     }
-    
-    public IntValMax(int val, int max){
+
+    public IntValMax(int val, int max) {
         this.val = val;
         this.max = max;
     }
-    
-    public boolean plusPlus(){
+
+    public boolean incremente() {
         this.val++;
         return this.val == this.max;
+    }
+
+    public boolean decremente() {
+        this.val--;
+        return this.val == 0;
     }
 
     public int getVal() {
