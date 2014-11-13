@@ -15,8 +15,10 @@ public abstract class ElementDynamique {
     protected Case conteneur;
 
     public void update() {
-        if (this.vie.decremente()) {
-            this.mort();
+        if (this instanceof Animal) {
+            if (this.vie.decremente()) {
+                this.mort();
+            }
         }
         if (this.age.incremente()) {
             this.mort();

@@ -1,8 +1,11 @@
 package GUI;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.JPanel;
+import moutonsimulator.Config;
+import moutonsimulator.Jeu.ConfigInitial;
 import moutonsimulator.Jeu.Partie;
 
 public class PanelPartie extends JPanel {
@@ -11,12 +14,18 @@ public class PanelPartie extends JPanel {
 
     public PanelPartie() {
         super();
-
+        this.setMaximumSize(new Dimension((Config.coteCase * ConfigInitial.width), (Config.coteCase * ConfigInitial.heigth)));
+        this.setPreferredSize(new Dimension(800, 600));
+        
+        //Evidement le maxSize marche pas ...
         this.addComponentListener(new PanelListener());
         this.addKeyListener(new PanelKeyListener());
+        
         MouseListenerPanel motion = new MouseListenerPanel();
         this.addMouseListener(motion);
         this.addMouseMotionListener(motion);
+        this.addMouseWheelListener(motion);
+        
         this.setFocusable(true);
     }
 
