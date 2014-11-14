@@ -1,6 +1,5 @@
 package GUI;
 
-import static GUI.MouseListenerPanel.inMoove;
 import moutonsimulator.Config;
 import moutonsimulator.Jeu.ConfigInitial;
 
@@ -43,7 +42,7 @@ public class ViewPort {
         ViewPort.panel.repaint();
     }
 
-    public static void zoom(int wheel) {
+    public static void zoom(int wheel, boolean inMoove) {
         int nC = Config.coteCase - 2 * wheel;
         if (nC >= 16 && nC <= 64 && !inMoove) {
             ViewPort.x = (ViewPort.x / Config.coteCase) * nC;
