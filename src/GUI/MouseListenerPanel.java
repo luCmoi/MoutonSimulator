@@ -35,13 +35,10 @@ public class MouseListenerPanel implements MouseMotionListener, MouseListener, M
 
     @Override
     public void mouseMoved(MouseEvent me) {
-        //System.out.println("M");
     }
 
     @Override
     public void mouseClicked(MouseEvent me) {
-
-        // System.out.println("C");
     }
 
     @Override
@@ -56,17 +53,14 @@ public class MouseListenerPanel implements MouseMotionListener, MouseListener, M
     @Override
     public void mouseReleased(MouseEvent me) {
         inMoove = false;
-        //System.out.println("R");
     }
 
     @Override
     public void mouseEntered(MouseEvent me) {
-        // System.out.println("E");
     }
 
     @Override
     public void mouseExited(MouseEvent me) {
-        //System.out.println("Ex");
     }
 
     @Override
