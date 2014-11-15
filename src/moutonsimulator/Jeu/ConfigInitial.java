@@ -2,10 +2,12 @@ package moutonsimulator.Jeu;
 
 public class ConfigInitial {
     
-    public static int width = 150;
-    public static int heigth = 150;
+    public static int width = 100;
+    public static int heigth = 100;
     public int nbMouton = 30;
     public int nbLoup = 15;
+    private int probaPlante = 4;
+    private int eau = 1000;
 
     public int getWidth() {
         return width;
@@ -37,6 +39,22 @@ public class ConfigInitial {
 
     public void setNbLoup(int nbLoup) {
         this.nbLoup = nbLoup;
+    }
+
+    public int getProbaPlante() {
+        return probaPlante;
+    }
+
+    public void setProbaPlante(int probaPlante) {
+        this.probaPlante = probaPlante;
+    }
+
+    public int getEau() {
+        return eau;
+    }
+
+    public void setEau(int eau) {
+        this.eau = eau;
     }
     
     

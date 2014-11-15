@@ -3,16 +3,19 @@ package moutonsimulator.Jeu;
 import GUI.ViewPort;
 import java.awt.Graphics2D;
 import moutonsimulator.Config;
+import moutonsimulator.Elements.Plaine;
 
 public class Grille {
 
     private Case[][] plateau;
+    private Partie partie;
 
-    public Grille(int width, int height) {
+    public Grille(int width, int height,Partie p) {
+        this.partie = p;
         this.plateau = new Case[width][height];
         for (int x = 0; x < plateau.length; x++) {
             for (int y = 0; y < plateau[0].length; y++) {
-                this.plateau[x][y] = new Case(x, y, this);
+                this.plateau[x][y] = new Case(x, y, this,new Plaine());
             }
         }
     }
@@ -51,6 +54,14 @@ public class Grille {
 
     public void setPlateau(Case[][] plateau) {
         this.plateau = plateau;
+    }
+
+    public Partie getPartie() {
+        return partie;
+    }
+
+    public void setPartie(Partie partie) {
+        this.partie = partie;
     }
 
 }

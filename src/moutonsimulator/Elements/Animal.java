@@ -23,6 +23,7 @@ public abstract class Animal extends ElementDynamique {
     }
 
     public abstract boolean mange(ElementDynamique el);
+    public abstract void moove();
 
     @Override
     public void mort() {

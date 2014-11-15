@@ -13,9 +13,11 @@ public class Images {
     public static Image mouton;
     public static Image loup;
     public static Image buisson;
+    public static Image eau;
 
     public static void init() {
         try {
+            Images.eau = ImageIO.read(new File("Ressources/Images/eau.gif"));
             Images.herbe = ImageIO.read(new File("Ressources/Images/herbe.jpg"));
             Images.mouton = ImageIO.read(new File("Ressources/Images/mouton.png"));
             Images.loup = ImageIO.read(new File("Ressources/Images/loup.gif"));

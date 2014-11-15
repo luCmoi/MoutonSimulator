@@ -6,15 +6,17 @@ public class CompetenceAnimale {
     private int vieMax;
     private int ageMax;
     private int engrais;
+    private int vue;
 
-    public CompetenceAnimale(int vieMax, int ageMax, int engrais) {
+    public CompetenceAnimale(int vieMax, int ageMax, int engrais,int vue) {
         this.vieMax = vieMax;
         this.ageMax = ageMax;
         this.engrais = engrais;
+        this.vue = vue;
     }
     
     public static CompetenceAnimale randomCompetences(){
-        return new CompetenceAnimale(10, 50, 2);
+        return new CompetenceAnimale(10, 50, 2, 5);
     }
     
     public int getEngrais() {
@@ -39,6 +41,14 @@ public class CompetenceAnimale {
 
     public void setEngrais(int engrais) {
         this.engrais = engrais;
+    }
+
+    public int getVue() {
+        return vue;
+    }
+
+    public void setVue(int vue) {
+        this.vue = vue;
     }
 
 }
