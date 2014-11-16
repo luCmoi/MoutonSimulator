@@ -6,8 +6,9 @@ import java.awt.Graphics2D;
 import moutonsimulator.Config;
 import moutonsimulator.Elements.Animal;
 import moutonsimulator.Elements.Plante;
+import moutonsimulator.Elements.Sol;
 
-public class Case {
+public class Case implements Comparable {
 
     private int x;
     private int y;
@@ -15,14 +16,36 @@ public class Case {
     private Plante plante;
     private int engrais;
     private final Grille container;
+    private boolean traversable;
+    private Sol sol;
 
-    Case(int x, int y, Grille cont) {
+    Case(int x, int y, Grille cont,Sol sol) {
         this.x = x;
         this.y = y;
         this.animal = null;
         this.plante = null;
         this.container = cont;
         this.engrais = 0;
+        this.sol = sol;
+        this.traversable = true;
+    }
+    
+    public void interaction(Case c){
+        if(this.animal!=null){
+            if(c.getAnimal().mange(animal)){
+                animal.mort();
+                animal=c.getAnimal();
+                c.setAnimal(null);
+            }else if(animal.mange(c.getAnimal())){
+                c.animal.mort();
+            }
+        }else if(this.plante!=null){
+            
+            
+        }else{
+            this.animal = c.getAnimal();
+            c.setAnimal(null);
+        }
     }
     
     public boolean presence(){
@@ -43,7 +66,7 @@ public class Case {
     }
 
     public void render(Graphics2D batch) {
-        batch.drawImage(Images.herbe, (x * Config.coteCase) - (ViewPort.x), (y * Config.coteCase) - (ViewPort.y), Config.coteCase, Config.coteCase, null);
+        batch.drawImage(sol.getImage(), (x * Config.coteCase) - (ViewPort.x), (y * Config.coteCase) - (ViewPort.y), Config.coteCase, Config.coteCase, null);
         if (this.getPlante() != null) {
             this.getPlante().render(batch);
         }
@@ -96,4 +119,37 @@ public class Case {
         this.engrais = engrais;
     }
 
+    @Override
+    public int compareTo(Object o) {
+        Case tmp = (Case)o;
+        if(this.x<tmp.getX()){
+            return -1;
+        }else if(x>tmp.getX()){
+            return 1;
+        }else{
+            if(this.y<tmp.getY()){
+                return -1;
+            }else if(this.y>tmp.getY()){
+                return 1;
+            }else{
+                return 0;
+            }
+        }
+    }
+
+    public boolean isTraversable() {
+        return traversable;
+    }
+
+    public void setTraversable(boolean traversable) {
+        this.traversable = traversable;
+    }
+
+    public Sol getSol() {
+        return sol;
+    }
+
+    public void setSol(Sol sol) {
+        this.sol = sol;
+    }
 }

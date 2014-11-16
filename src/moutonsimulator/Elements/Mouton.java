@@ -15,4 +15,9 @@ public class Mouton extends Animal{
     public boolean mange(ElementDynamique el) {
        return (el instanceof Plante);
     }
+
+    @Override
+    public void moove() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

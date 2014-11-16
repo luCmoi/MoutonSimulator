@@ -23,6 +23,7 @@ public abstract class Animal extends ElementDynamique {
     }
 
     public abstract boolean mange(ElementDynamique el);
+    public abstract void moove();
 
     @Override
     public void mort() {
@@ -40,8 +41,10 @@ public abstract class Animal extends ElementDynamique {
             nY = (conteneur.getY() - 1) + (int) (Math.random() * 3);
             cmp++;
             try {
-                if (conteneur.getContainer().getPlateau()[nX][nY].presence()
-                        && conteneur.getContainer().getPlateau()[nX][nY].getAnimal() != this) {
+                if(!conteneur.getContainer().getPlateau()[nX][nY].isTraversable()){
+                    throw new IndexOutOfBoundsException();
+                }
+                if (conteneur.getContainer().getPlateau()[nX][nY].presence() && conteneur.getContainer().getPlateau()[nX][nY].getAnimal() != this) {
                     if (this.mange(conteneur.getContainer().getPlateau()[nX][nY].getAnimal())) {
                         conteneur.getContainer().getPlateau()[nX][nY].getAnimal().mort();
                         conteneur.setAnimal(null);
