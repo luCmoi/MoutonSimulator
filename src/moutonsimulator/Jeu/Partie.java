@@ -4,12 +4,15 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JPanel;
 import moutonsimulator.Elements.Animal;
 import moutonsimulator.Elements.Eau;
 import moutonsimulator.Elements.Loup;
 import moutonsimulator.Elements.Mouton;
 import moutonsimulator.Elements.Pierre;
+import moutonsimulator.Elements.Plaine;
 
 public class Partie {
 
@@ -33,16 +36,24 @@ public class Partie {
             System.out.println("Parametre initiaux invalides.");
             System.exit(0);
         }
+
+        placementSol(init);
+        pan.repaint();
+
         Stack<Case> caseLibre = new Stack<>();
         for (int x = 0; x < init.getWidth(); x++) {
             for (int y = 0; y < init.getHeigth(); y++) {
-                caseLibre.add(plateau.getPlateau()[x][y]);
-                //Placement des plantes : 
-                if ((int) (Math.random() * 11) < init.getProbaPlante()) {
-                    //plateau.getPlateau()[x][y].setPlante(new Plante((int) (50 + Math.random() * 50), 10, 5, plateau.getPlateau()[x][y]));
+                if (plateau.getPlateau()[x][y].isTraversable()) {
+                    caseLibre.add(plateau.getPlateau()[x][y]);
+
+                    //Placement des plantes : 
+                    if ((int) (Math.random() * 11) < init.getProbaPlante()) {
+                        //plateau.getPlateau()[x][y].setPlante(new Plante((int) (50 + Math.random() * 50), 10, 5, plateau.getPlateau()[x][y]));
+                    }
                 }
             }
         }
+
         Collections.shuffle(caseLibre);
         //Placement des animaux
         int mouton = init.getNbMouton();
@@ -64,7 +75,7 @@ public class Partie {
         caseLibre.clear();
         triInsert(setMouton);
         triInsert(setLoup);
-        placementSol(init);
+
     }
 
     public void placementSol(ConfigInitial init) {
@@ -78,17 +89,19 @@ public class Partie {
         }
         Collections.shuffle(caseLibre);
         int eau = init.getEau();
-
         while (!caseLibre.empty() && eau > 0) {
             Case tmpC = caseLibre.pop();
             Node tmpN = tab[tmpC.getX()][tmpC.getY()];
             if (tmpN.testValide(init, tab)) {
                 tmpC.setSol(new Eau());
                 eau--;
-            }else{
-                tmpC.setSol(new Pierre());
+            } else {
+                 tmpC.setSol(new Plaine());
             }
+            this.update();
+            pan.repaint();
         }
+        caseLibre.clear();
     }
 
     public Node[][] initTabNode(ConfigInitial init) {
