@@ -4,15 +4,13 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JPanel;
 import moutonsimulator.Elements.Animal;
 import moutonsimulator.Elements.Eau;
 import moutonsimulator.Elements.Loup;
 import moutonsimulator.Elements.Mouton;
-import moutonsimulator.Elements.Pierre;
 import moutonsimulator.Elements.Plaine;
+import moutonsimulator.Elements.Plante;
 
 public class Partie {
 
@@ -32,23 +30,20 @@ public class Partie {
 
     private void initPlateau(ConfigInitial init) {
         this.plateau = new Grille(init.getWidth(), init.getHeigth(), this);
-        if (init.getNbMouton() + init.getNbLoup() >= init.getHeigth() * init.getWidth()) {
+        //Placement de l'eau + verification nombre animaux;
+        if (init.getNbMouton() + init.getNbLoup() >= (init.getHeigth() * init.getWidth()-placementSol(init))) {
             System.out.println("Parametre initiaux invalides.");
             System.exit(0);
         }
-
-        placementSol(init);
-        pan.repaint();
 
         Stack<Case> caseLibre = new Stack<>();
         for (int x = 0; x < init.getWidth(); x++) {
             for (int y = 0; y < init.getHeigth(); y++) {
                 if (plateau.getPlateau()[x][y].isTraversable()) {
                     caseLibre.add(plateau.getPlateau()[x][y]);
-
                     //Placement des plantes : 
                     if ((int) (Math.random() * 11) < init.getProbaPlante()) {
-                        //plateau.getPlateau()[x][y].setPlante(new Plante((int) (50 + Math.random() * 50), 10, 5, plateau.getPlateau()[x][y]));
+                        plateau.getPlateau()[x][y].setPlante(new Plante((int) (50 + Math.random() * 50), 10, 5, plateau.getPlateau()[x][y]));
                     }
                 }
             }
@@ -78,10 +73,10 @@ public class Partie {
 
     }
 
-    public void placementSol(ConfigInitial init) {
+    public int placementSol(ConfigInitial init) {
         Node tab[][] = initTabNode(init);
-
         Stack<Case> caseLibre = new Stack<>();
+        int compteurEau = 0;
         for (int x = 0; x < init.getWidth(); x++) {
             for (int y = 0; y < init.getHeigth(); y++) {
                 caseLibre.add(plateau.getPlateau()[x][y]);
@@ -96,12 +91,19 @@ public class Partie {
                 tmpC.setSol(new Eau());
                 eau--;
             } else {
-                 tmpC.setSol(new Plaine());
+                compteurEau++;
             }
-            this.update();
-            pan.repaint();
+        }
+
+        for (int x = 0; x < init.getWidth(); x++) {
+            for (int y = 0; y < init.getHeigth(); y++) {
+                if (plateau.getPlateau()[x][y].getSol() instanceof Eau) {
+                    plateau.getPlateau()[x][y].setTraversable(false);
+                }
+            }
         }
         caseLibre.clear();
+        return compteurEau;
     }
 
     public Node[][] initTabNode(ConfigInitial init) {
