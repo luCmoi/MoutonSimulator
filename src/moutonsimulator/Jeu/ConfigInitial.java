@@ -7,7 +7,7 @@ public class ConfigInitial {
     public int nbMouton = 30;
     public int nbLoup = 15;
     private int probaPlante = 4;
-    private int eau = 1000;
+    private int eau = 5000;
 
     public int getWidth() {
         return width;

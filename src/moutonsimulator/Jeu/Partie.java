@@ -3,14 +3,13 @@ package moutonsimulator.Jeu;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Stack;
 import javax.swing.JPanel;
 import moutonsimulator.Elements.Animal;
+import moutonsimulator.Elements.Eau;
 import moutonsimulator.Elements.Loup;
 import moutonsimulator.Elements.Mouton;
-import moutonsimulator.Elements.Plante;
+import moutonsimulator.Elements.Pierre;
 
 public class Partie {
 
@@ -26,9 +25,6 @@ public class Partie {
         this.setLoup = new ArrayList<>();
         this.setMouton = new ArrayList<>();
         initPlateau(init);
-        for (Animal m : setMouton) {
-            System.out.println("x :" + m.getConteneur().getX() + " y : " + m.getConteneur().getY());
-        }
     }
 
     private void initPlateau(ConfigInitial init) {
@@ -43,7 +39,7 @@ public class Partie {
                 caseLibre.add(plateau.getPlateau()[x][y]);
                 //Placement des plantes : 
                 if ((int) (Math.random() * 11) < init.getProbaPlante()) {
-                    plateau.getPlateau()[x][y].setPlante(new Plante((int) (50 + Math.random() * 50), 10, 5, plateau.getPlateau()[x][y]));
+                    //plateau.getPlateau()[x][y].setPlante(new Plante((int) (50 + Math.random() * 50), 10, 5, plateau.getPlateau()[x][y]));
                 }
             }
         }
@@ -68,19 +64,31 @@ public class Partie {
         caseLibre.clear();
         triInsert(setMouton);
         triInsert(setLoup);
+        placementSol(init);
     }
 
     public void placementSol(ConfigInitial init) {
         Node tab[][] = initTabNode(init);
-        
+
         Stack<Case> caseLibre = new Stack<>();
         for (int x = 0; x < init.getWidth(); x++) {
             for (int y = 0; y < init.getHeigth(); y++) {
                 caseLibre.add(plateau.getPlateau()[x][y]);
             }
         }
+        Collections.shuffle(caseLibre);
         int eau = init.getEau();
-        while(!caseLibre.empty())
+
+        while (!caseLibre.empty() && eau > 0) {
+            Case tmpC = caseLibre.pop();
+            Node tmpN = tab[tmpC.getX()][tmpC.getY()];
+            if (tmpN.testValide(init, tab)) {
+                tmpC.setSol(new Eau());
+                eau--;
+            }else{
+                tmpC.setSol(new Pierre());
+            }
+        }
     }
 
     public Node[][] initTabNode(ConfigInitial init) {
@@ -92,8 +100,8 @@ public class Partie {
         }
         for (int x = 0; x < init.getWidth(); x++) {
             for (int y = 0; y < init.getHeigth(); y++) {
-                for (int x2 = Math.max(0, x - 1); x < Math.min(x + 2, init.getWidth()); x++) {
-                    for (int y2 = Math.max(0, y - 1); y < Math.min(y + 2, init.getHeigth()); y++) {
+                for (int x2 = Math.max(0, x - 1); x2 < Math.min(x + 2, init.getWidth()); x2++) {
+                    for (int y2 = Math.max(0, y - 1); y2 < Math.min(y + 2, init.getHeigth()); y2++) {
                         if (tab[x][y] != tab[x2][y2]) {
                             tab[x][y].getPeres().add(tab[x2][y2]);
                         }
