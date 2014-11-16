@@ -9,7 +9,6 @@ import moutonsimulator.Elements.Animal;
 import moutonsimulator.Elements.Eau;
 import moutonsimulator.Elements.Loup;
 import moutonsimulator.Elements.Mouton;
-import moutonsimulator.Elements.Plaine;
 import moutonsimulator.Elements.Plante;
 
 public class Partie {
@@ -53,14 +52,14 @@ public class Partie {
         //Placement des animaux
         int mouton = init.getNbMouton();
         int loup = init.getNbLoup();
-        while (mouton > 0) {
+        while (mouton > 0 && !caseLibre.empty()) {
             Case tmp = caseLibre.pop();
             Mouton moutmout = new Mouton(tmp, null);
             tmp.setAnimal(moutmout);
             setMouton.add(moutmout);
             mouton--;
         }
-        while (loup > 0) {
+        while (loup > 0 && !caseLibre.empty()) {
             Case tmp = caseLibre.pop();
             Loup loupe = new Loup(tmp, null);
             tmp.setAnimal(loupe);

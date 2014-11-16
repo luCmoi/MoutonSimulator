@@ -1,7 +1,6 @@
 package moutonsimulator.Jeu;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 public class Node {
 
@@ -18,13 +17,12 @@ public class Node {
     }
 
     public boolean testValide(ConfigInitial init, Node[][] tab) {
-        //But : savoir si tout les pere peuvent se remettre a true en passsant pas quelq'un d'autre
+        //But : savoir si tout les pere peuvent se remettre a true en passsant par quelq'un d'autre
         for (int x2 = Math.max(0, self.getX() - 1); x2 < Math.min(self.getX() + 2, init.getWidth()); x2++) {
             for (int y2 = Math.max(0, self.getY() - 1); y2 < Math.min(self.getY() + 2, init.getHeigth()); y2++) {
                 tab[x2][y2].setRacine(false);
             }
         }
-        int nbPereTrue = 0;
         for (int x2 = Math.max(0, self.getX() - 1); x2 < Math.min(self.getX() + 2, init.getWidth()); x2++) {
             for (int y2 = Math.max(0, self.getY() - 1); y2 < Math.min(self.getY() + 2, init.getHeigth()); y2++) {
                 if (tab[x2][y2] != this && !tab[x2][y2].isEau()) {
@@ -32,7 +30,6 @@ public class Node {
                         if (n != this && n.isRacine()) {//racine = non eau
                             n.getPeres().remove(tab[x2][y2]);
                             tab[x2][y2].setRacine(true);
-                            nbPereTrue++;
                         }
                     }
                 }
