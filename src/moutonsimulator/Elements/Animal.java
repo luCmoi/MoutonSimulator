@@ -1,5 +1,6 @@
 package moutonsimulator.Elements;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -12,7 +13,7 @@ public abstract class Animal extends ElementDynamique {
     protected Arbre arbreGene;
     protected CaracteristiqueAnimale competence;
     protected HashMap<Class, Integer> priorite;
-    protected Boolean aBouge=false;
+    protected Boolean aBouge = false;
 
     public Animal(Case c, Arbre arbre) {
         priorite = new HashMap<>();
@@ -81,26 +82,55 @@ public abstract class Animal extends ElementDynamique {
     }
 
     public void mouvementDirige(Case c) {
-        mouvementAleatoire();
+        Point cible = new Point(c.getX(), c.getY());
+        Point courant = new Point(conteneur.getX(), conteneur.getY());
+        HashMap<Point, Noeud> listeFermee = new HashMap<>();
+        HashMap<Point, Noeud> listeOuverte = new HashMap<>();
+        listeOuverte.put(courant, new Noeud());
+        listeOuverte.get(courant).cout_f = (float) PathFinding.distance(courant, cible);
+        PathFinding.ajoutListeFermee(courant, listeFermee, listeOuverte);
+        PathFinding.ajoutCaseVoisines(courant, cible, listeOuverte, listeFermee, conteneur.getContainer().getPlateau());
+        while (!((courant.x == cible.x) && (courant.y == cible.y)) && (!listeOuverte.isEmpty())) {
+            courant = PathFinding.meilleurNoeud(listeOuverte);
+            PathFinding.ajoutListeFermee(courant, listeFermee, listeOuverte);
+            PathFinding.ajoutCaseVoisines(courant, cible, listeOuverte, listeFermee, conteneur.getContainer().getPlateau());
+        }
+        if ((courant.x == cible.x) && (courant.y == cible.y)) {
+            Point tmp = PathFinding.retrouver_chemin(cible, new Point(conteneur.getX(), conteneur.getY()), listeFermee);
+            conteneur.setAnimal(null);
+            Case caseTmp = conteneur.getContainer().getPlateau()[tmp.x][tmp.y];
+            caseTmp.setAnimal(this);
+            /*if (listeFermee.get(cible).parent == tmp) {
+             if (c.getAnimal() != null) {
+             interaction(c.getAnimal());
+             }else {
+             interaction(c.getPlante());
+             }
+             }*/
+            this.conteneur = caseTmp;
+        } else {
+            System.out.println(cible + " " + courant + " " + new Point(conteneur.getX(), conteneur.getY()));
+        }
     }
 
     public void mouvementBasique() {
         if (!aBouge) {
-            aBouge=true;
+            aBouge = true;
             ArrayList<Objectif> objectifs = new ArrayList();
             for (int x = Math.max(0, conteneur.getX() - competence.getVue()); x < Math.min(conteneur.getX() + competence.getVue(), conteneur.getContainer().getPlateau().length); x++) {
                 for (int y = Math.max(0, conteneur.getY() - (competence.getVue() - Math.abs(conteneur.getX() - x))); y < Math.min(conteneur.getY() + (competence.getVue() - Math.abs(conteneur.getX() - x)), conteneur.getContainer().getPlateau().length); y++) {
-                    if (conteneur.getContainer().getPlateau()[x][y].getAnimal() != null) {
-                        if (priorite.keySet().contains(conteneur.getContainer().getPlateau()[x][y].getAnimal().getClass())) {
-                            objectifs.add(new Objectif(conteneur, conteneur.getContainer().getPlateau()[x][y]));
+                    if (!(x == conteneur.getX() && y == conteneur.getY())) {
+                        if (conteneur.getContainer().getPlateau()[x][y].getAnimal() != null) {
+                            if (priorite.keySet().contains(conteneur.getContainer().getPlateau()[x][y].getAnimal().getClass())) {
+                                objectifs.add(new Objectif(conteneur, conteneur.getContainer().getPlateau()[x][y]));
+                            }
+                        }
+                        if (conteneur.getContainer().getPlateau()[x][y].getPlante() != null) {
+                            if (priorite.keySet().contains(conteneur.getContainer().getPlateau()[x][y].getPlante().getClass())) {
+                                objectifs.add(new Objectif(conteneur, conteneur.getContainer().getPlateau()[x][y]));
+                            }
                         }
                     }
-                    if (conteneur.getContainer().getPlateau()[x][y].getPlante() != null) {
-                        if (priorite.keySet().contains(conteneur.getContainer().getPlateau()[x][y].getPlante().getClass())) {
-                            objectifs.add(new Objectif(conteneur, conteneur.getContainer().getPlateau()[x][y]));
-                        }
-                    }
-
                 }
             }
             if (objectifs.isEmpty()) {
@@ -160,7 +190,7 @@ public abstract class Animal extends ElementDynamique {
         this.priorite = priorite;
     }
 
-    public void setABouge(boolean change){
-        this.aBouge=change;
+    public void setABouge(boolean change) {
+        this.aBouge = change;
     }
 }
