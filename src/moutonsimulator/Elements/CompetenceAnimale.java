@@ -16,7 +16,7 @@ public class CompetenceAnimale {
     }
     
     public static CompetenceAnimale randomCompetences(){
-        return new CompetenceAnimale(10, 50, 2, 5);
+        return new CompetenceAnimale(100, 50, 2, 5);
     }
     
     public int getEngrais() {
