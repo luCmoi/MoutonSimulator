@@ -4,16 +4,13 @@ import GUI.Images;
 import java.util.ArrayList;
 import moutonsimulator.Jeu.Case;
 
-public class Loup extends Animal {
+public class Loup extends Carnivore {
 
     public Loup(Case c, Arbre arbre) {
         super(c, arbre);
         this.image = Images.loup;
-    }
-
-    @Override
-    public boolean mange(ElementDynamique el) {
-        return (el instanceof Mouton);
+        priorite.add(Mouton.class);
+        priorite.add(Loup.class);
     }
 
     public boolean inRange(Case c) {

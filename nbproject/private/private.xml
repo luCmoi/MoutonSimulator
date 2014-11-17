@@ -5,9 +5,13 @@
         <group>
             <file>file:/C:/Users/Guillaume/Documents/GitHub/MoutonSimulator/src/GUI/MouseListenerPanel.java</file>
             <file>file:/C:/Users/Guillaume/Documents/GitHub/MoutonSimulator/src/GUI/PanelPartie.java</file>
-            <file>file:/C:/Users/Guillaume/Documents/GitHub/MoutonSimulator/src/GUI/ViewPort.java</file>
-            <file>file:/C:/Users/Guillaume/Documents/GitHub/MoutonSimulator/src/GUI/FenetrePrincipale.java</file>
+            <file>file:/C:/Users/Guillaume/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Jeu/Case.java</file>
+            <file>file:/C:/Users/Guillaume/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Elements/Herbivore.java</file>
+            <file>file:/C:/Users/Guillaume/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Elements/Carnivore.java</file>
+            <file>file:/C:/Users/Guillaume/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Elements/Animal.java</file>
+            <file>file:/C:/Users/Guillaume/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Elements/ElementDynamique.java</file>
             <file>file:/C:/Users/Guillaume/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Elements/Loup.java</file>
+            <file>file:/C:/Users/Guillaume/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Elements/Mouton.java</file>
             <file>file:/C:/Users/Guillaume/Documents/GitHub/MoutonSimulator/src/GUI/PanelListener.java</file>
         </group>
     </open-files>

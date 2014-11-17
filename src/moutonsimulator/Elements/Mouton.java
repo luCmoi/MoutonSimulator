@@ -4,16 +4,13 @@ import GUI.Images;
 import moutonsimulator.Jeu.Case;
 
 
-public class Mouton extends Animal{
+public class Mouton extends Herbivore{
 
     public Mouton(Case c,Arbre arbre) {
         super(c, arbre);
         this.image=Images.mouton;
-    }
-    
-    @Override
-    public boolean mange(ElementDynamique el) {
-       return (el instanceof Plante);
+        priorite.add(Plante.class);
+        priorite.add(Mouton.class);
     }
 
     @Override

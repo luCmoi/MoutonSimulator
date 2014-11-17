@@ -27,6 +27,18 @@ public abstract class ElementDynamique {
 
     public abstract void mort();
 
+    public int estMange(int puissance){
+        int retour;
+        if (this.vie.getVal()<=puissance){
+            retour = this.vie.getVal();
+            this.mort();
+        } else {
+            retour = puissance;
+            this.vie.setVal(this.vie.getVal()-puissance);
+        }
+        return retour;
+    }
+    
     public void render(Graphics2D batch) {
         batch.drawImage(image, (conteneur.getX() * Config.coteCase) - (ViewPort.x), (conteneur.getY() * Config.coteCase) - (ViewPort.y), Config.coteCase, Config.coteCase, null);
     }
