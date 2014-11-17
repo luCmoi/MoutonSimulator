@@ -14,20 +14,30 @@ public class Objectif {
         this.point = 0;
     }
 
-    public int  evaluation() {
-        int valeurAnimal = 0;
-        int valeurPlante = 0;
-
-        if (proprietaire.getAnimal().getPriorite().containsKey(cible.getAnimal().getClass())) {
-            valeurAnimal = proprietaire.getAnimal().getPriorite().get(cible.getAnimal().getClass());
-            valeurAnimal *= ((proprietaire.getX() - cible.getX()) * (proprietaire.getX() - cible.getX())) + ((proprietaire.getY() - cible.getY()) * (proprietaire.getY() - cible.getY()));
+    public int evaluation() {
+        int valeurAnimal = 1000;//A changer
+        int valeurPlante = 1000;
+        if(proprietaire.getAnimal()==null){
+            //System.out.println("pas animal");
+            return 100000;
+        }else{
+            //System.out.println("animal");
         }
-        if (proprietaire.getAnimal().getPriorite().containsKey(cible.getPlante().getClass())) {
-            valeurPlante = proprietaire.getAnimal().getPriorite().get(cible.getPlante().getClass());
-            valeurPlante *= ((proprietaire.getX() - cible.getX()) * (proprietaire.getX() - cible.getX())) + ((proprietaire.getY() - cible.getY()) * (proprietaire.getY() - cible.getY()));
+        
+        if (cible.getAnimal() != null) {
+            if (proprietaire.getAnimal().getPriorite().containsKey(cible.getAnimal().getClass())) {
+                valeurAnimal = proprietaire.getAnimal().getPriorite().get(cible.getAnimal().getClass());
+                valeurAnimal *= ((proprietaire.getX() - cible.getX()) * (proprietaire.getX() - cible.getX())) + ((proprietaire.getY() - cible.getY()) * (proprietaire.getY() - cible.getY()));
+            }
+        }
+        if (cible.getPlante() != null) {
+            if (proprietaire.getAnimal().getPriorite().containsKey(cible.getPlante().getClass())) {
+                valeurPlante = proprietaire.getAnimal().getPriorite().get(cible.getPlante().getClass());
+                valeurPlante *= ((proprietaire.getX() - cible.getX()) * (proprietaire.getX() - cible.getX())) + ((proprietaire.getY() - cible.getY()) * (proprietaire.getY() - cible.getY()));
+            }
         }
 
-         return point = Math.min(valeurAnimal, valeurPlante);
+        return point = Math.min(valeurAnimal, valeurPlante);
     }
 
     public int getPoint() {

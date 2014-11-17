@@ -22,6 +22,7 @@ public class Loup extends Carnivore {
     @Override
     public void moove() {
         //Recherche dichotomique du plus proche sur x
+        /*
         ArrayList<Animal> moutInRange = new ArrayList<>();
         ArrayList<Animal> listMouton = getConteneur().getContainer().getPartie().getSetMouton();
         int indice = listMouton.size() / 2;
@@ -67,6 +68,8 @@ public class Loup extends Carnivore {
         //fouiller dans le range du loup les moutons quil y a dedant -FAIT
         //trouer celui qui a la distance la plus courte
         //aller le bouffer
+                */
     }
+                
 
 }

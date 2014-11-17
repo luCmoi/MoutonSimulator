@@ -30,7 +30,7 @@ public class Partie {
     private void initPlateau(ConfigInitial init) {
         this.plateau = new Grille(init.getWidth(), init.getHeigth(), this);
         //Placement de l'eau + verification nombre animaux;
-        if (init.getNbMouton() + init.getNbLoup() >= (init.getHeigth() * init.getWidth()-placementSol(init))) {
+        if (init.getNbMouton() + init.getNbLoup() >= (init.getHeigth() * init.getWidth() - placementSol(init))) {
             System.out.println("Parametre initiaux invalides.");
             System.exit(0);
         }
@@ -89,7 +89,6 @@ public class Partie {
             if (tmpN.testValide(init, tab)) {
                 tmpC.setSol(new Eau());
                 eau--;
-            } else {
                 compteurEau++;
             }
         }
