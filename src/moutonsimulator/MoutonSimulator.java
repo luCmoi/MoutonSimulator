@@ -1,8 +1,6 @@
 package moutonsimulator;
 
-import GUI.FenetrePrincipale;
 import GUI.Images;
-import javax.swing.JFrame;
 
 public class MoutonSimulator {
 

@@ -15,13 +15,11 @@ public class Objectif {
     }
 
     public int evaluation() {
-        int valeurAnimal = 1000;//A changer
+        int valeurAnimal = 1000;
         int valeurPlante = 1000;
         if(proprietaire.getAnimal()==null){
-            //System.out.println("pas animal");
             return 100000;
         }else{
-            //System.out.println("animal");
         }
         
         if (cible.getAnimal() != null) {
