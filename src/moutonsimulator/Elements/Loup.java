@@ -9,8 +9,9 @@ public class Loup extends Carnivore {
     public Loup(Case c, Arbre arbre) {
         super(c, arbre);
         this.image = Images.loup;
-        priorite.add(Mouton.class);
-        priorite.add(Loup.class);
+        priorite.put(Mouton.class, 10);
+        priorite.put(Loup.class, 5);
+        
     }
 
     public boolean inRange(Case c) {

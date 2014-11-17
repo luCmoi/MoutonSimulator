@@ -1,6 +1,8 @@
 package moutonsimulator.Elements;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import moutonsimulator.IntValMax;
 import moutonsimulator.Jeu.Case;
 
@@ -8,10 +10,10 @@ public abstract class Animal extends ElementDynamique {
 
     protected Arbre arbreGene;
     protected CaracteristiqueAnimale competence;
-    protected ArrayList<Class> priorite;
+    protected HashMap<Class, Integer> priorite;
 
     public Animal(Case c, Arbre arbre) {
-        priorite = new ArrayList<>();
+        priorite = new HashMap<Class, Integer>();
         this.competence = CaracteristiqueAnimale.randomCompetences();
         this.arbreGene = arbre;
         this.vie = competence.getVie();
@@ -54,6 +56,39 @@ public abstract class Animal extends ElementDynamique {
         this.conteneur.setAnimal(null);
         this.conteneur.setEngrais(this.conteneur.getEngrais() + this.competence.getEngrais());
         this.image = null;
+    }
+    
+    public void mouvementAleatoire(){
+        
+    }
+    public void mouvementDirige(Case c){
+        
+    }
+
+    public void mouvementBasique2() {
+        ArrayList<Objectif> objectifs = new ArrayList();
+        for (int x = conteneur.getX() - competence.getVue(); x < conteneur.getX() + competence.getVue(); x++) {
+            for (int y = conteneur.getY() - (competence.getVue() - Math.abs(conteneur.getX() - x)); y < conteneur.getY() + (competence.getVue() - Math.abs(conteneur.getX() - x)); y++) {
+                if (priorite.keySet().contains(conteneur.getContainer().getPlateau()[x][y].getAnimal().getClass()) || priorite.keySet().contains(conteneur.getContainer().getPlateau()[x][y].getPlante().getClass())) {
+                    objectifs.add(new Objectif(conteneur, conteneur.getContainer().getPlateau()[x][y]));
+                }
+            }
+        }
+        if (objectifs.isEmpty()) {
+            mouvementAleatoire();
+        } else {
+            Objectif but = objectifs.get(0);
+            int max = but.evaluation();
+            for (Objectif e : objectifs) {
+                if (e.evaluation() < max) {
+                    max = e.getPoint();
+                    but = e;
+                }
+            }
+            mouvementDirige(but.getCible());
+            objectifs.clear();
+        }
+
     }
 
     public void mouvementBasique() {
@@ -153,6 +188,14 @@ public abstract class Animal extends ElementDynamique {
 
     public void setConteneur(Case conteneur) {
         this.conteneur = conteneur;
+    }
+
+    public HashMap<Class, Integer> getPriorite() {
+        return priorite;
+    }
+
+    public void setPriorite(HashMap<Class, Integer> priorite) {
+        this.priorite = priorite;
     }
 
 }

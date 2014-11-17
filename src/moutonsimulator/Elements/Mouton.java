@@ -9,8 +9,9 @@ public class Mouton extends Herbivore{
     public Mouton(Case c,Arbre arbre) {
         super(c, arbre);
         this.image=Images.mouton;
-        priorite.add(Plante.class);
-        priorite.add(Mouton.class);
+        priorite.put(Plante.class, 5);
+        priorite.put(Mouton.class,10);
+        priorite.put(Loup.class, -10);
     }
 
     @Override
