@@ -12,6 +12,7 @@ public abstract class Animal extends ElementDynamique {
     protected Arbre arbreGene;
     protected CaracteristiqueAnimale competence;
     protected HashMap<Class, Integer> priorite;
+    protected Boolean aBouge=false;
 
     public Animal(Case c, Arbre arbre) {
         priorite = new HashMap<>();
@@ -68,7 +69,7 @@ public abstract class Animal extends ElementDynamique {
                 }
             }
         }
-        if(casePossible.isEmpty()){
+        if (casePossible.isEmpty()) {
             System.out.println("peut pas bouger");
             return;
         }
@@ -84,37 +85,39 @@ public abstract class Animal extends ElementDynamique {
     }
 
     public void mouvementBasique() {
-        ArrayList<Objectif> objectifs = new ArrayList();
-        for (int x = Math.max(0, conteneur.getX() - competence.getVue()); x < Math.min(conteneur.getX() + competence.getVue(), conteneur.getContainer().getPlateau().length); x++) {
-            for (int y = Math.max(0, conteneur.getY() - (competence.getVue() - Math.abs(conteneur.getX() - x))); y < Math.min(conteneur.getY() + (competence.getVue() - Math.abs(conteneur.getX() - x)), conteneur.getContainer().getPlateau().length); y++) {
-                if (conteneur.getContainer().getPlateau()[x][y].getAnimal() != null) {
-                    if (priorite.keySet().contains(conteneur.getContainer().getPlateau()[x][y].getAnimal().getClass())) {
-                        objectifs.add(new Objectif(conteneur, conteneur.getContainer().getPlateau()[x][y]));
+        if (!aBouge) {
+            aBouge=true;
+            ArrayList<Objectif> objectifs = new ArrayList();
+            for (int x = Math.max(0, conteneur.getX() - competence.getVue()); x < Math.min(conteneur.getX() + competence.getVue(), conteneur.getContainer().getPlateau().length); x++) {
+                for (int y = Math.max(0, conteneur.getY() - (competence.getVue() - Math.abs(conteneur.getX() - x))); y < Math.min(conteneur.getY() + (competence.getVue() - Math.abs(conteneur.getX() - x)), conteneur.getContainer().getPlateau().length); y++) {
+                    if (conteneur.getContainer().getPlateau()[x][y].getAnimal() != null) {
+                        if (priorite.keySet().contains(conteneur.getContainer().getPlateau()[x][y].getAnimal().getClass())) {
+                            objectifs.add(new Objectif(conteneur, conteneur.getContainer().getPlateau()[x][y]));
+                        }
                     }
-                }
-                if (conteneur.getContainer().getPlateau()[x][y].getPlante() != null) {
-                    if (priorite.keySet().contains(conteneur.getContainer().getPlateau()[x][y].getPlante().getClass())) {
-                        objectifs.add(new Objectif(conteneur, conteneur.getContainer().getPlateau()[x][y]));
+                    if (conteneur.getContainer().getPlateau()[x][y].getPlante() != null) {
+                        if (priorite.keySet().contains(conteneur.getContainer().getPlateau()[x][y].getPlante().getClass())) {
+                            objectifs.add(new Objectif(conteneur, conteneur.getContainer().getPlateau()[x][y]));
+                        }
                     }
-                }
 
-            }
-        }
-        if (objectifs.isEmpty()) {
-            mouvementAleatoire();
-        } else {
-            Objectif but = objectifs.get(0);
-            int max = but.evaluation();
-            for (Objectif e : objectifs) {
-                if (e.evaluation() < max) {
-                    max = e.getPoint();
-                    but = e;
                 }
             }
-            mouvementDirige(but.getCible());
-            objectifs.clear();
+            if (objectifs.isEmpty()) {
+                mouvementAleatoire();
+            } else {
+                Objectif but = objectifs.get(0);
+                int max = but.evaluation();
+                for (Objectif e : objectifs) {
+                    if (e.evaluation() < max) {
+                        max = e.getPoint();
+                        but = e;
+                    }
+                }
+                mouvementDirige(but.getCible());
+                objectifs.clear();
+            }
         }
-
     }
 
     public IntValMax getVie() {
@@ -157,4 +160,7 @@ public abstract class Animal extends ElementDynamique {
         this.priorite = priorite;
     }
 
+    public void setABouge(boolean change){
+        this.aBouge=change;
+    }
 }

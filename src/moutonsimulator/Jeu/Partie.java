@@ -141,7 +141,12 @@ public class Partie {
     public void update() {
         plateau.update();
         jours++;
-        //System.out.println("J : " + jours);
+        for (Animal a : setMouton) {
+            a.setABouge(false);
+        }
+        for (Animal a : setLoup) {
+            a.setABouge(false);
+        }
     }
 
     public void render(Graphics2D batch) {

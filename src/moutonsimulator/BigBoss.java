@@ -22,7 +22,6 @@ public class BigBoss {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                System.out.println(Thread.currentThread().getId());
                 while (true) {
                     try {
                         fenetre.getPan().execution();

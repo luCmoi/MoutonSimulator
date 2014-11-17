@@ -19,7 +19,6 @@ public class FenetrePrincipale extends JFrame {
         pan = new PanelPartie();
         this.setContentPane(pan);
         this.setVisible(true);
-        System.out.println(Thread.currentThread().getId());
     }
 
     public PanelPartie getPan() {
