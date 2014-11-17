@@ -30,24 +30,6 @@ public class Case implements Comparable {
         this.traversable = true;
     }
     
-    public void interaction(Case c){
-        if(this.animal!=null){
-            if(c.getAnimal().mange(animal)){
-                animal.mort();
-                animal=c.getAnimal();
-                c.setAnimal(null);
-            }else if(animal.mange(c.getAnimal())){
-                c.animal.mort();
-            }
-        }else if(this.plante!=null){
-            
-            
-        }else{
-            this.animal = c.getAnimal();
-            c.setAnimal(null);
-        }
-    }
-    
     public boolean presence(){
         return this.animal!=null || this.plante!=null;
     }
