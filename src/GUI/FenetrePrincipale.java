@@ -9,7 +9,6 @@ import moutonsimulator.Jeu.ConfigInitial;
 public class FenetrePrincipale extends JFrame {
 
     private PanelPartie pan;
-    private PanelOverview panOv;
     
     public FenetrePrincipale() {
         super("Mouton Simulator");
@@ -18,9 +17,7 @@ public class FenetrePrincipale extends JFrame {
         this.setResizable(true);
         setSize(800, 600);
         pan = new PanelPartie();
-        panOv = new PanelOverview(this);
         this.setContentPane(pan);
-        this.add(panOv, BorderLayout.EAST);
         this.setVisible(true);
     }
 
