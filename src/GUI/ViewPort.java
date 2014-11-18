@@ -20,7 +20,6 @@ public class ViewPort {
                 ViewPort.x = 0;
             } else {
                 int xTmp = ViewPort.widthMax - width;
-                System.out.println(xTmp);
                 ViewPort.width = width;
                 ViewPort.x = xTmp;
             }
@@ -50,6 +49,24 @@ public class ViewPort {
             ViewPort.heightMax = (nC * ConfigInitial.heigth);
             ViewPort.widthMax = (nC * ConfigInitial.width);
             Config.coteCase = nC;
+            if (ViewPort.x + ViewPort.width > ViewPort.widthMax) {
+                if (ViewPort.width > ViewPort.widthMax) {
+                    ViewPort.width = ViewPort.widthMax;
+                    ViewPort.x = 0;
+                } else {
+                    int xTmp = ViewPort.widthMax - ViewPort.width;
+                    ViewPort.x = xTmp;
+                }
+            }
+            if (ViewPort.y + ViewPort.height > ViewPort.heightMax) {
+                if (ViewPort.height > ViewPort.heightMax) {
+                    ViewPort.height = ViewPort.heightMax;
+                    ViewPort.y = 0;
+                } else {
+                    int yTmp = ViewPort.heightMax - ViewPort.height;
+                    ViewPort.y = yTmp;
+                }
+            }
             ViewPort.panel.repaint();
         }
 
