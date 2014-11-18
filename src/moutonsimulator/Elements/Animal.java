@@ -9,7 +9,22 @@ import moutonsimulator.IntValMax;
 import moutonsimulator.Jeu.Case;
 
 public abstract class Animal extends ElementDynamique {
-
+    
+    protected enum action {        
+        
+        boufferVoisin(1),
+        boufferChevauche(2),
+        reproduction(3),
+        boire(4);
+        
+        private final int val;
+        
+        action(int val){
+            this.val = val;
+        }
+    
+    }
+    
     protected Arbre arbreGene;
     protected CaracteristiqueAnimale competence;
     protected HashMap<Class, Integer> priorite;
@@ -81,8 +96,8 @@ public abstract class Animal extends ElementDynamique {
         this.conteneur = tmp;
     }
 
-    public void mouvementDirige(Case c) {
-        Point cible = new Point(c.getX(), c.getY());
+    public void mouvementDirige(Objectif o) {
+        Point cible = new Point(o.getCible().getX(), o.getCible().getY());
         Point courant = new Point(conteneur.getX(), conteneur.getY());
         HashMap<Point, Noeud> listeFermee = new HashMap<>();
         HashMap<Point, Noeud> listeOuverte = new HashMap<>();
@@ -101,11 +116,7 @@ public abstract class Animal extends ElementDynamique {
             Case caseTmp = conteneur.getContainer().getPlateau()[tmp.x][tmp.y];
             caseTmp.setAnimal(this);
             /*if (listeFermee.get(cible).parent == tmp) {
-             if (c.getAnimal() != null) {
-             interaction(c.getAnimal());
-             }else {
-             interaction(c.getPlante());
-             }
+                
              }*/
             this.conteneur = caseTmp;
         } else {
@@ -144,7 +155,7 @@ public abstract class Animal extends ElementDynamique {
                         but = e;
                     }
                 }
-                mouvementDirige(but.getCible());
+                mouvementDirige(but);
                 objectifs.clear();
             }
         }
