@@ -6,10 +6,12 @@ import java.util.Collections;
 import java.util.Stack;
 import javax.swing.JPanel;
 import moutonsimulator.Elements.Animal;
+import moutonsimulator.Elements.Buisson;
+import moutonsimulator.Elements.CaracteristiquePlante;
 import moutonsimulator.Elements.Eau;
+import moutonsimulator.Elements.Herbe;
 import moutonsimulator.Elements.Loup;
 import moutonsimulator.Elements.Mouton;
-import moutonsimulator.Elements.Plante;
 
 public class Partie {
 
@@ -34,16 +36,14 @@ public class Partie {
             System.out.println("Parametre initiaux invalides.");
             System.exit(0);
         }
+        
+        placementPlante(init);
 
         Stack<Case> caseLibre = new Stack<>();
         for (int x = 0; x < init.getWidth(); x++) {
             for (int y = 0; y < init.getHeigth(); y++) {
                 if (plateau.getPlateau()[x][y].isTraversable()) {
                     caseLibre.add(plateau.getPlateau()[x][y]);
-                    //Placement des plantes : 
-                    if ((int) (Math.random() * 11) < init.getProbaPlante()) {
-                        plateau.getPlateau()[x][y].setPlante(new Plante((int) (50 + Math.random() * 50), 10, 5, plateau.getPlateau()[x][y]));
-                    }
                 }
             }
         }
@@ -102,6 +102,26 @@ public class Partie {
         }
         caseLibre.clear();
         return compteurEau;
+    }
+
+    public int placementPlante(ConfigInitial init) {
+        int cmp = 0;
+        for (int x = 0; x < init.getWidth(); x++) {
+            for (int y = 0; y < init.getHeigth(); y++) {
+                if ((int) (Math.random() * 101) < init.getProbaPlante() && plateau.getPlateau()[x][y].isTraversable()) {
+                    switch ((int) (Math.random() * 2)) {
+                        case 0:
+                            plateau.getPlateau()[x][y].setPlante(new Herbe(CaracteristiquePlante.randomSpecs(), plateau.getPlateau()[x][y]));
+                            break;
+                        case 1:
+                            plateau.getPlateau()[x][y].setPlante(new Buisson(CaracteristiquePlante.randomSpecs(), plateau.getPlateau()[x][y]));
+                            break;
+                    }
+                    cmp++;
+                }
+            }
+        }
+        return cmp;
     }
 
     public Node[][] initTabNode(ConfigInitial init) {

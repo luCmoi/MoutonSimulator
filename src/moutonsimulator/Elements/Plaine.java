@@ -7,6 +7,6 @@ import java.awt.Image;
 public class Plaine extends Sol{
     
     public Plaine(){
-        super(Images.herbe,true);
+        super(Images.herbe2,true);
     }
 }

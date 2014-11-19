@@ -1,10 +1,14 @@
 package moutonsimulator.Jeu;
 
-import GUI.Images;
 import GUI.ViewPort;
 import java.awt.Graphics2D;
+import java.util.HashSet;
 import moutonsimulator.Config;
 import moutonsimulator.Elements.Animal;
+import moutonsimulator.Elements.Buisson;
+import moutonsimulator.Elements.CaracteristiquePlante;
+import moutonsimulator.Elements.Graine;
+import moutonsimulator.Elements.Herbe;
 import moutonsimulator.Elements.Plante;
 import moutonsimulator.Elements.Sol;
 
@@ -18,6 +22,7 @@ public class Case implements Comparable {
     private final Grille container;
     private boolean traversable;
     private Sol sol;
+    private HashSet<Graine> graines;
 
     Case(int x, int y, Grille cont,Sol sol) {
         this.x = x;
@@ -25,20 +30,40 @@ public class Case implements Comparable {
         this.animal = null;
         this.plante = null;
         this.container = cont;
-        this.engrais = 0;
+        this.engrais = 10;
         this.sol = sol;
         this.traversable = true;
+        this.graines = new HashSet<>();
     }
     
     public boolean presence(){
         return this.animal!=null || this.plante!=null;
     }
+    
+    public void updatePlante(){
+        if(this.plante!=null){
+            plante.update();
+        }else if(this.engrais>0){
+            for(Graine g : graines){
+                g.setCountDown(g.getCountDown()-1);
+                if(g.getCountDown()==0){
+                    switch(g.getType()){//J'ai pas encore trouver mieu que le switch
+                        case Herbe.type:
+                            this.plante = new Herbe(CaracteristiquePlante.randomSpecs(),this);
+                            break;
+                        case Buisson.type:
+                            this.plante = new Buisson(CaracteristiquePlante.randomSpecs(),this);
+                            break;
+                    }
+                    engrais--;
+                    break;
+                }
+            }
+        }
+    }
 
     public void update() {
-        if(this.plante==null && this.engrais>0){
-            this.engrais--;
-            this.plante = new Plante(10, 20, 1, this);
-        }
+        updatePlante();
         if (this.getAnimal() != null) {
             this.getAnimal().update();
         }
@@ -133,5 +158,13 @@ public class Case implements Comparable {
 
     public void setSol(Sol sol) {
         this.sol = sol;
+    }
+
+    public HashSet<Graine> getGraines() {
+        return graines;
+    }
+
+    public void setGraines(HashSet<Graine> graines) {
+        this.graines = graines;
     }
 }
