@@ -2,11 +2,11 @@ package moutonsimulator.Jeu;
 
 public class ConfigInitial {
     
-    public static int width = 50;
-    public static int heigth = 50;
+    public static int width = 150;
+    public static int heigth = 150;
     public int nbMouton = 0;
     public int nbLoup = 0;
-    private int probaPlante = 2;//Pourcentage de plante
+    private int probaPlante = 1;//Pourcentage de plante (sur 1000)
     private int eau = 10000;
 
     public int getWidth() {

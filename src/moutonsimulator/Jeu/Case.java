@@ -30,7 +30,7 @@ public class Case implements Comparable {
         this.animal = null;
         this.plante = null;
         this.container = cont;
-        this.engrais = 10;
+        this.engrais = 5;
         this.sol = sol;
         this.traversable = true;
         this.graines = new HashSet<>();

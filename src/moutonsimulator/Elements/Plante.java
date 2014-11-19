@@ -43,7 +43,11 @@ public class Plante extends ElementDynamique {
         }
         for (Case c : casePossible) {
             if ((int) (Math.random() * 101) < specs.getProliferation()) {
-                c.getGraines().add(new Graine(c, (this).type, specs.getDureePousse()));//je sais pas si pour le type ça vas marcher
+                if (this instanceof Herbe) {
+                    c.getGraines().add(new Graine(c, 0, specs.getDureePousse()));//je sais pas si pour le type ça vas marcher
+                } else if (this instanceof Buisson) {
+                    c.getGraines().add(new Graine(c, 1, specs.getDureePousse()));//je sais pas si pour le type ça vas marcher
+                }
             }
         }
         this.countDownRepro = specs.getDureeReproduction();

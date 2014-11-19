@@ -108,7 +108,7 @@ public class Partie {
         int cmp = 0;
         for (int x = 0; x < init.getWidth(); x++) {
             for (int y = 0; y < init.getHeigth(); y++) {
-                if ((int) (Math.random() * 101) < init.getProbaPlante() && plateau.getPlateau()[x][y].isTraversable()) {
+                if ((int) (Math.random() * 1001) < init.getProbaPlante() && plateau.getPlateau()[x][y].isTraversable()) {
                     switch ((int) (Math.random() * 2)) {
                         case 0:
                             plateau.getPlateau()[x][y].setPlante(new Herbe(CaracteristiquePlante.randomSpecs(), plateau.getPlateau()[x][y]));

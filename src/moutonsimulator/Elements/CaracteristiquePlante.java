@@ -22,7 +22,7 @@ public class CaracteristiquePlante {
     }
     
     public static CaracteristiquePlante randomSpecs(){
-        return new CaracteristiquePlante(10+(int)(Math.random()*50), 75+(int)(Math.random()*50), 2, 3+(int)(Math.random()*10), 10,25);
+        return new CaracteristiquePlante(10+(int)(Math.random()*25), 10+(int)(Math.random()*50), 2, 3+(int)(Math.random()*10), 20,10);
     }
 
     public IntValMax getAge() {

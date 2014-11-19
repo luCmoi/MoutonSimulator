@@ -9,6 +9,7 @@ import GUI.Images;
 import moutonsimulator.Jeu.Case;
 
 public class Buisson extends Plante {
+
     public static final int type = 1;
 
     public Buisson(CaracteristiquePlante specs, Case c) {
