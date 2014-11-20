@@ -21,6 +21,7 @@ public class PanelOverview extends JPanel {
     private JScrollPane scrollPan;
     private JPanel contenu;
     private int largeur;
+    private int state;
 
     public PanelOverview(PanelPartie pan) {
         this.pan = pan;
@@ -55,13 +56,13 @@ public class PanelOverview extends JPanel {
         if (getSelection().getSelectedIndex() == 0) {
             contenu.setLayout(new GridLayout(getPan().getPartie().getSetLoup().size(), 1));
             for (Animal m : getPan().getPartie().getSetLoup()) {
-                getContenu().add(new JLabel("Louloup"));
+                contenu.add(new AffichageElement(m));
             }
         }
         if (getSelection().getSelectedIndex() == 1) {
             contenu.setLayout(new GridLayout(getPan().getPartie().getSetMouton().size(), 1));
             for (Animal m : getPan().getPartie().getSetMouton()) {
-                getContenu().add(new JLabel("Moutmout"));
+                contenu.add(new AffichageElement(m));
             }
         }
         getScrollPan().validate();
@@ -115,7 +116,10 @@ public class PanelOverview extends JPanel {
 
         @Override
         public void itemStateChanged(ItemEvent e) {
-            update();
+            if (e.getStateChange() != state) {
+                update();
+                state = e.getStateChange();
+            }
         }
     }
 }
