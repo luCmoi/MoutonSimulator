@@ -2,11 +2,10 @@ package GUI;
 
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
-import java.awt.event.MouseAdapter;
 import moutonsimulator.Config;
 import moutonsimulator.Jeu.ConfigInitial;
 
-public class PanelListener extends MouseAdapter implements ComponentListener {
+public class PanelListener implements ComponentListener {
     
     @Override
     public void componentResized(ComponentEvent e) {

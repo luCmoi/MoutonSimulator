@@ -10,7 +10,6 @@ import moutonsimulator.Jeu.Partie;
 public class PanelPartie extends JPanel {
 
     public Partie partie;
-    private PanelOverview panOv;
 
     public PanelPartie() {
         super();
@@ -18,14 +17,11 @@ public class PanelPartie extends JPanel {
         this.setLayout(new BorderLayout());
         this.addComponentListener(new PanelListener());
         this.addKeyListener(new PanelKeyListener());
-        panOv=new PanelOverview(this);
         MouseListenerPanel motion = new MouseListenerPanel();
         this.addMouseListener(motion);
         this.addMouseMotionListener(motion);
-        this.addMouseWheelListener(motion);
-        
+        this.addMouseWheelListener(motion);        
         this.setFocusable(true);
-        this.add(panOv,BorderLayout.EAST);
     }
 
     @Override
