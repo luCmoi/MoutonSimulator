@@ -55,14 +55,18 @@ public class PanelOverview extends JPanel {
         contenu.repaint();
         if (getSelection().getSelectedIndex() == 0) {
             contenu.setLayout(new GridLayout(getPan().getPartie().getSetLoup().size(), 1));
-            for (Animal m : getPan().getPartie().getSetLoup()) {
-                contenu.add(new AffichageElement(m));
+            if (!getPan().getPartie().getSetMouton().isEmpty()) {
+                for (Animal m : getPan().getPartie().getSetLoup()) {
+                    contenu.add(new AffichageElement(m));
+                }
             }
         }
         if (getSelection().getSelectedIndex() == 1) {
             contenu.setLayout(new GridLayout(getPan().getPartie().getSetMouton().size(), 1));
-            for (Animal m : getPan().getPartie().getSetMouton()) {
-                contenu.add(new AffichageElement(m));
+            if (!getPan().getPartie().getSetMouton().isEmpty()) {
+                for (Animal m : getPan().getPartie().getSetMouton()) {
+                    contenu.add(new AffichageElement(m));
+                }
             }
         }
         getScrollPan().validate();
