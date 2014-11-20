@@ -1,25 +1,28 @@
 package GUI;
 
-import java.awt.Image;
+import java.awt.Color;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 public class Images {
 
-    public static Image herbe;
-    public static Image mouton;
-    public static Image loup;
-    public static Image buisson;
-    public static Image eau;
-    public static Image pierre;
-    public static Image hauteHerbe;
-    public static Image herbe2;
+    public static BufferedImage herbe;
+    public static BufferedImage mouton;
+    public static BufferedImage loup;
+    public static BufferedImage buisson;
+    public static BufferedImage eau;
+    public static BufferedImage pierre;
+    public static BufferedImage hauteHerbe;
+    public static BufferedImage herbe2;
+    public static BufferedImage hauteHerbeModel;
+    public static BufferedImage buissonModel;
 
     public static void init() {
         try {
+            Images.hauteHerbeModel = ImageIO.read(new File("Ressources/Images/hauteHerbeNB.png"));
+            Images.buissonModel = ImageIO.read(new File("Ressources/Images/buissonNB.png"));
             Images.herbe2 = ImageIO.read(new File("Ressources/Images/herbe2.png"));
             Images.hauteHerbe= ImageIO.read(new File("Ressources/Images/hauteHerbe.png"));
             Images.pierre= ImageIO.read(new File("Ressources/Images/rock.gif"));
@@ -29,8 +32,29 @@ public class Images {
             Images.loup = ImageIO.read(new File("Ressources/Images/loup.gif"));
             Images.buisson = ImageIO.read(new File("Ressources/Images/buisson.png"));
         } catch (IOException ex) {
-            Logger.getLogger(Images.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Toutes les images n'ont pas pu etre chargees.");
         }
+    }
+    
+    public static BufferedImage conversionModel(BufferedImage model,Color c1,Color c2,Color c3){
+       BufferedImage img = new BufferedImage(64,64,2);
+       Color fond = new Color(0f,0f,0f,0f);//ptetre 1 a la fin
+       for(int x = 0;x<64;x++){
+           for (int y = 0; y < 64; y++) {
+               Color tmp = new Color(model.getRGB(x, y));
+               if(tmp.getRed()==100){//c1
+                   img.setRGB(x, y, c1.getRGB());
+               }else if(tmp.getRed()==150){//c2
+                   img.setRGB(x, y, c2.getRGB());
+               }else if(tmp.getRed()==255){//c3
+                   img.setRGB(x, y, c3.getRGB());
+               }
+               else{
+                   img.setRGB(x, y, fond.getRGB());//peut etre dispensable
+               }
+           }
+       }
+       return img;
     }
 
 }
