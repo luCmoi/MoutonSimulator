@@ -204,4 +204,8 @@ public abstract class Animal extends ElementDynamique {
     public void setABouge(boolean change) {
         this.aBouge = change;
     }
+    
+    public CaracteristiqueAnimale getCompetence(){
+        return competence;
+    }
 }
