@@ -37,22 +37,17 @@ public class Images {
     }
 
     public static BufferedImage conversionModel(BufferedImage model, Color c1, Color c2, Color c3) {
-<<<<<<< HEAD
+
         /* System.out.println("-------------------------");
          System.out.println("-------------------------");
          System.out.println("-------------------------");
          */
-=======
->>>>>>> origin/master
         BufferedImage img = new BufferedImage(64, 64, 2);
         for (int x = 0; x < 64; x++) {
             for (int y = 0; y < 64; y++) {
                 Color tmp = new Color(model.getRGB(x, y));
-<<<<<<< HEAD
+
                 //System.out.println("R : "+tmp.getRed()+" G : "+tmp.getGreen()+" B : "+tmp.getBlue()+" A : "+tmp.getAlpha());
-=======
-                 //System.out.println("R : "+tmp.getRed()+" G : "+tmp.getGreen()+" B : "+tmp.getBlue()+" A : "+tmp.getAlpha());
->>>>>>> origin/master
                 if (tmp.getAlpha() != 0.0 && tmp.getRed() == 0) {
                     // img.setRGB(x,y,Color.BLACK.getRGB());
                 } else if (tmp.getRed() == 100) {//c1
@@ -63,16 +58,14 @@ public class Images {
                     img.setRGB(x, y, c3.getRGB());
                 }
             }
-<<<<<<< HEAD
+
         }/*
          System.out.println("-------------------------");
          System.out.println("-------------------------");
          System.out.println("-------------------------");
          */
 
-=======
-        }
->>>>>>> origin/master
+
         return img;
     }
 
