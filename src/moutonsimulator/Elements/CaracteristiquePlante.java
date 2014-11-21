@@ -7,22 +7,22 @@ public class CaracteristiquePlante {
     
     private IntValMax age;
     private IntValMax vie;
-    private int dureePousse;
-    private int porteSpore;
-    private int dureeReproduction;
+    private int dureePousse;//temps qu'une graine met a pousser
+    private int porteSpore;//distance a la quelle un plante peut fertiliser une case
+    private int dureeReproduction;//nombre de tour avant chaque reproduction
     private int proliferation;//pourcentage de chance d'ensemencer une case alentour
     
-    public CaracteristiquePlante(int vieMax, int ageMax,int duree,int porte,int repro,int proliferartion){
+    public CaracteristiquePlante(int vieMax, int ageMax,int dureePousse,int porte,int dureeRepro,int proliferartion){
         this.vie = new IntValMax(vieMax);
         this.age = new IntValMax(0, ageMax);
-        this.dureePousse = duree;
+        this.dureePousse = dureePousse;
         this.porteSpore = porte;
-        this.dureeReproduction = repro;
+        this.dureeReproduction = dureeRepro;
         this.proliferation = proliferartion;
     }
     
     public static CaracteristiquePlante randomSpecs(){
-        return new CaracteristiquePlante(10+(int)(Math.random()*25), 10+(int)(Math.random()*50), 2, 3+(int)(Math.random()*10), 20,10);
+        return new CaracteristiquePlante(10+(int)(Math.random()*25), 10+(int)(Math.random()*50), 10, 3+(int)(Math.random()*5), 30,5);
     }
 
     public IntValMax getAge() {

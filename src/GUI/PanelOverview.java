@@ -1,8 +1,10 @@
 package GUI;
 
-import java.awt.Component;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.GridLayout;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import javax.swing.JComboBox;
@@ -18,51 +20,110 @@ public class PanelOverview extends JPanel {
     private JComboBox selection;
     private JScrollPane scrollPan;
     private JPanel contenu;
+    private int largeur;
+    private int state;
 
     public PanelOverview(PanelPartie pan) {
         this.pan = pan;
-        //this.setLayout(new GridLayout(3, 1));
+        this.setLayout(new BorderLayout());
+        this.largeur = 4 * Config.coteCase;
         contenu = new JPanel();
-        contenu.setPreferredSize(new Dimension(3 * Config.coteCase, 150));
         scrollPan = new JScrollPane(contenu, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        this.add(new JLabel("Overview"));
-        this.setPreferredSize(new Dimension(4 * Config.coteCase, Toolkit.getDefaultToolkit().getScreenSize().height));
+        this.add(new JLabel("Overview"), BorderLayout.NORTH);
         selection = new JComboBox();
-        selection.setPreferredSize(new Dimension(3 * Config.coteCase, 20));
         selection.addItem("Loup");
         selection.addItem("Mouton");
         selection.addItem("Plante");
         selection.addItemListener(new EtatCombo());
-        this.add(selection);
-        this.add(scrollPan);
+        this.add(selection, BorderLayout.CENTER);
+        this.add(scrollPan, BorderLayout.SOUTH);
+        this.addComponentListener(new ComponentAdapter() {
+
+            @Override
+            public void componentResized(ComponentEvent e) {
+                setLargeur(e.getComponent().getWidth());
+                selection.setSize(new Dimension(getLargeur(), 20));
+                scrollPan.setPreferredSize(new Dimension(getLargeur(), e.getComponent().getHeight() - 60));
+                selection.validate();
+                contenu.validate();
+            }
+        });
     }
 
     public void update() {
-        for (Component comp : contenu.getComponents()) {
-            contenu.remove(comp);
-        }
-        if (selection.getSelectedIndex() == 0) {
-            for (Animal m : pan.getPartie().getSetLoup()) {
-                contenu.add(new JLabel("Louloup"));
+        contenu.removeAll();
+        contenu.repaint();
+        if (getSelection().getSelectedIndex() == 0) {
+            contenu.setLayout(new GridLayout(getPan().getPartie().getSetLoup().size(), 1));
+            if (!getPan().getPartie().getSetMouton().isEmpty()) {
+                for (Animal m : getPan().getPartie().getSetLoup()) {
+                    contenu.add(new AffichageElement(m));
+                }
             }
         }
-        if (selection.getSelectedIndex() == 1) {
-            for (Animal m : pan.getPartie().getSetMouton()) {
-                contenu.add(new JLabel("Moutmout"));
+        if (getSelection().getSelectedIndex() == 1) {
+            contenu.setLayout(new GridLayout(getPan().getPartie().getSetMouton().size(), 1));
+            if (!getPan().getPartie().getSetMouton().isEmpty()) {
+                for (Animal m : getPan().getPartie().getSetMouton()) {
+                    contenu.add(new AffichageElement(m));
+                }
             }
         }
-        scrollPan.validate();
+        getScrollPan().validate();
     }
 
     public void render() {
 
     }
 
+    public PanelPartie getPan() {
+        return pan;
+    }
+
+    public void setPan(PanelPartie pan) {
+        this.pan = pan;
+    }
+
+    public JComboBox getSelection() {
+        return selection;
+    }
+
+    public void setSelection(JComboBox selection) {
+        this.selection = selection;
+    }
+
+    public JScrollPane getScrollPan() {
+        return scrollPan;
+    }
+
+    public void setScrollPan(JScrollPane scrollPan) {
+        this.scrollPan = scrollPan;
+    }
+
+    public JPanel getContenu() {
+        return contenu;
+    }
+
+    public void setContenu(JPanel contenu) {
+        this.contenu = contenu;
+    }
+
+    public int getLargeur() {
+        return largeur;
+    }
+
+    public void setLargeur(int largeur) {
+        this.largeur = largeur;
+    }
+
     class EtatCombo implements ItemListener {
 
         @Override
         public void itemStateChanged(ItemEvent e) {
-            update();
+            if (e.getStateChange() != state) {
+                update();
+                state = e.getStateChange();
+            }
         }
     }
 }

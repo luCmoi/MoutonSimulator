@@ -4,10 +4,10 @@ public class ConfigInitial {
     
     public static int width = 150;
     public static int heigth = 150;
-    public int nbMouton = 0;
-    public int nbLoup = 0;
-    private int probaPlante = 1;//Pourcentage de plante (sur 1000)
-    private int eau = 10000;
+    public int nbMouton = 150;
+    public int nbLoup = 100 ;
+    private int probaPlante = 1;
+    private int eau = 400;
 
     public int getWidth() {
         return width;

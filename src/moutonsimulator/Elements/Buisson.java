@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package moutonsimulator.Elements;
 
 import GUI.Images;
+import java.awt.Color;
 import moutonsimulator.Jeu.Case;
 
 public class Buisson extends Plante {
@@ -14,7 +10,7 @@ public class Buisson extends Plante {
 
     public Buisson(CaracteristiquePlante specs, Case c) {
         super(specs, c);
-        this.image = Images.buisson;
+        this.image = Images.conversionModel(Images.buissonModel, new Color(2, 51, 2, 255), new Color(5, 102, 5, 255), new Color(15, 130, 15, 255));
     }
 
 }

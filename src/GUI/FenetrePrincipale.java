@@ -8,6 +8,8 @@ import moutonsimulator.Jeu.ConfigInitial;
 
 public class FenetrePrincipale extends JFrame {
 
+    private PanelSplit split;
+    private PanelOverview over;
     private PanelPartie pan;
     
     public FenetrePrincipale() {
@@ -17,7 +19,9 @@ public class FenetrePrincipale extends JFrame {
         this.setResizable(true);
         setSize(800, 600);
         pan = new PanelPartie();
-        this.setContentPane(pan);
+        over = new PanelOverview(pan);
+        split = new PanelSplit(pan, over,getSize().width);
+        this.setContentPane(split);
         this.setVisible(true);
     }
 
@@ -27,6 +31,22 @@ public class FenetrePrincipale extends JFrame {
 
     public void setPan(PanelPartie pan) {
         this.pan = pan;
+    }
+
+    public PanelSplit getSplit() {
+        return split;
+    }
+
+    public void setSplit(PanelSplit split) {
+        this.split = split;
+    }
+
+    public PanelOverview getOver() {
+        return over;
+    }
+
+    public void setOver(PanelOverview over) {
+        this.over = over;
     }
 
 }

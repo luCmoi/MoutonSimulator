@@ -50,4 +50,8 @@ public abstract class ElementDynamique {
     public void setImage(Image image) {
         this.image = image;
     }
+    
+    public Case getConteneur(){
+        return conteneur;
+    }
 }

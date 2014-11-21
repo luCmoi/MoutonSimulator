@@ -71,4 +71,24 @@ public class ViewPort {
         }
 
     }
+
+    static void setVue(int x, int y) {
+        x = x - (ViewPort.width / 2);
+        y = y - (ViewPort.height / 2);
+        if (x < 0) {
+            x = 0;
+        }
+        if (y < 0) {
+            y = 0;
+        }
+        if (x + ViewPort.width > ViewPort.widthMax) {
+            x = ViewPort.widthMax - ViewPort.width;
+        }
+        if (y + ViewPort.height > heightMax) {
+            y = ViewPort.heightMax - ViewPort.height;
+        }
+        ViewPort.x = x;
+        ViewPort.y = y;
+        ViewPort.panel.repaint();
+    }
 }
