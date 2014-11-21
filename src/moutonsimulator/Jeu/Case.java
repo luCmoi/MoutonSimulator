@@ -30,7 +30,7 @@ public class Case implements Comparable {
         this.animal = null;
         this.plante = null;
         this.container = cont;
-        this.engrais = 5;
+        this.engrais = 15;
         this.sol = sol;
         this.traversable = true;
         this.graines = new HashSet<>();
@@ -49,10 +49,10 @@ public class Case implements Comparable {
                 if(g.getCountDown()==0){
                     switch(g.getType()){//J'ai pas encore trouver mieu que le switch
                         case Herbe.type:
-                            this.plante = new Herbe(CaracteristiquePlante.randomSpecs(),this);
+                            this.plante = new Herbe(CaracteristiquePlante.randomSpecs(),this,g.getC1(),g.getC2(),g.getC3());
                             break;
                         case Buisson.type:
-                            this.plante = new Buisson(CaracteristiquePlante.randomSpecs(),this);
+                            this.plante = new Buisson(CaracteristiquePlante.randomSpecs(),this,g.getC1(),g.getC2(),g.getC3());
                             break;
                     }
                     engrais--;
