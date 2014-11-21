@@ -6,6 +6,7 @@ import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import moutonsimulator.Config;
+import moutonsimulator.Jeu.Case;
 import moutonsimulator.Jeu.ConfigInitial;
 
 public class MouseListenerPanel implements MouseMotionListener, MouseListener, MouseWheelListener {
@@ -19,17 +20,17 @@ public class MouseListenerPanel implements MouseMotionListener, MouseListener, M
     @Override
 
     public void mouseDragged(MouseEvent me) {
-        if(inMoove){
-        int nX = xV + (xPressed - me.getX());
-        int nY = yV + (yPressed - me.getY());
+        if (inMoove) {
+            int nX = xV + (xPressed - me.getX());
+            int nY = yV + (yPressed - me.getY());
 
-        if (nX >= 0 && nX < (ConfigInitial.width * Config.coteCase) - ViewPort.width) {
-            ViewPort.x = xV + (xPressed - me.getX());
-        }
-        if (nY >= 0 && nY < (ConfigInitial.heigth * Config.coteCase) - ViewPort.height) {
-            ViewPort.y = yV + (yPressed - me.getY());
-        }
-        ViewPort.panel.repaint();
+            if (nX >= 0 && nX < (ConfigInitial.width * Config.coteCase) - ViewPort.width) {
+                ViewPort.x = xV + (xPressed - me.getX());
+            }
+            if (nY >= 0 && nY < (ConfigInitial.heigth * Config.coteCase) - ViewPort.height) {
+                ViewPort.y = yV + (yPressed - me.getY());
+            }
+            ViewPort.panel.repaint();
         }
     }
 
@@ -39,15 +40,23 @@ public class MouseListenerPanel implements MouseMotionListener, MouseListener, M
 
     @Override
     public void mouseClicked(MouseEvent me) {
+        if (me.getButton() == MouseEvent.BUTTON3) {
+            Case tmp = ViewPort.panel.getPartie().getPlateau().getPlateau()[(me.getX() + ViewPort.x) / 32][(me.getY() + ViewPort.y) / 32];
+            if (tmp.getAnimal() != null) {
+                new FenetreElement(tmp.getAnimal());
+            }
+        }
     }
 
     @Override
     public void mousePressed(MouseEvent me) {
-        xPressed = me.getX();
-        yPressed = me.getY();
-        xV = ViewPort.x;
-        yV = ViewPort.y;
-        inMoove = true;
+        if (me.getButton() == MouseEvent.BUTTON1) {
+            xPressed = me.getX();
+            yPressed = me.getY();
+            xV = ViewPort.x;
+            yV = ViewPort.y;
+            inMoove = true;
+        }
     }
 
     @Override
@@ -65,7 +74,7 @@ public class MouseListenerPanel implements MouseMotionListener, MouseListener, M
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent mwe) {
-        ViewPort.zoom(mwe.getWheelRotation(),inMoove);
+        ViewPort.zoom(mwe.getWheelRotation(), inMoove);
 
     }
 
