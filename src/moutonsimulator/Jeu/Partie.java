@@ -6,12 +6,13 @@ import java.util.Collections;
 import java.util.Stack;
 import javax.swing.JPanel;
 import moutonsimulator.Elements.Animal;
-import moutonsimulator.Elements.Buisson;
-import moutonsimulator.Elements.CaracteristiquePlante;
+import moutonsimulator.Elements.Plantes.Buisson;
+import moutonsimulator.Elements.Plantes.CaracteristiquePlante;
 import moutonsimulator.Elements.Eau;
-import moutonsimulator.Elements.Herbe;
+import moutonsimulator.Elements.Plantes.Herbe;
 import moutonsimulator.Elements.Loup;
 import moutonsimulator.Elements.Mouton;
+import moutonsimulator.Elements.Plantes.FamillePlante;
 
 public class Partie {
 
@@ -20,12 +21,14 @@ public class Partie {
     private JPanel pan;
     private ArrayList<Animal> setMouton;
     private ArrayList<Animal> setLoup;
+    public ArrayList<FamillePlante> famillesPlante;
 
     public Partie(ConfigInitial init, JPanel pan) {
         this.jours = 0;
         this.pan = pan;
         this.setLoup = new ArrayList<>();
         this.setMouton = new ArrayList<>();
+        this.famillesPlante = new ArrayList<>();
         initPlateau(init);
     }
 
@@ -36,7 +39,7 @@ public class Partie {
             System.out.println("Parametre initiaux invalides.");
             System.exit(0);
         }
-        
+
         placementPlante(init);
 
         Stack<Case> caseLibre = new Stack<>();
@@ -106,21 +109,29 @@ public class Partie {
 
     public int placementPlante(ConfigInitial init) {
         int cmp = 0;
-        for (int x = 0; x < init.getWidth(); x++) {
-            for (int y = 0; y < init.getHeigth(); y++) {
-                if ((int) (Math.random() * 1001) < init.getProbaPlante() && plateau.getPlateau()[x][y].isTraversable()) {
-                    switch ((int) (Math.random() * 2)) {
-                        case 0:
-                            plateau.getPlateau()[x][y].setPlante(new Herbe(CaracteristiquePlante.randomSpecs(), plateau.getPlateau()[x][y]));
-                            break;
-                        case 1:
-                            plateau.getPlateau()[x][y].setPlante(new Buisson(CaracteristiquePlante.randomSpecs(), plateau.getPlateau()[x][y]));
-                            break;
-                    }
-                    cmp++;
+        Stack<Case> casesLibres = new Stack<>();
+        for (int x = 0; x < plateau.getPlateau().length; x++) {
+            for (int y = 0; y < plateau.getPlateau()[x].length; y++) {
+                if (plateau.getPlateau()[x][y].isTraversable()) {
+                    casesLibres.add(plateau.getPlateau()[x][y]);
                 }
             }
         }
+        Collections.shuffle(casesLibres);
+        int f = init.getNbFamillePlante();
+        while (f-- > 0) {
+            famillesPlante.add(new FamillePlante((int) (Math.random() * 2), casesLibres.pop()));
+        }
+        while (!casesLibres.empty()) {
+            Case tmp = casesLibres.pop();
+            if ((int) (Math.random() * 1001) < init.getProbaPlante()) {
+                if (!famillesPlante.isEmpty()) {
+                    FamillePlante fp = famillesPlante.get((int) (Math.random() * famillesPlante.size()));
+                    fp.add(tmp);
+                }
+            }
+        }
+
         return cmp;
     }
 
@@ -159,6 +170,7 @@ public class Partie {
     }
 
     public void update() {
+        System.out.println("nbFamille : "+famillesPlante.size());
         plateau.update();
         jours++;
         for (Animal a : setMouton) {
@@ -211,5 +223,13 @@ public class Partie {
 
     public void setSetLoup(ArrayList<Animal> setLoup) {
         this.setLoup = setLoup;
+    }
+
+    public ArrayList<FamillePlante> getFamillesPlante() {
+        return famillesPlante;
+    }
+
+    public void setFamillesPlante(ArrayList<FamillePlante> famillesPlante) {
+        this.famillesPlante = famillesPlante;
     }
 }

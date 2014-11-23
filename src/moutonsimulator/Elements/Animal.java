@@ -1,5 +1,6 @@
 package moutonsimulator.Elements;
 
+import moutonsimulator.Elements.Plantes.Plante;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;

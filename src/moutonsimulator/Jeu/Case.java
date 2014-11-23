@@ -5,12 +5,11 @@ import java.awt.Graphics2D;
 import java.util.HashSet;
 import moutonsimulator.Config;
 import moutonsimulator.Elements.Animal;
-import moutonsimulator.Elements.Buisson;
-import moutonsimulator.Elements.CaracteristiquePlante;
-import moutonsimulator.Elements.Graine;
-import moutonsimulator.Elements.Herbe;
-import moutonsimulator.Elements.Plante;
+import moutonsimulator.Elements.Plantes.FamillePlante;
+import moutonsimulator.Elements.Plantes.Graine;
+import moutonsimulator.Elements.Plantes.Plante;
 import moutonsimulator.Elements.Sol;
+
 
 public class Case implements Comparable {
 
@@ -30,7 +29,7 @@ public class Case implements Comparable {
         this.animal = null;
         this.plante = null;
         this.container = cont;
-        this.engrais = 15;
+        this.engrais = 5;
         this.sol = sol;
         this.traversable = true;
         this.graines = new HashSet<>();
@@ -45,18 +44,10 @@ public class Case implements Comparable {
             plante.update();
         }else if(this.engrais>0){
             for(Graine g : graines){
-                g.setCountDown(g.getCountDown()-1);
-                if(g.getCountDown()==0){
-                    switch(g.getType()){//J'ai pas encore trouver mieu que le switch
-                        case Herbe.type:
-                            this.plante = new Herbe(CaracteristiquePlante.randomSpecs(),this,g.getC1(),g.getC2(),g.getC3());
-                            break;
-                        case Buisson.type:
-                            this.plante = new Buisson(CaracteristiquePlante.randomSpecs(),this,g.getC1(),g.getC2(),g.getC3());
-                            break;
-                    }
-                    engrais--;
-                    break;
+                if(g.getCountDown().decremente()){
+                    FamillePlante tmp = g.getFamille();
+                    Plante p = tmp.add(this);
+                    plante = p;
                 }
             }
         }
@@ -66,9 +57,6 @@ public class Case implements Comparable {
         updatePlante();
         if (this.getAnimal() != null) {
             this.getAnimal().update();
-        }
-        if (this.getPlante() != null) {
-            this.getPlante().update();
         }
     }
 

@@ -1,5 +1,6 @@
 package moutonsimulator.Elements;
 
+import moutonsimulator.Elements.Plantes.Plante;
 import GUI.Images;
 import moutonsimulator.Jeu.Case;
 
