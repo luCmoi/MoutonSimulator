@@ -50,6 +50,13 @@ public class FamillePlante {
                 return b;
         }
     }
+    
+    public void remove(Plante p){
+        this.representants.remove(p);
+        if(this.representants.isEmpty()){
+            Images.banqueImage.remove(idImage);
+        }
+    }
 
     public ArrayList getRepresentants() {
         return representants;
