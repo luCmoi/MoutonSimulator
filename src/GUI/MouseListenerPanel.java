@@ -40,12 +40,6 @@ public class MouseListenerPanel implements MouseMotionListener, MouseListener, M
 
     @Override
     public void mouseClicked(MouseEvent me) {
-        if (me.getButton() == MouseEvent.BUTTON3) {
-            Case tmp = ViewPort.panel.getPartie().getPlateau().getPlateau()[(me.getX() + ViewPort.x) / 32][(me.getY() + ViewPort.y) / 32];
-            if (tmp.getAnimal() != null) {
-                new FenetreElement(tmp.getAnimal());
-            }
-        }
     }
 
     @Override
@@ -56,6 +50,12 @@ public class MouseListenerPanel implements MouseMotionListener, MouseListener, M
             xV = ViewPort.x;
             yV = ViewPort.y;
             inMoove = true;
+        }
+        if (me.getButton() == MouseEvent.BUTTON3) {
+            Case tmp = ViewPort.panel.getPartie().getPlateau().getPlateau()[(me.getX() + ViewPort.x) / 32][(me.getY() + ViewPort.y) / 32];
+            if (tmp.getAnimal() != null) {
+                new FenetreElement(tmp.getAnimal());
+            }
         }
     }
 
