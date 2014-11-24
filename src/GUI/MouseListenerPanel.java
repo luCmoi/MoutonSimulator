@@ -52,7 +52,7 @@ public class MouseListenerPanel implements MouseMotionListener, MouseListener, M
             inMoove = true;
         }
         if (me.getButton() == MouseEvent.BUTTON3) {
-            Case tmp = ViewPort.panel.getPartie().getPlateau().getPlateau()[(me.getX() + ViewPort.x) / 32][(me.getY() + ViewPort.y) / 32];
+            Case tmp = ViewPort.panel.getPartie().getPlateau().getPlateau()[(me.getX() + ViewPort.x) / Config.coteCase][(me.getY() + ViewPort.y) / Config.coteCase];
             if (tmp.presence()) {
                 if (tmp.getAnimal() != null) {
                     new FenetreElement(tmp.getAnimal());
