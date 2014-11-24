@@ -22,7 +22,7 @@ public class Plante extends ElementDynamique {
 
     @Override
     public void mort() {
-        this.famille.getRepresentants().remove(this);
+        this.famille.remove(this);
         this.conteneur.setPlante(null);
         this.conteneur = null;
         this.age = null;
@@ -52,15 +52,18 @@ public class Plante extends ElementDynamique {
         }
         for (Case c : casePossible) {
             if ((int) (Math.random() * 101) <= famille.getSpecs().getProliferation()) {
-                if ((int) (Math.random() * 1001) <= famille.getSpecs().getTauxMutationPlante()) {
+                if ((int) (Math.random() * 10001) <= famille.getSpecs().getTauxMutationPlante()) {
                     if (this instanceof Herbe) {
+                        //System.out.println("Reprod : new Famille");
                         FamillePlante fp = new FamillePlante(0, c);
                         conteneur.getContainer().getPartie().getFamillesPlante().add(fp);
                     } else {
+                        //System.out.println("Reprod : new Famille");
                         FamillePlante fp = new FamillePlante(1, c);
                         conteneur.getContainer().getPartie().getFamillesPlante().add(fp);
                     }
                 } else {
+                    //System.out.println("Reprod : NORMAL");
                     c.getGraines().add(new Graine(famille));
                 }
             }

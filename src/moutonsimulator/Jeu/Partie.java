@@ -170,7 +170,10 @@ public class Partie {
     }
 
     public void update() {
-        System.out.println("nbFamille : "+famillesPlante.size());
+        if(jours%100==0){
+            System.out.println("nbFamille : "+famillesPlante.size());
+        }
+        
         plateau.update();
         jours++;
         for (Animal a : setMouton) {
