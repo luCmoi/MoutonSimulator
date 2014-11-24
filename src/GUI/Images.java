@@ -19,14 +19,15 @@ public class Images {
     public static BufferedImage herbe2;
     public static BufferedImage hauteHerbeModel;
     public static BufferedImage buissonModel;
-    
-    public static HashMap<Integer,BufferedImage> banqueImage;
-    public static  int compteurImage;
+    public static BufferedImage arbre;
+    public static HashMap<Integer, BufferedImage> banqueImage;
+    public static int compteurImage;
 
     public static void init() {
         Images.banqueImage = new HashMap<>();
         Images.compteurImage = 0;
         try {
+            Images.arbre = ImageIO.read(new File("Ressources/Images/arbre.png"));
             Images.hauteHerbeModel = ImageIO.read(new File("Ressources/Images/hauteHerbeNB.png"));
             Images.buissonModel = ImageIO.read(new File("Ressources/Images/buissonNB.png"));
             Images.herbe2 = ImageIO.read(new File("Ressources/Images/herbe2.png"));
@@ -41,22 +42,23 @@ public class Images {
             System.out.println("Toutes les images n'ont pas pu etre chargees.");
         }
     }
-    
-    public static int nouvelleImage(int model){
+
+    public static int nouvelleImage(int model) {
         BufferedImage imgModel;
-        switch(model){
+        switch (model) {
             case 0:
                 imgModel = hauteHerbeModel;
                 break;
-            default : imgModel = buissonModel;
+            default:
+                imgModel = buissonModel;
         }
-        int r = (int)(Math.random()*153);
-        int g = (int)(Math.random()*153);
-        int b = (int)(Math.random()*153);
-        
+        int r = (int) (Math.random() * 153);
+        int g = (int) (Math.random() * 153);
+        int b = (int) (Math.random() * 153);
+
         Color c1 = new Color(r, g, b);
-        Color c2 = new Color(r+51,g+51,b+51);
-        Color c3 = new Color(r+102,g+102,b+102);
+        Color c2 = new Color(r + 51, g + 51, b + 51);
+        Color c3 = new Color(r + 102, g + 102, b + 102);
         Images.banqueImage.put(Images.compteurImage, conversionModel(imgModel, c1, c2, c3));
         return compteurImage++;
     }
@@ -66,8 +68,8 @@ public class Images {
         for (int x = 0; x < 64; x++) {
             for (int y = 0; y < 64; y++) {
                 Color tmp = new Color(model.getRGB(x, y));
-                if ( tmp.getRed() == 30) {
-                     img.setRGB(x,y,Color.BLACK.getRGB());
+                if (tmp.getRed() == 30) {
+                    img.setRGB(x, y, Color.BLACK.getRGB());
                 } else if (tmp.getRed() == 100) {//c1
                     img.setRGB(x, y, c1.getRGB());
                 } else if (tmp.getRed() == 150) {//c2
