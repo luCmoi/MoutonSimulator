@@ -66,7 +66,7 @@ public class Images {
         for (int x = 0; x < 64; x++) {
             for (int y = 0; y < 64; y++) {
                 Color tmp = new Color(model.getRGB(x, y));
-                if ( tmp.getRed() == 1) {
+                if ( tmp.getRed() == 30) {
                      img.setRGB(x,y,Color.BLACK.getRGB());
                 } else if (tmp.getRed() == 100) {//c1
                     img.setRGB(x, y, c1.getRGB());
