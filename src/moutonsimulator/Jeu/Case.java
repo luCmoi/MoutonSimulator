@@ -38,10 +38,7 @@ public class Case implements Comparable {
         return this.animal != null || this.plante != null;
     }
 
-    public void updatePlante() {
-        if (this.plante != null) {
-            plante.update();
-        } else if (this.engrais > 0) {
+    public void updateGraine() {
             for (Graine g : graines) {
                 if (g.getCountDown().decremente()) {
                     FamillePlante tmp = g.getFamille();
@@ -50,15 +47,13 @@ public class Case implements Comparable {
                 }
             }
         }
-    }
 
     public void update() {
-        updatePlante();
-        /*        if(this.plante!=null){
-         plante.update();
-         }else if(this.engrais>0){
-        
-         }*/
+        if (this.plante != null) {
+            plante.update();
+        } else if (this.engrais > 0) {
+            updateGraine();
+        }
         if (this.getAnimal() != null) {
             this.getAnimal().update();
         }
