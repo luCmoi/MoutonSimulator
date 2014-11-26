@@ -6,9 +6,9 @@ public class ConfigInitial {
     public static int heigth = 150;
     public int nbMouton = 150;
     public int nbLoup = 100 ;
-    private int probaPlante = 0;
-    public int nbFamillePlante = 10;
-    private int eau = 400;
+    private int probaPlante = 2;
+    public int nbFamillePlante = 4;
+    private int eau = 10;
 
     public int getWidth() {
         return width;
