@@ -14,11 +14,11 @@ public class Mouton extends Herbivore {
         priorite.put(Loup.class, -10);
     }
 
-    /*@Override
+    @Override
     public void mort() {
         super.mort();
         conteneur.getContainer().getPartie().getSetMouton().remove(this);
-    */
+    }
 
     @Override
     public void moove() {

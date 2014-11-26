@@ -25,6 +25,7 @@ public class BigBoss {
                 while (true) {
                     try {
                         fenetre.getPan().execution();
+                        fenetre.getOver().update();
                         Thread.currentThread().sleep(500);
                     } catch (InterruptedException ex) {
                     }

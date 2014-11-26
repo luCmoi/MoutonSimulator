@@ -17,6 +17,7 @@ public class CaracteristiquePlante {
         this.porteSpore = porte;
         this.intervalReproduction = dureeRepro;
         this.proliferation = proliferartion;
+        this.tauxMutationPlante= tauxMutation;
     }
 
     public static CaracteristiquePlante randomSpecs() {

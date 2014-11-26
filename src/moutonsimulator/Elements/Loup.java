@@ -18,11 +18,11 @@ public class Loup extends Carnivore {
         return d <= competence.getVue();
     }
     
-   /* @Override
+    @Override
     public void mort(){
        super.mort();
        conteneur.getContainer().getPartie().getSetLoup().remove(this);
-    }*/
+    }
 
     @Override
     public void moove() {
