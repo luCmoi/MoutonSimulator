@@ -10,7 +10,6 @@ import moutonsimulator.Elements.Plantes.Graine;
 import moutonsimulator.Elements.Plantes.Plante;
 import moutonsimulator.Elements.Sol;
 
-
 public class Case implements Comparable {
 
     private int x;
@@ -23,28 +22,28 @@ public class Case implements Comparable {
     private Sol sol;
     private HashSet<Graine> graines;
 
-    Case(int x, int y, Grille cont,Sol sol) {
+    Case(int x, int y, Grille cont, Sol sol) {
         this.x = x;
         this.y = y;
         this.animal = null;
         this.plante = null;
         this.container = cont;
-        this.engrais = 1+(int)(Math.random()*2);
+        this.engrais = 1 + (int) (Math.random() * 2);
         this.sol = sol;
-        this.traversable = true;
+        this.traversable = sol.isTraversable();
         this.graines = new HashSet<>();
     }
-    
-    public boolean presence(){
-        return this.animal!=null || this.plante!=null;
+
+    public boolean presence() {
+        return this.animal != null || this.plante != null;
     }
-    
-    public void updatePlante(){
-        if(this.plante!=null){
+
+    public void updatePlante() {
+        if (this.plante != null) {
             plante.update();
-        }else if(this.engrais>0){
-            for(Graine g : graines){
-                if(g.getCountDown().decremente()){
+        } else if (this.engrais > 0) {
+            for (Graine g : graines) {
+                if (g.getCountDown().decremente()) {
                     FamillePlante tmp = g.getFamille();
                     Plante p = tmp.add(this);
                     plante = p;
@@ -55,6 +54,11 @@ public class Case implements Comparable {
 
     public void update() {
         updatePlante();
+        /*        if(this.plante!=null){
+         plante.update();
+         }else if(this.engrais>0){
+        
+         }*/
         if (this.getAnimal() != null) {
             this.getAnimal().update();
         }
@@ -116,17 +120,17 @@ public class Case implements Comparable {
 
     @Override
     public int compareTo(Object o) {
-        Case tmp = (Case)o;
-        if(this.x<tmp.getX()){
+        Case tmp = (Case) o;
+        if (this.x < tmp.getX()) {
             return -1;
-        }else if(x>tmp.getX()){
+        } else if (x > tmp.getX()) {
             return 1;
-        }else{
-            if(this.y<tmp.getY()){
+        } else {
+            if (this.y < tmp.getY()) {
                 return -1;
-            }else if(this.y>tmp.getY()){
+            } else if (this.y > tmp.getY()) {
                 return 1;
-            }else{
+            } else {
                 return 0;
             }
         }
@@ -146,6 +150,7 @@ public class Case implements Comparable {
 
     public void setSol(Sol sol) {
         this.sol = sol;
+        this.traversable = sol.isTraversable();
     }
 
     public HashSet<Graine> getGraines() {
