@@ -8,7 +8,9 @@ public class ConfigInitial {
     public int nbLoup = 100 ;
     private int probaPlante = 2;
     public int nbFamillePlante = 4;
+    private int nbMaxFamille;
     private int eau = 10;
+    
 
     public int getWidth() {
         return width;

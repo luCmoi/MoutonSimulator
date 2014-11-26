@@ -3,6 +3,7 @@ package moutonsimulator.Elements.Plantes;
 import GUI.Images;
 import java.util.ArrayList;
 import moutonsimulator.Jeu.Case;
+import moutonsimulator.Jeu.Partie;
 
 public class FamillePlante {
 
@@ -10,6 +11,7 @@ public class FamillePlante {
     public int idImage;
     public CaracteristiquePlante specs;
     public int espece;
+    private Partie partie;
 
     public FamillePlante(int espece, Case c) {
         this.espece = espece;
@@ -33,7 +35,7 @@ public class FamillePlante {
                 }
                 break;
         }
-
+        this.partie = c.getContainer().getPartie();
     }
 
     public Plante add(Case c) {
@@ -50,11 +52,20 @@ public class FamillePlante {
                 return b;
         }
     }
-    
-    public void remove(Plante p){
+
+    public void remove(Plante p) {
+        //System.out.println("id : "+idImage+" size : "+Images.banqueImage.size());
         this.representants.remove(p);
-        if(this.representants.isEmpty()){
+        if (this.representants.isEmpty()) {
+            System.out.println("remove");
+            try{
+               Images.banqueImage.get(idImage).flush(); 
+            }
+            catch(NullPointerException n){
+                System.out.println("Suppresion image : nullPointer");
+            }
             Images.banqueImage.remove(idImage);
+            partie.getFamillesPlante().remove(this);
         }
     }
 

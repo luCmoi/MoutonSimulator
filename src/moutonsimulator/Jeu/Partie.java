@@ -167,6 +167,9 @@ public class Partie {
         for (Animal a : setLoup) {
             a.setABouge(false);
         }
+        if(jours%100==0){
+            System.out.println("nbF : "+famillesPlante.size());
+        }
     }
 
     public void render(Graphics2D batch) {
