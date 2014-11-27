@@ -64,6 +64,7 @@ public class Plante extends ElementDynamique {
                 } else {
                     //System.out.println("Reprod : NORMAL");
                     c.getGraines().add(new Graine(famille));
+                    famille.setCompteurGraines(famille.getCompteurGraines()+1);
                 }
             }
         }

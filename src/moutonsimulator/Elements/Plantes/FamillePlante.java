@@ -7,16 +7,18 @@ import moutonsimulator.Jeu.Partie;
 
 public class FamillePlante {
 
-    public ArrayList representants;
-    public int idImage;
-    public CaracteristiquePlante specs;
-    public int espece;
+    private ArrayList representants;
+    private int idImage;
+    private CaracteristiquePlante specs;
+    private int espece;
     private Partie partie;
+    private int compteurGraines;
 
     public FamillePlante(int espece, Case c) {
         this.espece = espece;
         this.specs = CaracteristiquePlante.randomSpecs();
         this.idImage = Images.nouvelleImage(espece);
+        this.compteurGraines = 0;
         switch (espece) {
             case 0:
                 this.representants = new ArrayList<Herbe>();
@@ -53,15 +55,29 @@ public class FamillePlante {
         }
     }
 
+    public void mort() {
+        try {
+            Images.banqueImage.get(idImage).flush();
+        } catch (NullPointerException n) {
+        }
+        this.specs = null;
+        this.representants = null;
+        Images.banqueImage.remove(idImage);
+        partie.getFamillesPlante().remove(this);
+        this.partie = null;
+    }
+
+    public void supGraine() {
+        this.compteurGraines--;
+        if (this.representants.isEmpty() && compteurGraines <= 0) {
+            mort();
+        }
+    }
+
     public void remove(Plante p) {
         this.representants.remove(p);
-        if (this.representants.isEmpty()) {
-            try {
-                Images.banqueImage.get(idImage).flush();
-            } catch (NullPointerException n) {
-            }
-            Images.banqueImage.remove(idImage);
-            partie.getFamillesPlante().remove(this);
+        if (this.representants.isEmpty() && compteurGraines <= 0) {
+            mort();
         }
     }
 
@@ -79,6 +95,22 @@ public class FamillePlante {
 
     public int getEspece() {
         return espece;
+    }
+
+    public Partie getPartie() {
+        return partie;
+    }
+
+    public void setPartie(Partie partie) {
+        this.partie = partie;
+    }
+
+    public int getCompteurGraines() {
+        return compteurGraines;
+    }
+
+    public void setCompteurGraines(int compteurGraines) {
+        this.compteurGraines = compteurGraines;
     }
 
 }

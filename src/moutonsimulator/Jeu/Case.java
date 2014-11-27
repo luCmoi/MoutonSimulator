@@ -28,7 +28,7 @@ public class Case implements Comparable {
         this.animal = null;
         this.plante = null;
         this.container = cont;
-        this.engrais = 1 + (int) (Math.random() * 2);
+        this.engrais = 5 + (int) (Math.random() * 2);
         this.sol = sol;
         this.traversable = sol.isTraversable();
         this.graines = new HashSet<>();
@@ -39,15 +39,25 @@ public class Case implements Comparable {
     }
 
     public void updateGraine() {
+        boolean germe = false;
         for (Graine g : graines) {
             if (g.getCountDown().decremente()) {
-                FamillePlante tmp = g.getFamille();
-                Plante p = tmp.add(this);
-                plante = p;
-                break;
+                if (this.engrais > 0) {
+                    FamillePlante tmp = g.getFamille();
+                    Plante p = tmp.add(this);
+                    plante = p;
+                    engrais--;
+                    germe = true;
+                    break;
+                }else{
+                    germe=true;
+                }
             }
         }
-        if (this.plante != null) {
+        if (germe) {
+            for (Graine g : graines) {
+                g.getFamille().supGraine();
+            }
             graines.clear();
         }
     }
@@ -55,7 +65,7 @@ public class Case implements Comparable {
     public void update() {
         if (this.plante != null) {
             plante.update();
-        } else if (this.engrais > 0) {
+        } else {//if (this.engrais > 0)
             updateGraine();
         }
         if (this.getAnimal() != null) {
