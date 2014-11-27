@@ -34,7 +34,7 @@ public class FenetreElement extends JFrame {
         this.setResizable(false);
         this.setAlwaysOnTop(true);
         
-        JLabel image = new JLabel(new ImageIcon(info.getImage().getScaledInstance(64, 64, java.awt.Image.SCALE_SMOOTH)));
+        JLabel image = new JLabel(new ImageIcon(Images.banqueImage.get(info.getIdImage()).getScaledInstance(64, 64, java.awt.Image.SCALE_SMOOTH)));
         contraintes.gridx = 0;
         contraintes.gridy = 0;
         contraintes.gridwidth = 2;

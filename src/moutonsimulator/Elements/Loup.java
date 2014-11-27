@@ -7,7 +7,7 @@ public class Loup extends Carnivore {
 
     public Loup(Case c, Arbre arbre) {
         super(c, arbre);
-        this.image = Images.loup;
+        this.idImage = 0;
         priorite.put(Mouton.class, 10);
         priorite.put(Loup.class, 5);
         

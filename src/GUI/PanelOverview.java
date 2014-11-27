@@ -57,7 +57,7 @@ public class PanelOverview extends JPanel {
         this.nombreFamillePlante.setText("Nombre de famille de Plantes : " + pan.getPartie().getFamillesPlante().size());
         int comptePlante = 0;
         for (FamillePlante fp : pan.getPartie().getFamillesPlante()) {
-            comptePlante += fp.representants.size();
+            comptePlante += fp.getRepresentants().size();
         }
         this.nombrePlante.setText("Nombre de Plantes : " + comptePlante);
         this.repaint();

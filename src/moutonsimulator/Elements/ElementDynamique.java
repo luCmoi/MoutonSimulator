@@ -1,5 +1,6 @@
 package moutonsimulator.Elements;
 
+import GUI.Images;
 import GUI.ViewPort;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -11,7 +12,7 @@ public abstract class ElementDynamique {
 
     protected IntValMax vie;
     protected IntValMax age;
-    protected Image image;
+    protected int idImage;
     protected Case conteneur;
 
     public void update() {
@@ -40,18 +41,14 @@ public abstract class ElementDynamique {
     }
     
     public void render(Graphics2D batch) {
-        batch.drawImage(image, (conteneur.getX() * Config.coteCase) - (ViewPort.x), (conteneur.getY() * Config.coteCase) - (ViewPort.y), Config.coteCase, Config.coteCase, null);
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    public void setImage(Image image) {
-        this.image = image;
+        batch.drawImage(Images.banqueImage.get(idImage), (conteneur.getX() * Config.coteCase) - (ViewPort.x), (conteneur.getY() * Config.coteCase) - (ViewPort.y), Config.coteCase, Config.coteCase, null);
     }
     
     public Case getConteneur(){
         return conteneur;
+    }
+
+    public int getIdImage() {
+        return idImage;
     }
 }

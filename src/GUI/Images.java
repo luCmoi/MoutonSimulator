@@ -26,6 +26,7 @@ public class Images {
     public static void init() {
         Images.banqueImage = new HashMap<>();
         Images.compteurImage = 0;
+        
         try {
             Images.arbre = ImageIO.read(new File("Ressources/Images/arbre.png"));
             Images.hauteHerbeModel = ImageIO.read(new File("Ressources/Images/hauteHerbeNB.png"));
@@ -41,6 +42,12 @@ public class Images {
         } catch (IOException ex) {
             System.out.println("Toutes les images n'ont pas pu etre chargees.");
         }
+        //
+         Images.banqueImage.put(0,Images.loup);
+         Images.banqueImage.put(1,Images.mouton);
+         compteurImage = 2;
+        
+        //
     }
 
     public static int nouvelleImage(int model) {
