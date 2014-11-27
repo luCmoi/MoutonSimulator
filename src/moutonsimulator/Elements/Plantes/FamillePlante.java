@@ -54,15 +54,11 @@ public class FamillePlante {
     }
 
     public void remove(Plante p) {
-        //System.out.println("id : "+idImage+" size : "+Images.banqueImage.size());
         this.representants.remove(p);
         if (this.representants.isEmpty()) {
-            System.out.println("remove");
-            try{
-               Images.banqueImage.get(idImage).flush(); 
-            }
-            catch(NullPointerException n){
-                System.out.println("Suppresion image : nullPointer");
+            try {
+                Images.banqueImage.get(idImage).flush();
+            } catch (NullPointerException n) {
             }
             Images.banqueImage.remove(idImage);
             partie.getFamillesPlante().remove(this);

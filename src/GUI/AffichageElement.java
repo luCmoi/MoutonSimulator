@@ -24,7 +24,7 @@ public class AffichageElement extends JPanel {
                 ViewPort.setVue(element.getConteneur().getX() * Config.coteCase, element.getConteneur().getY() * Config.coteCase);
             }
         });
-        imageBoutton.setIcon(new ImageIcon(element.getImage().getScaledInstance(32, 32, java.awt.Image.SCALE_SMOOTH)));
+        imageBoutton.setIcon(new ImageIcon(Images.banqueImage.get(element.getIdImage()).getScaledInstance(32, 32, java.awt.Image.SCALE_SMOOTH)));
         this.add(imageBoutton);
     }
 }

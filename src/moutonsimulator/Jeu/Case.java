@@ -39,14 +39,18 @@ public class Case implements Comparable {
     }
 
     public void updateGraine() {
-            for (Graine g : graines) {
-                if (g.getCountDown().decremente()) {
-                    FamillePlante tmp = g.getFamille();
-                    Plante p = tmp.add(this);
-                    plante = p;
-                }
+        for (Graine g : graines) {
+            if (g.getCountDown().decremente()) {
+                FamillePlante tmp = g.getFamille();
+                Plante p = tmp.add(this);
+                plante = p;
+                break;
             }
         }
+        if (this.plante != null) {
+            graines.clear();
+        }
+    }
 
     public void update() {
         if (this.plante != null) {

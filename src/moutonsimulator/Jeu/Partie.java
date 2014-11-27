@@ -1,5 +1,6 @@
 package moutonsimulator.Jeu;
 
+import GUI.Images;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -166,9 +167,6 @@ public class Partie {
         }
         for (Animal a : setLoup) {
             a.setABouge(false);
-        }
-        if(jours%100==0){
-            System.out.println("nbF : "+famillesPlante.size());
         }
     }
 

@@ -74,7 +74,6 @@ public abstract class Animal extends ElementDynamique {
     public void mort() {
         this.conteneur.setAnimal(null);
         this.conteneur.setEngrais(this.conteneur.getEngrais() + this.competence.getEngrais());
-        this.image = null;
     }
 
     public void mouvementAleatoire() {
