@@ -7,15 +7,11 @@ public class ConfigInitial {
     public int nbMouton = 0;
     public int nbLoup = 0 ;
     private int probaPlante = 0;
-<<<<<<< HEAD
     public int nbFamillePlante = 5;
     private int eau = 40000;
-=======
-    public int nbFamillePlante = 200;
     private int nbMaxFamille;
-    private int eau = 0;
     
->>>>>>> origin/master
+
 
     public int getWidth() {
         return width;
