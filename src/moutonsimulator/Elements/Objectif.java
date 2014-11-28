@@ -17,11 +17,11 @@ public class Objectif {
     public int evaluation() {
         int valeurAnimal = 1000;
         int valeurPlante = 1000;
-        if(proprietaire.getAnimal()==null){
+        if (proprietaire.getAnimal() == null) {
             return 100000;
-        }else{
+        } else {
         }
-        
+
         if (cible.getAnimal() != null) {
             if (proprietaire.getAnimal().getPriorite().containsKey(cible.getAnimal().getClass())) {
                 valeurAnimal = proprietaire.getAnimal().getPriorite().get(cible.getAnimal().getClass());

@@ -1,79 +1,67 @@
 package GUI;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import moutonsimulator.Config;
-import moutonsimulator.Elements.Animal;
+import moutonsimulator.Elements.Plantes.FamillePlante;
 
 public class PanelOverview extends JPanel {
 
     private PanelPartie pan;
-    private JComboBox selection;
-    private JScrollPane scrollPan;
-    private JPanel contenu;
+    private JLabel nombreLoup = new JLabel();
+    private JLabel nombreMouton = new JLabel();
+    private JLabel nombreFamillePlante = new JLabel();
+    private JLabel nombrePlante = new JLabel();
+
     private int largeur;
-    private int state;
 
     public PanelOverview(PanelPartie pan) {
         this.pan = pan;
-        this.setLayout(new BorderLayout());
-        this.largeur = 4 * Config.coteCase;
-        contenu = new JPanel();
-        scrollPan = new JScrollPane(contenu, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-        this.add(new JLabel("Overview"), BorderLayout.NORTH);
-        selection = new JComboBox();
-        selection.addItem("Loup");
-        selection.addItem("Mouton");
-        selection.addItem("Plante");
-        selection.addItemListener(new EtatCombo());
-        this.add(selection, BorderLayout.CENTER);
-        this.add(scrollPan, BorderLayout.SOUTH);
-        this.addComponentListener(new ComponentAdapter() {
+        GridBagLayout layout = new GridBagLayout();
+        this.setLayout(layout);
+        GridBagConstraints contraintes = new GridBagConstraints();
+        contraintes.fill = GridBagConstraints.BOTH;
+        contraintes.insets = new Insets(5, 5, 5, 5);
+        contraintes.gridheight = 32;
 
+        contraintes.gridx = 0;
+        contraintes.gridy = 0;
+        contraintes.gridwidth = 1;
+        contraintes.gridheight = 1;
+        this.add(new JLabel("Overview"), contraintes);
+        contraintes.gridy = 2;
+        this.add(nombreLoup,contraintes);
+        contraintes.gridy = 3;
+        this.add(nombreMouton,contraintes);
+        contraintes.gridy = 4;
+        this.add(nombreFamillePlante,contraintes);
+        contraintes.gridy = 5;
+        this.add(nombrePlante,contraintes);
+        
+        
+        this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 setLargeur(e.getComponent().getWidth());
-                selection.setSize(new Dimension(getLargeur(), 20));
-                scrollPan.setPreferredSize(new Dimension(getLargeur(), e.getComponent().getHeight() - 60));
-                selection.validate();
-                contenu.validate();
             }
         });
     }
 
     public void update() {
-        contenu.removeAll();
-        contenu.repaint();
-        if (getSelection().getSelectedIndex() == 0) {
-            contenu.setLayout(new GridLayout(getPan().getPartie().getSetLoup().size(), 1));
-            if (!getPan().getPartie().getSetMouton().isEmpty()) {
-                for (Animal m : getPan().getPartie().getSetLoup()) {
-                    contenu.add(new AffichageElement(m));
-                }
-            }
+        this.nombreLoup.setText("Nombre de Loups : " + pan.getPartie().getSetLoup().size());
+        this.nombreMouton.setText("Nombre de Moutons : " + pan.getPartie().getSetMouton().size());
+        this.nombreFamillePlante.setText("Nombre de famille de Plantes : " + pan.getPartie().getFamillesPlante().size());
+        int comptePlante = 0;
+        for (FamillePlante fp : pan.getPartie().getFamillesPlante()) {
+            comptePlante += fp.getRepresentants().size();
         }
-        if (getSelection().getSelectedIndex() == 1) {
-            contenu.setLayout(new GridLayout(getPan().getPartie().getSetMouton().size(), 1));
-            if (!getPan().getPartie().getSetMouton().isEmpty()) {
-                for (Animal m : getPan().getPartie().getSetMouton()) {
-                    contenu.add(new AffichageElement(m));
-                }
-            }
-        }
-        getScrollPan().validate();
-    }
-
-    public void render() {
-
+        this.nombrePlante.setText("Nombre de Plantes : " + comptePlante);
+        this.repaint();
+        this.validate();
     }
 
     public PanelPartie getPan() {
@@ -84,46 +72,11 @@ public class PanelOverview extends JPanel {
         this.pan = pan;
     }
 
-    public JComboBox getSelection() {
-        return selection;
-    }
-
-    public void setSelection(JComboBox selection) {
-        this.selection = selection;
-    }
-
-    public JScrollPane getScrollPan() {
-        return scrollPan;
-    }
-
-    public void setScrollPan(JScrollPane scrollPan) {
-        this.scrollPan = scrollPan;
-    }
-
-    public JPanel getContenu() {
-        return contenu;
-    }
-
-    public void setContenu(JPanel contenu) {
-        this.contenu = contenu;
-    }
-
     public int getLargeur() {
         return largeur;
     }
 
     public void setLargeur(int largeur) {
         this.largeur = largeur;
-    }
-
-    class EtatCombo implements ItemListener {
-
-        @Override
-        public void itemStateChanged(ItemEvent e) {
-            if (e.getStateChange() != state) {
-                update();
-                state = e.getStateChange();
-            }
-        }
     }
 }

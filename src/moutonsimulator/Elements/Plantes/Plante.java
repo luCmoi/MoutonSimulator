@@ -17,7 +17,7 @@ public class Plante extends ElementDynamique {
         this.vie = new IntValMax(famille.getSpecs().getVie());
         this.age = new IntValMax(0, famille.getSpecs().getAge());
         this.countDownRepro = new IntValMax(famille.getSpecs().getIntervalReproduction());
-        this.image = Images.banqueImage.get(famille.getIdImage());
+        this.idImage = famille.getIdImage();
     }
 
     @Override
@@ -28,7 +28,6 @@ public class Plante extends ElementDynamique {
         this.age = null;
         this.vie = null;
         this.countDownRepro = null;
-        this.image = null;
     }
 
     @Override
@@ -45,7 +44,7 @@ public class Plante extends ElementDynamique {
         Stack<Case> casePossible = new Stack<>();
         for (int x = Math.max(0, conteneur.getX() - famille.getSpecs().getPorteSpore()); x < Math.min(conteneur.getX() + famille.getSpecs().getPorteSpore(), conteneur.getContainer().getPlateau().length); x++) {
             for (int y = Math.max(0, conteneur.getY() - (famille.getSpecs().getPorteSpore() - Math.abs(conteneur.getX() - x))); y < Math.min(conteneur.getY() + (famille.getSpecs().getPorteSpore() - Math.abs(conteneur.getX() - x)), conteneur.getContainer().getPlateau().length); y++) {
-                if (conteneur.getContainer().getPlateau()[x][y].isTraversable() &&conteneur.getContainer().getPlateau()[x][y]!=conteneur ) {
+                if (conteneur.getContainer().getPlateau()[x][y].isTraversable() && conteneur.getContainer().getPlateau()[x][y]!=conteneur  && conteneur.getContainer().getPlateau()[x][y].getPlante()==null) {
                     casePossible.add(conteneur.getContainer().getPlateau()[x][y]);
                 }
             }
@@ -65,6 +64,7 @@ public class Plante extends ElementDynamique {
                 } else {
                     //System.out.println("Reprod : NORMAL");
                     c.getGraines().add(new Graine(famille));
+                    famille.setCompteurGraines(famille.getCompteurGraines()+1);
                 }
             }
         }

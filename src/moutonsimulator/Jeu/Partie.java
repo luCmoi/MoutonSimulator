@@ -6,10 +6,7 @@ import java.util.Collections;
 import java.util.Stack;
 import javax.swing.JPanel;
 import moutonsimulator.Elements.Animal;
-import moutonsimulator.Elements.Plantes.Buisson;
-import moutonsimulator.Elements.Plantes.CaracteristiquePlante;
 import moutonsimulator.Elements.Eau;
-import moutonsimulator.Elements.Plantes.Herbe;
 import moutonsimulator.Elements.Loup;
 import moutonsimulator.Elements.Mouton;
 import moutonsimulator.Elements.Plantes.FamillePlante;
@@ -95,14 +92,6 @@ public class Partie {
                 compteurEau++;
             }
         }
-
-        for (int x = 0; x < init.getWidth(); x++) {
-            for (int y = 0; y < init.getHeigth(); y++) {
-                if (plateau.getPlateau()[x][y].getSol() instanceof Eau) {
-                    plateau.getPlateau()[x][y].setTraversable(false);
-                }
-            }
-        }
         caseLibre.clear();
         return compteurEau;
     }
@@ -110,10 +99,10 @@ public class Partie {
     public int placementPlante(ConfigInitial init) {
         int cmp = 0;
         Stack<Case> casesLibres = new Stack<>();
-        for (int x = 0; x < plateau.getPlateau().length; x++) {
-            for (int y = 0; y < plateau.getPlateau()[x].length; y++) {
-                if (plateau.getPlateau()[x][y].isTraversable()) {
-                    casesLibres.add(plateau.getPlateau()[x][y]);
+        for (Case[] plateauTmp : plateau.getPlateau()) {
+            for (Case caseTmp : plateauTmp) {
+                if (caseTmp.isTraversable()) {
+                    casesLibres.add(caseTmp);
                 }
             }
         }
@@ -170,10 +159,6 @@ public class Partie {
     }
 
     public void update() {
-        if(jours%100==0){
-            System.out.println("nbFamille : "+famillesPlante.size());
-        }
-        
         plateau.update();
         jours++;
         for (Animal a : setMouton) {
@@ -181,6 +166,14 @@ public class Partie {
         }
         for (Animal a : setLoup) {
             a.setABouge(false);
+        }
+        if (jours % 50 == 0) {
+            System.out.println("-----------------------");
+            System.out.println("nb famille : " + famillesPlante.size());
+            for (FamillePlante f : famillesPlante) {
+                System.out.println("Rep : " + f.getRepresentants().size() + "  gr : " + f.getCompteurGraines());
+            }
+            System.out.println("-----------------------");
         }
     }
 
