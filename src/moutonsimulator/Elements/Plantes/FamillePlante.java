@@ -65,6 +65,7 @@ public class FamillePlante {
         Images.banqueImage.remove(idImage);
         partie.getFamillesPlante().remove(this);
         this.partie = null;
+        System.gc();
     }
 
     public void supGraine() {

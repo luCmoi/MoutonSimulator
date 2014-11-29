@@ -7,7 +7,7 @@ public class ConfigInitial {
     public int nbMouton = 0;
     public int nbLoup = 0 ;
     private int probaPlante = 0;
-    public int nbFamillePlante = 5;
+    public int nbFamillePlante = 0;
     private int eau = 40000;
     private int nbMaxFamille;
     
