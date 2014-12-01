@@ -14,7 +14,7 @@ public class PathFinding {
         Noeud tmp = new Noeud();
         for (int i = Math.max(0, p.x - 1); i < Math.min(p.x + 2, plateau.length); i++) {
             for (int j = Math.max(0, p.y - 1); j < Math.min(p.y + 2, plateau[0].length); j++) {
-                if (((i == p.x) && (j == p.y)) || !plateau[i][j].isTraversable() ) {
+                if (((i == p.x) && (j == p.y)) || !plateau[i][j].isTraversable()) {
                     continue;
                 }
                 Point it = new Point(i, j);
@@ -55,7 +55,7 @@ public class PathFinding {
         return m_noeud;
     }
 
-    public static Point retrouver_chemin(Point destination, Point depart, HashMap<Point, Noeud> listeFermee) {
+    public static Point retrouver_chemin(Point destination, Point depart, HashMap<Point, Noeud> listeFermee, Objectif but) {
         Noeud tmp = listeFermee.get(destination);
         Point precedent = new Point();
         Point actuel = destination;
@@ -68,7 +68,11 @@ public class PathFinding {
             precedent.x = tmp.parent.x;
             precedent.y = tmp.parent.y;
         }
-        return actuel;
+        if (but.isSuperpose()) {
+            return actuel;
+        } else {
+            return precedent;
+        }
     }
 
 }

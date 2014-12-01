@@ -10,22 +10,22 @@ import moutonsimulator.IntValMax;
 import moutonsimulator.Jeu.Case;
 
 public abstract class Animal extends ElementDynamique {
-    
-    protected enum action {        
-        
+
+    protected enum action {
+
         boufferVoisin(1),
         boufferChevauche(2),
         reproduction(3),
         boire(4);
-        
+
         private final int val;
-        
-        action(int val){
+
+        action(int val) {
             this.val = val;
         }
-    
+
     }
-    
+
     protected Arbre arbreGene;
     protected CaracteristiqueAnimale competence;
     protected HashMap<Class, Integer> priorite;
@@ -52,21 +52,16 @@ public abstract class Animal extends ElementDynamique {
 
     public abstract void moove();
 
-    public void interaction(ElementDynamique voisin) {
+    public void interaction(Objectif but) {
         //Nourriture
-        if (this instanceof Herbivore) {
-            if (voisin instanceof Plante) {
-                this.mange(voisin);
+        if (but.isSuperpose()) {
+            //Mouton mange
+        } else {
+            if (but.getCible().getAnimal().getClass() == this.getClass()) {
+                //Nique Nique
+            } else {
+                //Loup Mange
             }
-        }
-        if (this instanceof Carnivore) {
-            if (voisin instanceof Animal && voisin.getClass() != this.getClass()) {
-                this.mange(voisin);
-            }
-        }
-        //Reproduction
-        if (this.getClass() == voisin.getClass()) {
-            //niquenique(voisin);
         }
     }
 
@@ -111,13 +106,15 @@ public abstract class Animal extends ElementDynamique {
             PathFinding.ajoutCaseVoisines(courant, cible, listeOuverte, listeFermee, conteneur.getContainer().getPlateau());
         }
         if ((courant.x == cible.x) && (courant.y == cible.y)) {
-            Point tmp = PathFinding.retrouver_chemin(cible, new Point(conteneur.getX(), conteneur.getY()), listeFermee);
+            Point tmp = PathFinding.retrouver_chemin(cible, new Point(conteneur.getX(), conteneur.getY()), listeFermee, o);
             conteneur.setAnimal(null);
             Case caseTmp = conteneur.getContainer().getPlateau()[tmp.x][tmp.y];
             caseTmp.setAnimal(this);
-            /*if (listeFermee.get(cible).parent == tmp) {
-                
-             }*/
+            if (cible == tmp && o.isSuperpose()) {
+                this.interaction(o);
+            } else if (listeFermee.get(cible).parent == tmp && !o.isSuperpose()) {
+                this.interaction(o);
+            }
             this.conteneur = caseTmp;
         } else {
             System.out.println(cible + " " + courant + " " + new Point(conteneur.getX(), conteneur.getY()));
@@ -204,8 +201,8 @@ public abstract class Animal extends ElementDynamique {
     public void setABouge(boolean change) {
         this.aBouge = change;
     }
-    
-    public CaracteristiqueAnimale getCompetence(){
+
+    public CaracteristiqueAnimale getCompetence() {
         return competence;
     }
 }
