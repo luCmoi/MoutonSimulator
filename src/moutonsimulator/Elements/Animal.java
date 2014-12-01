@@ -1,6 +1,5 @@
 package moutonsimulator.Elements;
 
-import moutonsimulator.Elements.Plantes.Plante;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,6 +9,14 @@ import moutonsimulator.IntValMax;
 import moutonsimulator.Jeu.Case;
 
 public abstract class Animal extends ElementDynamique {
+
+    public boolean getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(boolean sexe) {
+        this.sexe = sexe;
+    }
 
     protected enum action {
 
@@ -30,14 +37,20 @@ public abstract class Animal extends ElementDynamique {
     protected CaracteristiqueAnimale competence;
     protected HashMap<Class, Integer> priorite;
     protected Boolean aBouge = false;
+    private boolean sexe;
 
     public Animal(Case c, Arbre arbre) {
-        priorite = new HashMap<>();
+        this.priorite = new HashMap<>();
         this.competence = CaracteristiqueAnimale.randomCompetences();
         this.arbreGene = arbre;
         this.vie = competence.getVie();
         this.age = competence.getAge();
         this.conteneur = c;
+        if ((int) (Math.random() * 2) == 0) {
+            this.sexe = true;
+        } else {
+            this.sexe = false;
+        }
     }
 
     @Override
@@ -130,7 +143,11 @@ public abstract class Animal extends ElementDynamique {
                     if (!(x == conteneur.getX() && y == conteneur.getY())) {
                         if (conteneur.getContainer().getPlateau()[x][y].getAnimal() != null) {
                             if (priorite.keySet().contains(conteneur.getContainer().getPlateau()[x][y].getAnimal().getClass())) {
-                                objectifs.add(new Objectif(conteneur, conteneur.getContainer().getPlateau()[x][y]));
+                                if (conteneur.getContainer().getPlateau()[x][y].getAnimal().getClass() != this.getClass()) {
+                                    objectifs.add(new Objectif(conteneur, conteneur.getContainer().getPlateau()[x][y]));
+                                } else if (conteneur.getContainer().getPlateau()[x][y].getAnimal().getSexe() != this.sexe) {
+                                    objectifs.add(new Objectif(conteneur, conteneur.getContainer().getPlateau()[x][y]));
+                                }
                             }
                         }
                         if (conteneur.getContainer().getPlateau()[x][y].getPlante() != null) {
