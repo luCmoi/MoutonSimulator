@@ -65,15 +65,44 @@ public abstract class Animal extends ElementDynamique {
 
     public abstract void moove();
 
+    public void reproduction(Animal p1, Animal p2) {
+        Animal mere, pere;
+        if (p1.sexe) {
+            mere = p1;
+            pere = p2;
+        } else {
+            mere = p2;
+            pere = p1;
+        }
+        Stack<Case> caseLibre = new Stack<>();
+        for (int x = Math.max(0, mere.getConteneur().getX() - 1); x < Math.min(mere.getConteneur().getX() + 2, conteneur.getContainer().getPlateau().length); x++) {
+            for (int y = Math.max(0, mere.getConteneur().getY() - 1); y < Math.min(mere.getConteneur().getY() + 2, conteneur.getContainer().getPlateau()[0].length); y++) {
+                if (conteneur.getContainer().getPlateau()[x][y].isTraversable() && conteneur.getContainer().getPlateau()[x][y].getAnimal() == null) {
+                    caseLibre.add(conteneur.getContainer().getPlateau()[x][y]);
+                }
+            }
+        }
+        if(caseLibre.empty()) return;
+        Case tmp = caseLibre.pop();
+        Animal fils;
+        if(mere.getClass()==Mouton.class){
+            fils = new Mouton(tmp, arbreGene);
+        }else{
+             fils = new Loup(tmp, arbreGene);
+        }
+        tmp.setAnimal(fils);
+        caseLibre.clear();
+    }
+
     public void interaction(Objectif but) {
         //Nourriture
         if (but.isSuperpose()) {
-            System.out.println("Mange");
+            //System.out.println("Mange");
             mange(but.getCible().getPlante());
         } else {
             if (but.getCible().getAnimal().getClass() == this.getClass()) {
-                System.out.println("Nique");
-                //Nique-nique
+                reproduction(this, but.getCible().getAnimal());
+                System.out.println("Nique nique");
             } else {
                 mange(but.getCible().getAnimal());
             }
