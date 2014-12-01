@@ -28,7 +28,7 @@ public class Case implements Comparable {
         this.animal = null;
         this.plante = null;
         this.container = cont;
-        this.engrais = 5 + (int) (Math.random() * 2);
+        this.engrais = 15 + (int) (Math.random() * 2);
         this.sol = sol;
         this.traversable = sol.isTraversable();
         this.graines = new HashSet<>();
