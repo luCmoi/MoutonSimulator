@@ -102,7 +102,6 @@ public abstract class Animal extends ElementDynamique {
         } else {
             if (but.getCible().getAnimal().getClass() == this.getClass()) {
                 reproduction(this, but.getCible().getAnimal());
-                System.out.println("Nique nique");
             } else {
                 mange(but.getCible().getAnimal());
             }
