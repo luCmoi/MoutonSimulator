@@ -12,7 +12,7 @@ public class Mouton extends Herbivore {
         priorite.put(Buisson.class, 5);
         priorite.put(Herbe.class, 5);
         priorite.put(Mouton.class, 10);
-        priorite.put(Loup.class, -10);
+        priorite.put(Loup.class, 2310);
     }
 
     @Override

@@ -88,8 +88,10 @@ public abstract class Animal extends ElementDynamique {
         Animal fils;
         if(mere.getClass()==Mouton.class){
             fils = new Mouton(tmp, arbreGene);
+            mere.getConteneur().getContainer().getPartie().getSetMouton().add(fils);
         }else{
              fils = new Loup(tmp, arbreGene);
+             mere.getConteneur().getContainer().getPartie().getSetLoup().add(fils);
         }
         tmp.setAnimal(fils);
         caseLibre.clear();
