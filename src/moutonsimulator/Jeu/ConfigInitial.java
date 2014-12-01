@@ -2,12 +2,21 @@ package moutonsimulator.Jeu;
 
 public class ConfigInitial {
     
+<<<<<<< HEAD
     public static int width = 150;
     public static int heigth = 150;
     public int nbMouton = 0;
     public int nbLoup = 0 ;
     private int probaPlante = 0;
     public int nbFamillePlante = 10;
+=======
+    public static int width = 15;
+    public static int heigth = 15;
+    public int nbMouton = 2;
+    public int nbLoup = 10 ;
+    private int probaPlante = 90;
+    public int nbFamillePlante = 3;
+>>>>>>> origin/master
     private int eau = 40000;
     private int nbMaxFamille;
     

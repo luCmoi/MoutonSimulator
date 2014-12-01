@@ -79,7 +79,7 @@ public class MouseListenerPanel implements MouseMotionListener, MouseListener, M
     @Override
     public void mouseWheelMoved(MouseWheelEvent mwe) {
         ViewPort.zoom(mwe.getWheelRotation(), inMoove);
-
+        mwe.consume();
     }
 
 }

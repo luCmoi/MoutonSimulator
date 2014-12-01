@@ -7,11 +7,13 @@ public class Objectif {
     private int point;
     private Case proprietaire;
     private Case cible;
+    private boolean superpose;
 
     public Objectif(Case prop, Case cible) {
         this.proprietaire = prop;
         this.cible = cible;
         this.point = 0;
+        superpose = cible.getAnimal()==null && cible.getPlante()!=null;
     }
 
     public int evaluation() {
@@ -60,6 +62,14 @@ public class Objectif {
 
     public void setCible(Case cible) {
         this.cible = cible;
+    }
+
+    public boolean isSuperpose() {
+        return superpose;
+    }
+
+    public void setSuperpose(boolean superpose) {
+        this.superpose = superpose;
     }
 
 }
