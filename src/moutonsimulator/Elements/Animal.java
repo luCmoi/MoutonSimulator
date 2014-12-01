@@ -68,12 +68,14 @@ public abstract class Animal extends ElementDynamique {
     public void interaction(Objectif but) {
         //Nourriture
         if (but.isSuperpose()) {
-            //Mouton mange
+            System.out.println("Mange");
+            mange(but.getCible().getPlante());
         } else {
             if (but.getCible().getAnimal().getClass() == this.getClass()) {
-                //Nique Nique
+                System.out.println("Nique");
+                //Nique-nique
             } else {
-                //Loup Mange
+                mange(but.getCible().getAnimal());
             }
         }
     }
@@ -123,12 +125,12 @@ public abstract class Animal extends ElementDynamique {
             conteneur.setAnimal(null);
             Case caseTmp = conteneur.getContainer().getPlateau()[tmp.x][tmp.y];
             caseTmp.setAnimal(this);
-            if (cible == tmp && o.isSuperpose()) {
+            this.conteneur = caseTmp;
+            if (cible.equals(tmp) && o.isSuperpose()) {
                 this.interaction(o);
             } else if (listeFermee.get(cible).parent == tmp && !o.isSuperpose()) {
                 this.interaction(o);
             }
-            this.conteneur = caseTmp;
         } else {
             System.out.println(cible + " " + courant + " " + new Point(conteneur.getX(), conteneur.getY()));
         }

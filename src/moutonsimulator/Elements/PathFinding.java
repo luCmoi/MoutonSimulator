@@ -68,11 +68,7 @@ public class PathFinding {
             precedent.x = tmp.parent.x;
             precedent.y = tmp.parent.y;
         }
-        if (but.isSuperpose()) {
-            return actuel;
-        } else {
-            return precedent;
-        }
+        return actuel;
     }
 
 }

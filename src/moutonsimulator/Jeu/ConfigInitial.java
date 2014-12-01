@@ -4,10 +4,10 @@ public class ConfigInitial {
     
     public static int width = 150;
     public static int heigth = 150;
-    public int nbMouton = 0;
+    public int nbMouton = 3000;
     public int nbLoup = 0 ;
-    private int probaPlante = 0;
-    public int nbFamillePlante = 0;
+    private int probaPlante = 90;
+    public int nbFamillePlante = 1;
     private int eau = 40000;
     private int nbMaxFamille;
     
