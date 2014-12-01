@@ -68,7 +68,11 @@ public class PathFinding {
             precedent.x = tmp.parent.x;
             precedent.y = tmp.parent.y;
         }
-        return actuel;
+        if (actuel.equals(destination) && !but.isSuperpose()) {
+            return listeFermee.get(actuel).parent;
+        }else{
+            return actuel;
+        }
     }
 
 }

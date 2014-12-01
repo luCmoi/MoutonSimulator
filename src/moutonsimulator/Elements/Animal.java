@@ -83,6 +83,7 @@ public abstract class Animal extends ElementDynamique {
             }
         }
         if(caseLibre.empty()) return;
+        Collections.shuffle(caseLibre);
         Case tmp = caseLibre.pop();
         Animal fils;
         if(mere.getClass()==Mouton.class){
@@ -97,7 +98,6 @@ public abstract class Animal extends ElementDynamique {
     public void interaction(Objectif but) {
         //Nourriture
         if (but.isSuperpose()) {
-            //System.out.println("Mange");
             mange(but.getCible().getPlante());
         } else {
             if (but.getCible().getAnimal().getClass() == this.getClass()) {
@@ -157,7 +157,7 @@ public abstract class Animal extends ElementDynamique {
             this.conteneur = caseTmp;
             if (cible.equals(tmp) && o.isSuperpose()) {
                 this.interaction(o);
-            } else if (listeFermee.get(cible).parent == tmp && !o.isSuperpose()) {
+            } else if (listeFermee.get(cible).parent.equals(tmp) && !o.isSuperpose()) {
                 this.interaction(o);
             }
         } else {
