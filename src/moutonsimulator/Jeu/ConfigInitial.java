@@ -12,6 +12,7 @@ public class ConfigInitial {
     private int nbMaxFamille;
     
 
+
     public int getWidth() {
         return width;
     }
