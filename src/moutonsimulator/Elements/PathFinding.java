@@ -58,7 +58,9 @@ public class PathFinding {
     public static Point retrouver_chemin(Point destination, Point depart, HashMap<Point, Noeud> listeFermee, Objectif but) {
         Noeud tmp = listeFermee.get(destination);
         Point precedent = new Point();
-        Point actuel = destination;
+        Point actuel = new Point();
+        actuel.x = destination.x;
+        actuel.y = destination.y;
         precedent.x = tmp.parent.x;
         precedent.y = tmp.parent.y;
         while (!precedent.equals(depart)) {
