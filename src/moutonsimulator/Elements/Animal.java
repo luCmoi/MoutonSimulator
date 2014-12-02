@@ -10,20 +10,6 @@ import moutonsimulator.Jeu.Case;
 
 public abstract class Animal extends ElementDynamique {
 
-    protected enum action {
-
-        boufferVoisin(1),
-        boufferChevauche(2),
-        reproduction(3),
-        boire(4);
-
-        private final int val;
-
-        action(int val) {
-            this.val = val;
-        }
-
-    }
     protected IntValMax repro;
     protected Arbre arbreGene;
     protected CaracteristiqueAnimale competence;
@@ -39,11 +25,7 @@ public abstract class Animal extends ElementDynamique {
         this.age = competence.getAge();
         this.repro = competence.getReproduction();
         this.conteneur = c;
-        if ((int) (Math.random() * 2) == 0) {
-            this.sexe = true;
-        } else {
-            this.sexe = false;
-        }
+        this.sexe = (int) (Math.random() * 2) == 0;
     }
 
     @Override
@@ -54,10 +36,8 @@ public abstract class Animal extends ElementDynamique {
     }
 
     public void mange(ElementDynamique el) {
-        this.vie.setVal(Math.min(this.vie.getMax(), this.vie.getVal() + el.estMange(this.competence.getPuissance())));
+        this.vie.setVal(this.vie.getVal() + el.estMange(this.competence.getPuissance()));
     }
-
-    public abstract void moove();
 
     public void reproduction(Animal p1, Animal p2) {
         Animal mere, pere;
@@ -96,12 +76,14 @@ public abstract class Animal extends ElementDynamique {
     public void interaction(Objectif but) {
         //Nourriture
         if (but.isSuperpose()) {
-            mange(but.getCible().getPlante());
+            if (this instanceof Herbivore) {
+                mange(but.getCible().getPlante());
+            }
         } else {
-            if (but.getCible().getAnimal().getClass() == this.getClass() && this.repro.getVal()<=0 ) {
+            if (but.getCible().getAnimal().getClass() == this.getClass()) {
                 repro.setVal(repro.getMax());
                 reproduction(this, but.getCible().getAnimal());
-            } else if(this instanceof Carnivore){
+            } else if (this instanceof Carnivore) {
                 mange(but.getCible().getAnimal());
             }
         }
@@ -134,32 +116,36 @@ public abstract class Animal extends ElementDynamique {
     }
 
     public void mouvementDirige(Objectif o) {
-        Point cible = new Point(o.getCible().getX(), o.getCible().getY());
-        Point courant = new Point(conteneur.getX(), conteneur.getY());
-        HashMap<Point, Noeud> listeFermee = new HashMap<>();
-        HashMap<Point, Noeud> listeOuverte = new HashMap<>();
-        listeOuverte.put(courant, new Noeud());
-        listeOuverte.get(courant).cout_f = (float) PathFinding.distance(courant, cible);
-        PathFinding.ajoutListeFermee(courant, listeFermee, listeOuverte);
-        PathFinding.ajoutCaseVoisines(courant, cible, listeOuverte, listeFermee, conteneur.getContainer().getPlateau());
-        while (!((courant.x == cible.x) && (courant.y == cible.y)) && (!listeOuverte.isEmpty())) {
-            courant = PathFinding.meilleurNoeud(listeOuverte);
+        if (o.getCible() != this.conteneur) {
+            Point cible = new Point(o.getCible().getX(), o.getCible().getY());
+            Point courant = new Point(conteneur.getX(), conteneur.getY());
+            HashMap<Point, Noeud> listeFermee = new HashMap<>();
+            HashMap<Point, Noeud> listeOuverte = new HashMap<>();
+            listeOuverte.put(courant, new Noeud());
+            listeOuverte.get(courant).cout_f = (float) PathFinding.distance(courant, cible);
             PathFinding.ajoutListeFermee(courant, listeFermee, listeOuverte);
             PathFinding.ajoutCaseVoisines(courant, cible, listeOuverte, listeFermee, conteneur.getContainer().getPlateau());
-        }
-        if ((courant.x == cible.x) && (courant.y == cible.y)) {
-            Point tmp = PathFinding.retrouver_chemin(cible, new Point(conteneur.getX(), conteneur.getY()), listeFermee, o);
-            conteneur.setAnimal(null);
-            Case caseTmp = conteneur.getContainer().getPlateau()[tmp.x][tmp.y];
-            caseTmp.setAnimal(this);
-            this.conteneur = caseTmp;
-            if (cible.equals(tmp) && o.isSuperpose()) {
-                this.interaction(o);
-            } else if (listeFermee.get(cible).parent.equals(tmp) && !o.isSuperpose()) {
-                this.interaction(o);
+            while (!((courant.x == cible.x) && (courant.y == cible.y)) && (!listeOuverte.isEmpty())) {
+                courant = PathFinding.meilleurNoeud(listeOuverte);
+                PathFinding.ajoutListeFermee(courant, listeFermee, listeOuverte);
+                PathFinding.ajoutCaseVoisines(courant, cible, listeOuverte, listeFermee, conteneur.getContainer().getPlateau());
+            }
+            if ((courant.x == cible.x) && (courant.y == cible.y)) {
+                Point tmp = PathFinding.retrouver_chemin(cible, new Point(conteneur.getX(), conteneur.getY()), listeFermee, o);
+                conteneur.setAnimal(null);
+                Case caseTmp = conteneur.getContainer().getPlateau()[tmp.x][tmp.y];
+                caseTmp.setAnimal(this);
+                this.conteneur = caseTmp;
+                if (cible.equals(tmp) && o.isSuperpose()) {
+                    this.interaction(o);
+                } else if (listeFermee.get(cible).parent.equals(tmp) && !o.isSuperpose()) {
+                    this.interaction(o);
+                }
+            } else {
+                mouvementAleatoire();
             }
         } else {
-            System.out.println(cible + " " + courant + " " + new Point(conteneur.getX(), conteneur.getY()));
+            this.interaction(o);
         }
     }
 
@@ -169,20 +155,25 @@ public abstract class Animal extends ElementDynamique {
             ArrayList<Objectif> objectifs = new ArrayList();
             for (int x = Math.max(0, conteneur.getX() - competence.getVue()); x < Math.min(conteneur.getX() + competence.getVue(), conteneur.getContainer().getPlateau().length); x++) {
                 for (int y = Math.max(0, conteneur.getY() - (competence.getVue() - Math.abs(conteneur.getX() - x))); y < Math.min(conteneur.getY() + (competence.getVue() - Math.abs(conteneur.getX() - x)), conteneur.getContainer().getPlateau()[0].length); y++) {
+                    //On regarde pas notre case ici
                     if (!(x == conteneur.getX() && y == conteneur.getY())) {
+                        //Ici on regarde le cas ou il y a un animal
                         if (conteneur.getContainer().getPlateau()[x][y].getAnimal() != null) {
+                            //S'il est dans notre liste
                             if (priorite.keySet().contains(conteneur.getContainer().getPlateau()[x][y].getAnimal().getClass())) {
+                                //Si c'est un autre animal
                                 if (conteneur.getContainer().getPlateau()[x][y].getAnimal().getClass() != this.getClass()) {
                                     objectifs.add(new Objectif(conteneur, conteneur.getContainer().getPlateau()[x][y]));
-                                } else if (conteneur.getContainer().getPlateau()[x][y].getAnimal().getSexe() != this.sexe) {
+                                    //Si c'est l'un des notres
+                                } else if (conteneur.getContainer().getPlateau()[x][y].getAnimal().getSexe() != this.sexe && this.repro.getVal() <= 0) {
                                     objectifs.add(new Objectif(conteneur, conteneur.getContainer().getPlateau()[x][y]));
                                 }
                             }
                         }
-                        if (conteneur.getContainer().getPlateau()[x][y].getPlante() != null) {
-                            if (priorite.keySet().contains(conteneur.getContainer().getPlateau()[x][y].getPlante().getClass())) {
-                                objectifs.add(new Objectif(conteneur, conteneur.getContainer().getPlateau()[x][y]));
-                            }
+                    }
+                    if (conteneur.getContainer().getPlateau()[x][y].getPlante() != null && priorite.keySet().contains(conteneur.getContainer().getPlateau()[x][y].getPlante().getClass())) {
+                        if (conteneur.getContainer().getPlateau()[x][y].getAnimal() == null || conteneur.getContainer().getPlateau()[x][y].getAnimal() == this) {
+                            objectifs.add(new Objectif(conteneur, conteneur.getContainer().getPlateau()[x][y]));
                         }
                     }
                 }
@@ -193,13 +184,18 @@ public abstract class Animal extends ElementDynamique {
                 Objectif but = objectifs.get(0);
                 int max = but.evaluation();
                 for (Objectif e : objectifs) {
-                    if (e.evaluation() < max) {
+                    if (e.evaluation() < max && e.evaluation() >= 0) {
                         max = e.getPoint();
                         but = e;
                     }
                 }
-                mouvementDirige(but);
+                if (but.evaluation() < 0) {
+                    mouvementAleatoire();
+                } else {
+                    mouvementDirige(but);
+                }
                 objectifs.clear();
+
             }
         }
     }
@@ -226,10 +222,6 @@ public abstract class Animal extends ElementDynamique {
 
     public void setArbreGene(Arbre arbreGene) {
         this.arbreGene = arbreGene;
-    }
-
-    public Case getConteneur() {
-        return conteneur;
     }
 
     public void setConteneur(Case conteneur) {

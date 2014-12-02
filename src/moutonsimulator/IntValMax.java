@@ -30,7 +30,7 @@ public class IntValMax {
     }
 
     public void setVal(int val) {
-        this.val = val;
+        this.val = Math.min(this.max,val);
     }
 
     public int getMax() {
