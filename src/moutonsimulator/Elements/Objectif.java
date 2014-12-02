@@ -13,16 +13,19 @@ public class Objectif {
         this.proprietaire = prop;
         this.cible = cible;
         this.point = 0;
-        superpose = cible.getAnimal()==null && cible.getPlante()!=null;
+        superpose = (cible.getAnimal()==null || cible==proprietaire) && cible.getPlante()!=null;
     }
 
     public int evaluation() {
         int valeurAnimal = 1000;
         int valeurPlante = 1000;
+<<<<<<< HEAD
         if (proprietaire.getAnimal() == null) {
             return 100000;
         } 
 
+=======
+>>>>>>> origin/master
         if (cible.getAnimal() != null) {
             if (proprietaire.getAnimal().getPriorite().containsKey(cible.getAnimal().getClass())) {
                 valeurAnimal = proprietaire.getAnimal().getPriorite().get(cible.getAnimal().getClass());
