@@ -21,8 +21,7 @@ public class Objectif {
         int valeurPlante = 1000;
         if (proprietaire.getAnimal() == null) {
             return 100000;
-        } else {
-        }
+        } 
 
         if (cible.getAnimal() != null) {
             if (proprietaire.getAnimal().getPriorite().containsKey(cible.getAnimal().getClass())) {
@@ -30,7 +29,7 @@ public class Objectif {
                 valeurAnimal *= ((proprietaire.getX() - cible.getX()) * (proprietaire.getX() - cible.getX())) + ((proprietaire.getY() - cible.getY()) * (proprietaire.getY() - cible.getY()));
             }
         }
-        if (cible.getPlante() != null) {
+        if (cible.getPlante() != null && proprietaire.getAnimal() instanceof Herbivore) {
             if (proprietaire.getAnimal().getPriorite().containsKey(cible.getPlante().getClass())) {
                 valeurPlante = proprietaire.getAnimal().getPriorite().get(cible.getPlante().getClass());
                 valeurPlante *= ((proprietaire.getX() - cible.getX()) * (proprietaire.getX() - cible.getX())) + ((proprietaire.getY() - cible.getY()) * (proprietaire.getY() - cible.getY()));
