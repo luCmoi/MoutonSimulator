@@ -40,6 +40,9 @@ public abstract class Animal extends ElementDynamique {
     }
 
     public void reproduction(Animal p1, Animal p2) {
+        if (p1 instanceof Mouton) {
+            System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+        }
         Animal mere, pere;
         if (p1.sexe) {
             mere = p1;
