@@ -14,8 +14,10 @@ public class PathFinding {
         Noeud tmp = new Noeud();
         for (int i = Math.max(0, p.x - 1); i < Math.min(p.x + 2, plateau.length); i++) {
             for (int j = Math.max(0, p.y - 1); j < Math.min(p.y + 2, plateau[0].length); j++) {
-                if (((i == p.x) && (j == p.y)) || !plateau[i][j].isTraversable()) {
-                    continue;
+                if (!(i == destination.x && j == destination.y)) {
+                    if (((i == p.x) && (j == p.y)) || !plateau[i][j].isTraversable() || plateau[i][j].getAnimal()!=null) {
+                        continue;
+                    }
                 }
                 Point it = new Point(i, j);
                 if (!listeFermee.containsKey(it)) {
@@ -72,7 +74,7 @@ public class PathFinding {
         }
         if (actuel.equals(destination) && !but.isSuperpose()) {
             return listeFermee.get(actuel).parent;
-        }else{
+        } else {
             return actuel;
         }
     }

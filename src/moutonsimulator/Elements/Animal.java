@@ -105,7 +105,6 @@ public abstract class Animal extends ElementDynamique {
             }
         }
         if (casePossible.isEmpty()) {
-            System.out.println("peut pas bouger");
             return;
         }
         Collections.shuffle(casePossible);
