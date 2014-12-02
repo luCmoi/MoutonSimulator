@@ -7,20 +7,22 @@ public class CaracteristiqueAnimale {
 
     private IntValMax vie;
     private IntValMax age;
+    public IntValMax reproduction;
     private int engrais;
     private int vue;
     private int puissance;
 
-    public CaracteristiqueAnimale(int vieMax, int ageMax, int engrais,int vue, int puissance) {
+    public CaracteristiqueAnimale(int vieMax, int ageMax, int engrais,int vue, int puissance,int repro) {
         this.vie = new IntValMax(vieMax);
         this.age = new IntValMax(0, ageMax);
+        this.reproduction = new IntValMax(repro);
         this.engrais = engrais;
         this.vue = vue;
         this.puissance = puissance;
     }
     
     public static CaracteristiqueAnimale randomCompetences(){
-        return new CaracteristiqueAnimale(70, 100, 2, 20, 20);
+        return new CaracteristiqueAnimale(70, 100, 2, 30, 20,30);
     }
     
     public int getEngrais() {
@@ -60,6 +62,14 @@ public class CaracteristiqueAnimale {
 
     public void setAge(IntValMax age) {
         this.age = age;
+    }
+
+    public IntValMax getReproduction() {
+        return reproduction;
+    }
+
+    public void setReproduction(IntValMax reproduction) {
+        this.reproduction = reproduction;
     }
 
 }

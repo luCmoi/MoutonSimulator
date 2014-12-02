@@ -43,7 +43,7 @@ public class Plante extends ElementDynamique {
     public void reproduction() {
         Stack<Case> casePossible = new Stack<>();
         for (int x = Math.max(0, conteneur.getX() - famille.getSpecs().getPorteSpore()); x < Math.min(conteneur.getX() + famille.getSpecs().getPorteSpore(), conteneur.getContainer().getPlateau().length); x++) {
-            for (int y = Math.max(0, conteneur.getY() - (famille.getSpecs().getPorteSpore() - Math.abs(conteneur.getX() - x))); y < Math.min(conteneur.getY() + (famille.getSpecs().getPorteSpore() - Math.abs(conteneur.getX() - x)), conteneur.getContainer().getPlateau().length); y++) {
+            for (int y = Math.max(0, conteneur.getY() - (famille.getSpecs().getPorteSpore() - Math.abs(conteneur.getX() - x))); y < Math.min(conteneur.getY() + (famille.getSpecs().getPorteSpore() - Math.abs(conteneur.getX() - x)), conteneur.getContainer().getPlateau()[0].length); y++) {
                 if (conteneur.getContainer().getPlateau()[x][y].isTraversable() && conteneur.getContainer().getPlateau()[x][y]!=conteneur  && conteneur.getContainer().getPlateau()[x][y].getPlante()==null) {
                     casePossible.add(conteneur.getContainer().getPlateau()[x][y]);
                 }

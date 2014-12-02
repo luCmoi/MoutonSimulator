@@ -10,14 +10,6 @@ import moutonsimulator.Jeu.Case;
 
 public abstract class Animal extends ElementDynamique {
 
-    public boolean getSexe() {
-        return sexe;
-    }
-
-    public void setSexe(boolean sexe) {
-        this.sexe = sexe;
-    }
-
     protected enum action {
 
         boufferVoisin(1),
@@ -32,12 +24,12 @@ public abstract class Animal extends ElementDynamique {
         }
 
     }
-
+    protected IntValMax repro;
     protected Arbre arbreGene;
     protected CaracteristiqueAnimale competence;
     protected HashMap<Class, Integer> priorite;
     protected Boolean aBouge = false;
-    private boolean sexe;
+    protected boolean sexe;
 
     public Animal(Case c, Arbre arbre) {
         this.priorite = new HashMap<>();
@@ -45,6 +37,7 @@ public abstract class Animal extends ElementDynamique {
         this.arbreGene = arbre;
         this.vie = competence.getVie();
         this.age = competence.getAge();
+        this.repro = competence.getReproduction();
         this.conteneur = c;
         if ((int) (Math.random() * 2) == 0) {
             this.sexe = true;
@@ -55,12 +48,13 @@ public abstract class Animal extends ElementDynamique {
 
     @Override
     public void update() {
+        repro.decremente();
         mouvementBasique();
         super.update();
     }
 
     public void mange(ElementDynamique el) {
-        this.vie.setVal(this.vie.getVal() + el.estMange(this.competence.getPuissance()));
+        this.vie.setVal(Math.min(this.vie.getMax(), this.vie.getVal() + el.estMange(this.competence.getPuissance())));
     }
 
     public abstract void moove();
@@ -82,16 +76,18 @@ public abstract class Animal extends ElementDynamique {
                 }
             }
         }
-        if(caseLibre.empty()) return;
+        if (caseLibre.empty()) {
+            return;
+        }
         Collections.shuffle(caseLibre);
         Case tmp = caseLibre.pop();
         Animal fils;
-        if(mere.getClass()==Mouton.class){
+        if (mere.getClass() == Mouton.class) {
             fils = new Mouton(tmp, arbreGene);
             mere.getConteneur().getContainer().getPartie().getSetMouton().add(fils);
-        }else{
-             fils = new Loup(tmp, arbreGene);
-             mere.getConteneur().getContainer().getPartie().getSetLoup().add(fils);
+        } else {
+            fils = new Loup(tmp, arbreGene);
+            mere.getConteneur().getContainer().getPartie().getSetLoup().add(fils);
         }
         tmp.setAnimal(fils);
         caseLibre.clear();
@@ -102,9 +98,10 @@ public abstract class Animal extends ElementDynamique {
         if (but.isSuperpose()) {
             mange(but.getCible().getPlante());
         } else {
-            if (but.getCible().getAnimal().getClass() == this.getClass()) {
+            if (but.getCible().getAnimal().getClass() == this.getClass() && this.repro.getVal()<=0 ) {
+                repro.setVal(repro.getMax());
                 reproduction(this, but.getCible().getAnimal());
-            } else {
+            } else if(this instanceof Carnivore){
                 mange(but.getCible().getAnimal());
             }
         }
@@ -171,7 +168,7 @@ public abstract class Animal extends ElementDynamique {
             aBouge = true;
             ArrayList<Objectif> objectifs = new ArrayList();
             for (int x = Math.max(0, conteneur.getX() - competence.getVue()); x < Math.min(conteneur.getX() + competence.getVue(), conteneur.getContainer().getPlateau().length); x++) {
-                for (int y = Math.max(0, conteneur.getY() - (competence.getVue() - Math.abs(conteneur.getX() - x))); y < Math.min(conteneur.getY() + (competence.getVue() - Math.abs(conteneur.getX() - x)), conteneur.getContainer().getPlateau().length); y++) {
+                for (int y = Math.max(0, conteneur.getY() - (competence.getVue() - Math.abs(conteneur.getX() - x))); y < Math.min(conteneur.getY() + (competence.getVue() - Math.abs(conteneur.getX() - x)), conteneur.getContainer().getPlateau()[0].length); y++) {
                     if (!(x == conteneur.getX() && y == conteneur.getY())) {
                         if (conteneur.getContainer().getPlateau()[x][y].getAnimal() != null) {
                             if (priorite.keySet().contains(conteneur.getContainer().getPlateau()[x][y].getAnimal().getClass())) {
@@ -253,5 +250,13 @@ public abstract class Animal extends ElementDynamique {
 
     public CaracteristiqueAnimale getCompetence() {
         return competence;
+    }
+
+    public boolean getSexe() {
+        return sexe;
+    }
+
+    public void setSexe(boolean sexe) {
+        this.sexe = sexe;
     }
 }
