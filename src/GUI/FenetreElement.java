@@ -33,7 +33,6 @@ public class FenetreElement extends JFrame {
             info2 = (Plante) reçu[0];
         }
         taille = reçu.length;
-        System.out.println(taille);
         this.setLocation(MouseInfo.getPointerInfo().getLocation());
         GridBagLayout layout = new GridBagLayout();
         this.setLayout(layout);
@@ -153,5 +152,12 @@ public class FenetreElement extends JFrame {
         }
         this.pack();
         this.repaint();
+    }
+    
+    @Override
+    public void dispose(){
+        this.info=null;
+        this.info2=null;
+        super.dispose();
     }
 }

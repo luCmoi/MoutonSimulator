@@ -12,10 +12,10 @@ import moutonsimulator.Elements.Plantes.FamillePlante;
 public class PanelOverview extends JPanel {
 
     private PanelPartie pan;
-    private JLabel nombreLoup = new JLabel();
-    private JLabel nombreMouton = new JLabel();
-    private JLabel nombreFamillePlante = new JLabel();
-    private JLabel nombrePlante = new JLabel();
+    private final JLabel nombreLoup = new JLabel();
+    private final JLabel nombreMouton = new JLabel();
+    private final JLabel nombreFamillePlante = new JLabel();
+    private final JLabel nombrePlante = new JLabel();
 
     private int largeur;
 
@@ -34,15 +34,13 @@ public class PanelOverview extends JPanel {
         contraintes.gridheight = 1;
         this.add(new JLabel("Overview"), contraintes);
         contraintes.gridy = 2;
-        this.add(nombreLoup,contraintes);
+        this.add(nombreLoup, contraintes);
         contraintes.gridy = 3;
-        this.add(nombreMouton,contraintes);
+        this.add(nombreMouton, contraintes);
         contraintes.gridy = 4;
-        this.add(nombreFamillePlante,contraintes);
+        this.add(nombreFamillePlante, contraintes);
         contraintes.gridy = 5;
-        this.add(nombrePlante,contraintes);
-        
-        
+        this.add(nombrePlante, contraintes);
         this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {

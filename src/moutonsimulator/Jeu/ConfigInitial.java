@@ -10,7 +10,13 @@ public class ConfigInitial {
 
     public int nbFamillePlante = 100;
     private int eau = 40000;
-    private int nbMaxFamille;
+
+    public ConfigInitial(int caseX, int caseY, int mouton, int loup) {
+        width=caseX;
+        heigth=caseY;
+        nbMouton=mouton;
+        nbLoup=loup;
+    }
 
     public int getWidth() {
         return width;

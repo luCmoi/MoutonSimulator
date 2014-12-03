@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JFrame;
 import moutonsimulator.Config;
@@ -22,6 +23,7 @@ public class FenetrePrincipale extends JFrame {
         split = new PanelSplit(pan, over,getSize().width);
         this.setContentPane(split);
         this.setVisible(true);
+        this.setBackground(Color.yellow);
     }
 
     public PanelPartie getPan() {

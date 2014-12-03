@@ -1,6 +1,8 @@
 package moutonsimulator;
 
+import GUI.FenetreCreation;
 import GUI.Images;
+import moutonsimulator.Jeu.ConfigInitial;
 
 public class MoutonSimulator {
 
@@ -15,7 +17,10 @@ public class MoutonSimulator {
     }
 
     private static void creerEtAfficherGUI() {
-        BigBoss boss= new BigBoss();
+        new FenetreCreation();
     }
 
+    public static void nouveau(ConfigInitial conf) {
+        BigBoss boss = new BigBoss(conf);
+    }
 }
