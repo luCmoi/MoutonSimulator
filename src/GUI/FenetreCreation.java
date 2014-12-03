@@ -98,6 +98,7 @@ public class FenetreCreation extends JFrame {
                 dispose();
             }
         });
+        creer.setText("Valider");
         contraintes.gridx = 0;
         contraintes.gridy = 5;
         this.add(creer,contraintes);

@@ -2,7 +2,6 @@ package moutonsimulator.Jeu;
 
 public class ConfigInitial {
 
-<<<<<<< HEAD
     public static int width = 100;
     public static int heigth = 50;
     public int nbMouton = 150;
@@ -10,15 +9,7 @@ public class ConfigInitial {
     private int probaPlante = 1000;//sur 1000
 
     public int nbFamillePlante = 20;
-=======
-    public static int width = 5;
-    public static int heigth = 5;
-    public int nbMouton = 0;
-    public int nbLoup = 10;
-    private int probaPlante = 1000;//sur 1000
 
-    public int nbFamillePlante = 100;
->>>>>>> origin/master
     private int eau = 40000;
 
     public ConfigInitial(int caseX, int caseY, int mouton, int loup) {
