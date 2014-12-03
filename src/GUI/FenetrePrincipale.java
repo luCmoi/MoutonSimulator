@@ -15,7 +15,6 @@ public class FenetrePrincipale extends JFrame {
     public FenetrePrincipale() {
         super("Mouton Simulator");
         setLayout(new BorderLayout());
-        this.setMaximumSize(new Dimension((Config.coteCase * ConfigInitial.width), (Config.coteCase * ConfigInitial.heigth)));
         this.setResizable(true);
         setSize(new Dimension((Config.coteCase * ConfigInitial.width), (Config.coteCase * ConfigInitial.heigth)));
         pan = new PanelPartie();

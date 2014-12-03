@@ -54,10 +54,12 @@ public class MouseListenerPanel implements MouseMotionListener, MouseListener, M
         if (me.getButton() == MouseEvent.BUTTON3) {
             Case tmp = ViewPort.panel.getPartie().getPlateau().getPlateau()[(me.getX() + ViewPort.x) / Config.coteCase][(me.getY() + ViewPort.y) / Config.coteCase];
             if (tmp.presence()) {
-                if (tmp.getAnimal() != null) {
+                if (tmp.getAnimal() != null && tmp.getPlante()==null) {
                     new FenetreElement(tmp.getAnimal());
-                }else {
+                }else if(tmp.getAnimal()==null && tmp.getPlante()!=null){
                     new FenetreElement(tmp.getPlante());
+                }else{
+                    new FenetreElement(tmp.getAnimal(),tmp.getPlante());
                 }
             }
         }
