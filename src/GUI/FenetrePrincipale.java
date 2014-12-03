@@ -17,7 +17,7 @@ public class FenetrePrincipale extends JFrame {
         setLayout(new BorderLayout());
         this.setMaximumSize(new Dimension((Config.coteCase * ConfigInitial.width), (Config.coteCase * ConfigInitial.heigth)));
         this.setResizable(true);
-        setSize(800, 600);
+        setSize(new Dimension((Config.coteCase * ConfigInitial.width), (Config.coteCase * ConfigInitial.heigth)));
         pan = new PanelPartie();
         over = new PanelOverview(pan);
         split = new PanelSplit(pan, over,getSize().width);
