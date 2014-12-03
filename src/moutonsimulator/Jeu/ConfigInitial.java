@@ -4,14 +4,13 @@ public class ConfigInitial {
 
     public static int width = 150;
     public static int heigth = 150;
-    public int nbMouton = 200;
-    public int nbLoup = 20;
-    private int probaPlante = 500;//sur 1000
-    public int nbFamillePlante = 2;
+    public int nbMouton = 30;
+    public int nbLoup = 2;
+    private int probaPlante = 1000;//sur 1000
+
+    public int nbFamillePlante = 32;
     private int eau = 40000;
     private int nbMaxFamille;
-    
-
 
     public int getWidth() {
         return width;
@@ -68,6 +67,5 @@ public class ConfigInitial {
     public void setNbFamillePlante(int nbFamillePlante) {
         this.nbFamillePlante = nbFamillePlante;
     }
-    
-    
+
 }

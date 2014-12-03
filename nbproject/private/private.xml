@@ -3,11 +3,34 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Guillaume/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Elements/Animal.java</file>
             <file>file:/C:/Users/Guillaume/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Jeu/ConfigInitial.java</file>
             <file>file:/C:/Users/Guillaume/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Elements/Objectif.java</file>
             <file>file:/C:/Users/Guillaume/Documents/GitHub/MoutonSimulator/src/moutonsimulator/MoutonSimulator.java</file>
             <file>file:/C:/Users/Guillaume/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Elements/PathFinding.java</file>
+=======
+            <file>file:/C:/Users/Pablo/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Config.java</file>
+            <file>file:/C:/Users/Pablo/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Elements/Mouton.java</file>
+            <file>file:/C:/Users/Pablo/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Elements/Animal.java</file>
+            <file>file:/C:/Users/Pablo/Documents/GitHub/MoutonSimulator/src/GUI/ViewPort.java</file>
+            <file>file:/C:/Users/Pablo/Documents/GitHub/MoutonSimulator/src/GUI/FenetrePrincipale.java</file>
+            <file>file:/C:/Users/Pablo/Documents/GitHub/MoutonSimulator/src/GUI/FenetreElement.java</file>
+            <file>file:/C:/Users/Pablo/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Elements/PathFinding.java</file>
+            <file>file:/C:/Users/Pablo/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Elements/CaracteristiqueAnimale.java</file>
+            <file>file:/C:/Users/Pablo/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Elements/Plantes/CaracteristiquePlante.java</file>
+            <file>file:/C:/Users/Pablo/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Jeu/Grille.java</file>
+            <file>file:/C:/Users/Pablo/Documents/GitHub/MoutonSimulator/src/GUI/PanelPartie.java</file>
+            <file>file:/C:/Users/Pablo/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Elements/Plantes/Plante.java</file>
+            <file>file:/C:/Users/Pablo/Documents/GitHub/MoutonSimulator/src/moutonsimulator/BigBoss.java</file>
+            <file>file:/C:/Users/Pablo/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Jeu/ConfigInitial.java</file>
+            <file>file:/C:/Users/Pablo/Documents/GitHub/MoutonSimulator/src/GUI/PanelOverview.java</file>
+            <file>file:/C:/Users/Pablo/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Jeu/Case.java</file>
+            <file>file:/C:/Users/Pablo/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Jeu/Partie.java</file>
+            <file>file:/C:/Users/Pablo/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Jeu/Node.java</file>
+            <file>file:/C:/Users/Pablo/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Elements/Objectif.java</file>
+            <file>file:/C:/Users/Pablo/Documents/GitHub/MoutonSimulator/src/moutonsimulator/Elements/ElementDynamique.java</file>
+>>>>>>> 4fd66ebb00bfdf68a02ecc49673cfa2fb176bc3c
         </group>
     </open-files>
 </project-private>

@@ -22,7 +22,7 @@ public class CaracteristiqueAnimale {
     }
     
     public static CaracteristiqueAnimale randomCompetences(){
-        return new CaracteristiqueAnimale(70, 100, 2, 30, 20,30);
+        return new CaracteristiqueAnimale(50, 100, 2, 30, 20,30);
     }
     
     public int getEngrais() {
