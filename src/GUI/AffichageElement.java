@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
@@ -26,5 +27,6 @@ public class AffichageElement extends JPanel {
         });
         imageBoutton.setIcon(new ImageIcon(Images.banqueImage.get(element.getIdImage()).getScaledInstance(32, 32, java.awt.Image.SCALE_SMOOTH)));
         this.add(imageBoutton);
+        this.setBackground(Color.red);
     }
 }

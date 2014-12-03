@@ -1,6 +1,7 @@
 package moutonsimulator.Jeu;
 
 import GUI.ViewPort;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import moutonsimulator.Config;
 import moutonsimulator.Elements.Plaine;
@@ -29,6 +30,8 @@ public class Grille {
     }
 
     public void render(Graphics2D batch) {
+        batch.setColor(Color.DARK_GRAY);
+        batch.fillRect(0, 0, partie.getPan().getWidth(), partie.getPan().getHeight());
         int moduloX = 0;
         int viewXTmp = (ViewPort.width - (Config.coteCase - (ViewPort.x % Config.coteCase)));
         int caseX = (ViewPort.x / Config.coteCase) + (viewXTmp / Config.coteCase);

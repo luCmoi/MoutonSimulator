@@ -11,11 +11,11 @@ public class BigBoss {
     Partie partie;
     FenetrePrincipale fenetre;
 
-    public BigBoss() {
+    public BigBoss(ConfigInitial conf) {
         this.fenetre = new FenetrePrincipale();
         this.fenetre.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.fenetre.setVisible(true);
-        this.partie = new Partie(new ConfigInitial(), fenetre.getPan());
+        this.partie = new Partie(conf, fenetre.getPan());
         this.fenetre.getPan().setPartie(partie);
         ViewPort.panel = this.fenetre.getPan();
         ViewPort.resize(this.fenetre.getPan().getWidth(), this.fenetre.getPan().getHeight());
