@@ -17,8 +17,8 @@ public class Objectif {
     }
 
     public int evaluation() {
-        int valeurAnimal = 1000;
-        int valeurPlante = 1000;
+        int valeurAnimal = Integer.MAX_VALUE;
+        int valeurPlante = Integer.MAX_VALUE;
         if (cible.getAnimal() != null) {
             if (proprietaire.getAnimal().getPriorite().containsKey(cible.getAnimal().getClass())) {
                 valeurAnimal = proprietaire.getAnimal().getPriorite().get(cible.getAnimal().getClass());

@@ -9,11 +9,18 @@ public class Loup extends Carnivore {
         this.idImage = 0;
         priorite.put(Mouton.class, 5);
         priorite.put(Loup.class, 15);
-        
+
     }
+
     @Override
-    public void mort(){
-       super.mort();
-       conteneur.getContainer().getPartie().getSetLoup().remove(this);
+    public void mort() {
+        super.mort();
+        conteneur.getContainer().getPartie().getSetLoup().remove(this);
+    }
+
+    @Override
+    public void updatePriorite() {
+        priorite.put(Mouton.class, vie.getVal());
+        priorite.put(Loup.class, (vie.getMax() - vie.getVal()));
     }
 }

@@ -1,5 +1,6 @@
 package moutonsimulator.Elements;
 
+import java.util.ArrayList;
 import moutonsimulator.Elements.Plantes.Buisson;
 import moutonsimulator.Elements.Plantes.Herbe;
 import moutonsimulator.Jeu.Case;
@@ -20,4 +21,26 @@ public class Mouton extends Herbivore {
         super.mort();
         conteneur.getContainer().getPartie().getSetMouton().remove(this);
     }
-}
+
+    @Override
+    public void updatePriorite() {
+        priorite.put(Buisson.class, vie.getVal());
+        priorite.put(Herbe.class, vie.getVal());
+        priorite.put(Mouton.class, (vie.getMax() - vie.getVal()));
+
+    }
+    /*
+    @Override
+    public Objectif findBut() {
+        ArrayList<Objectif> objectifs = new ArrayList();
+        for (int x = Math.max(0, conteneur.getX() - competence.getVue()); x < Math.min(conteneur.getX() + competence.getVue(), conteneur.getContainer().getPlateau().length); x++) {
+            for (int y = Math.max(0, conteneur.getY() - (competence.getVue() - Math.abs(conteneur.getX() - x))); y < Math.min(conteneur.getY() + (competence.getVue() - Math.abs(conteneur.getX() - x)), conteneur.getContainer().getPlateau()[0].length); y++) {
+                if (!(x == conteneur.getX() && y == conteneur.getY())) {
+                    if (conteneur.getContainer().getPlateau()[x][y].getAnimal() instanceof Mouton || conteneur.getContainer().getPlateau()[x][y].getPlante() != null) {
+                        objectifs.add(new Objectif(conteneur, conteneur.getContainer().getPlateau()[x][y]));
+                    }
+                }
+            }
+        }
+    */
+    }

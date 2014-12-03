@@ -16,6 +16,9 @@ public abstract class Animal extends ElementDynamique {
     protected HashMap<Class, Integer> priorite;
     protected Boolean aBouge = false;
     protected boolean sexe;
+    
+    public abstract void updatePriorite();
+   // public abstract Objectif findBut();
 
     public Animal(Case c, Arbre arbre) {
         this.priorite = new HashMap<>();
@@ -31,6 +34,7 @@ public abstract class Animal extends ElementDynamique {
     @Override
     public void update() {
         repro.decremente();
+        updatePriorite();
         mouvementBasique();
         super.update();
     }
