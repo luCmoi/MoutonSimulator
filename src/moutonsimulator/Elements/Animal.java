@@ -127,11 +127,11 @@ public abstract class Animal extends ElementDynamique {
             listeOuverte.put(courant, new Noeud());
             listeOuverte.get(courant).cout_f = (float) PathFinding.distance(courant, cible);
             PathFinding.ajoutListeFermee(courant, listeFermee, listeOuverte);
-            PathFinding.ajoutCaseVoisines(courant, cible, listeOuverte, listeFermee, conteneur.getContainer().getPlateau());
+            PathFinding.ajoutCaseVoisines(courant, cible, listeOuverte, listeFermee, conteneur.getContainer().getPlateau(),this.competence.getVue());
             while (!((courant.x == cible.x) && (courant.y == cible.y)) && (!listeOuverte.isEmpty())) {
                 courant = PathFinding.meilleurNoeud(listeOuverte);
                 PathFinding.ajoutListeFermee(courant, listeFermee, listeOuverte);
-                PathFinding.ajoutCaseVoisines(courant, cible, listeOuverte, listeFermee, conteneur.getContainer().getPlateau());
+                PathFinding.ajoutCaseVoisines(courant, cible, listeOuverte, listeFermee, conteneur.getContainer().getPlateau(),this.competence.getVue());
             }
             if ((courant.x == cible.x) && (courant.y == cible.y)) {
                 Point tmp = PathFinding.retrouver_chemin(cible, new Point(conteneur.getX(), conteneur.getY()), listeFermee, o);

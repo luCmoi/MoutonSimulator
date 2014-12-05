@@ -5,8 +5,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.text.NumberFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
@@ -50,7 +48,7 @@ public class FenetreCreation extends JFrame {
         contraintes.gridwidth = 1;
         this.add(labelCaseX, contraintes);
         nombreCaseX = new JFormattedTextField(formatter);
-        nombreCaseX.setText("50");
+        nombreCaseX.setText("100");
         contraintes.gridx = 1;
         this.add(nombreCaseX, contraintes);
 
@@ -73,7 +71,7 @@ public class FenetreCreation extends JFrame {
         contraintes.gridy = 3;
         this.add(labelNombreMouton, contraintes);
         nombreMouton = new JFormattedTextField(formatter);
-        nombreMouton.setText("200");
+        nombreMouton.setText("400");
         contraintes.gridx = 1;
         this.add(nombreMouton, contraintes);
 
@@ -82,7 +80,7 @@ public class FenetreCreation extends JFrame {
         contraintes.gridy = 4;
         this.add(labelNombreLoup, contraintes);
         nombreLoup = new JFormattedTextField(formatter);
-        nombreLoup.setText("100");
+        nombreLoup.setText("20");
         contraintes.gridx = 1;
         this.add(nombreLoup, contraintes);
 

@@ -10,12 +10,12 @@ public class PathFinding {
         return Math.sqrt(((a.x - b.x) * (a.x - b.x)) + ((a.y - b.y) * (a.y - b.y)));
     }
 
-    public static void ajoutCaseVoisines(Point p, Point destination, HashMap<Point, Noeud> listeOuverte, HashMap<Point, Noeud> listeFermee, Case[][] plateau) {
+    public static void ajoutCaseVoisines(Point p, Point destination, HashMap<Point, Noeud> listeOuverte, HashMap<Point, Noeud> listeFermee, Case[][] plateau, int vue) {
         Noeud tmp = new Noeud();
         for (int i = Math.max(0, p.x - 1); i < Math.min(p.x + 2, plateau.length); i++) {
             for (int j = Math.max(0, p.y - 1); j < Math.min(p.y + 2, plateau[0].length); j++) {
                 if (!(i == destination.x && j == destination.y)) {
-                    if (((i == p.x) && (j == p.y)) || !plateau[i][j].isTraversable() || plateau[i][j].getAnimal()!=null) {
+                    if (((i == p.x) && (j == p.y)) || !plateau[i][j].isTraversable() || plateau[i][j].getAnimal() != null) {
                         continue;
                     }
                 }
@@ -25,12 +25,14 @@ public class PathFinding {
                     tmp.cout_h = (float) distance(it, destination);
                     tmp.cout_f = tmp.cout_g + tmp.cout_h;
                     tmp.parent = p;
-                    if (listeOuverte.containsKey(it)) {
-                        if (tmp.cout_f < listeOuverte.get(it).cout_f) {
+                    if (tmp.cout_g <= vue) {
+                        if (listeOuverte.containsKey(it)) {
+                            if (tmp.cout_f < listeOuverte.get(it).cout_f) {
+                                listeOuverte.put(it, tmp);
+                            }
+                        } else {
                             listeOuverte.put(it, tmp);
                         }
-                    } else {
-                        listeOuverte.put(it, tmp);
                     }
                 }
             }
