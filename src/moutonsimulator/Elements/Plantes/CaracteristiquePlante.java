@@ -23,7 +23,7 @@ public class CaracteristiquePlante {
     public static CaracteristiquePlante randomSpecs() {
         int vieMax = 1 + (int) (Math.random() * 10);
         int ageMax = 60 + (int) (Math.random() * 30);
-        int dureePousse = 3 + (int) (Math.random() * 13);
+        int dureePousse = 3 + (int) (Math.random() * 8);
         int porteSpore = 1 + (int) (Math.random() * 5);
         int intervaleReproduction = ageMax / (1 + (int) (Math.random() * 3));
         int proliferation = 1 + (int) (Math.random() * 8);

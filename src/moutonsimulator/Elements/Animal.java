@@ -16,6 +16,9 @@ public abstract class Animal extends ElementDynamique {
     protected HashMap<Class, Integer> priorite;
     protected Boolean aBouge = false;
     protected boolean sexe;
+    
+    public abstract void updatePriorite();
+   // public abstract Objectif findBut();
 
     public Animal(Case c, Arbre arbre) {
         this.priorite = new HashMap<>();
@@ -27,10 +30,21 @@ public abstract class Animal extends ElementDynamique {
         this.conteneur = c;
         this.sexe = (int) (Math.random() * 2) == 0;
     }
+    public Animal(Case c, Arbre arbre,CaracteristiqueAnimale specs) {
+        this.priorite = new HashMap<>();
+        this.competence = specs;
+        this.arbreGene = arbre;
+        this.vie = competence.getVie();
+        this.age = competence.getAge();
+        this.repro = competence.getReproduction();
+        this.conteneur = c;
+        this.sexe = (int) (Math.random() * 2) == 0;
+    }
 
     @Override
     public void update() {
         repro.decremente();
+        updatePriorite();
         mouvementBasique();
         super.update();
     }
@@ -123,11 +137,11 @@ public abstract class Animal extends ElementDynamique {
             listeOuverte.put(courant, new Noeud());
             listeOuverte.get(courant).cout_f = (float) PathFinding.distance(courant, cible);
             PathFinding.ajoutListeFermee(courant, listeFermee, listeOuverte);
-            PathFinding.ajoutCaseVoisines(courant, cible, listeOuverte, listeFermee, conteneur.getContainer().getPlateau());
+            PathFinding.ajoutCaseVoisines(courant, cible, listeOuverte, listeFermee, conteneur.getContainer().getPlateau(),this.competence.getVue());
             while (!((courant.x == cible.x) && (courant.y == cible.y)) && (!listeOuverte.isEmpty())) {
                 courant = PathFinding.meilleurNoeud(listeOuverte);
                 PathFinding.ajoutListeFermee(courant, listeFermee, listeOuverte);
-                PathFinding.ajoutCaseVoisines(courant, cible, listeOuverte, listeFermee, conteneur.getContainer().getPlateau());
+                PathFinding.ajoutCaseVoisines(courant, cible, listeOuverte, listeFermee, conteneur.getContainer().getPlateau(),this.competence.getVue());
             }
             if ((courant.x == cible.x) && (courant.y == cible.y)) {
                 Point tmp = PathFinding.retrouver_chemin(cible, new Point(conteneur.getX(), conteneur.getY()), listeFermee, o);

@@ -5,5 +5,5 @@ public class Config {
     public static int dimensionY = 600;
     
 
-    public static int coteCase = 16;
+    public static int coteCase = 32;
 }

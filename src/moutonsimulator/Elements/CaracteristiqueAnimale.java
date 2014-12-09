@@ -2,7 +2,6 @@ package moutonsimulator.Elements;
 
 import moutonsimulator.IntValMax;
 
-
 public class CaracteristiqueAnimale {
 
     private IntValMax vie;
@@ -12,7 +11,7 @@ public class CaracteristiqueAnimale {
     private int vue;
     private int puissance;
 
-    public CaracteristiqueAnimale(int vieMax, int ageMax, int engrais,int vue, int puissance,int repro) {
+    public CaracteristiqueAnimale(int vieMax, int ageMax, int engrais, int vue, int puissance, int repro) {
         this.vie = new IntValMax(vieMax);
         this.age = new IntValMax(0, ageMax);
         this.reproduction = new IntValMax(repro);
@@ -20,14 +19,21 @@ public class CaracteristiqueAnimale {
         this.vue = vue;
         this.puissance = puissance;
     }
-    
-    public static CaracteristiqueAnimale randomCompetences(){
-        return new CaracteristiqueAnimale(50, 100, 2, 30, 20,30);
+
+    public static CaracteristiqueAnimale randomCompetences() {
+        int vieMax = 5+(int)(Math.random()*11);
+        int ageMax= 70+(int)(Math.random()*41);
+        int engrais= 1+(int)(Math.random()*2);
+        int vue= 7+(int)(Math.random()*9);
+        int puissance= 5+(int)(Math.random()*5);
+        int repro= 15+(int)(Math.random()*10);
+        return new CaracteristiqueAnimale(vieMax, ageMax, engrais, vue, puissance, repro);
     }
-    
+
     public int getEngrais() {
         return engrais;
     }
+
     public void setEngrais(int engrais) {
         this.engrais = engrais;
     }
