@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
 import javax.swing.JPanel;
+import moutonsimulator.Config;
 import moutonsimulator.Elements.Animal;
 import moutonsimulator.Elements.Eau;
 import moutonsimulator.Elements.Loup;
@@ -168,7 +169,9 @@ public class Partie {
             a.setABouge(false);
         }
         if(jours%20==0){
-            System.gc();
+            System.out.println("Memory "+(Runtime.getRuntime().totalMemory()/1000000));
+            //System.gc();
+            
         }
     }
 
