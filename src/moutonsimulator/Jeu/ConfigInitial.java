@@ -6,23 +6,16 @@ public class ConfigInitial {
     public static int heigth = 50;
     public int nbMouton = 0;
     public int nbLoup = 0;
-<<<<<<< HEAD
-    private int probaPlante =0;//sur 1000
-
-    public int nbFamillePlante =0;
-=======
     private int probaPlante = 10000;//sur 1000
-
     public int nbFamillePlante = 100;
->>>>>>> origin/master
 
     private int eau = 40000;
 
     public ConfigInitial(int caseX, int caseY, int mouton, int loup) {
-        width=caseX;
-        heigth=caseY;
-        nbMouton=mouton;
-        nbLoup=loup;
+        width = caseX;
+        heigth = caseY;
+        nbMouton = mouton;
+        nbLoup = loup;
     }
 
     public int getWidth() {

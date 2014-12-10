@@ -11,38 +11,64 @@ import moutonsimulator.Jeu.Case;
 public abstract class Animal extends ElementDynamique {
 
     protected IntValMax repro;
-    protected Arbre arbreGene;
     protected CaracteristiqueAnimale competence;
     protected HashMap<Class, Integer> priorite;
     protected Boolean aBouge = false;
+    protected Animal pere;
+    protected Animal mere;
     protected boolean sexe;
+    protected boolean mort;
+    private int nbEnfants;
     
     public abstract void updatePriorite();
-   // public abstract Objectif findBut();
 
-    public Animal(Case c, Arbre arbre) {
+    public Animal(Case c) {
         this.priorite = new HashMap<>();
         this.competence = CaracteristiqueAnimale.randomCompetences();
-        this.arbreGene = arbre;
         this.vie = competence.getVie();
         this.age = competence.getAge();
         this.repro = competence.getReproduction();
         this.conteneur = c;
         this.sexe = (int) (Math.random() * 2) == 0;
+        this.mort = false;
+        this.pere = null;
+        this.mere = null;
     }
-    public Animal(Case c, Arbre arbre,CaracteristiqueAnimale specs) {
+    
+    public Animal(Case c,Animal pere,Animal mere) {
+        this.priorite = new HashMap<>();
+        this.competence = CaracteristiqueAnimale.specsEnfant(pere.getCompetence(), mere.getCompetence());
+        this.vie = competence.getVie();
+        this.age = competence.getAge();
+        this.repro = competence.getReproduction();
+        this.conteneur = c;
+        this.sexe = (int) (Math.random() * 2) == 0;
+        this.mort = false;
+        this.pere = pere;
+        this.mere = mere;
+    }
+    
+    public Animal(Case c, CaracteristiqueAnimale specs) {
         this.priorite = new HashMap<>();
         this.competence = specs;
-        this.arbreGene = arbre;
         this.vie = competence.getVie();
         this.age = competence.getAge();
         this.repro = competence.getReproduction();
         this.conteneur = c;
         this.sexe = (int) (Math.random() * 2) == 0;
+        this.mort = false;
+        this.pere = null;
+        this.mere = null;
     }
 
     @Override
     public void update() {
+        if(mere != null && mere.isMort()){
+            mere = null;
+        }
+        if(pere != null && pere.isMort()){
+            pere = null;
+        }
         repro.decremente();
         updatePriorite();
         mouvementBasique();
@@ -77,12 +103,16 @@ public abstract class Animal extends ElementDynamique {
         Case tmp = caseLibre.pop();
         Animal fils;
         if (mere.getClass() == Mouton.class) {
-            fils = new Mouton(tmp, arbreGene);
+            fils = new Mouton(tmp,pere,mere);
             mere.getConteneur().getContainer().getPartie().getSetMouton().add(fils);
         } else {
-            fils = new Loup(tmp, arbreGene);
+            fils = new Loup(tmp,pere,mere);
             mere.getConteneur().getContainer().getPartie().getSetLoup().add(fils);
         }
+        fils.setMere(mere);
+        fils.setPere(pere);
+        pere.setNbEnfants(pere.getNbEnfants()+1);
+        mere.setNbEnfants(mere.getNbEnfants()+1);
         tmp.setAnimal(fils);
         caseLibre.clear();
     }
@@ -107,6 +137,7 @@ public abstract class Animal extends ElementDynamique {
     public void mort() {
         this.conteneur.setAnimal(null);
         this.conteneur.setEngrais(this.conteneur.getEngrais() + this.competence.getEngrais());
+        this.mort = true;
     }
 
     public void mouvementAleatoire() {
@@ -229,14 +260,6 @@ public abstract class Animal extends ElementDynamique {
         this.age = age;
     }
 
-    public Arbre getArbreGene() {
-        return arbreGene;
-    }
-
-    public void setArbreGene(Arbre arbreGene) {
-        this.arbreGene = arbreGene;
-    }
-
     public void setConteneur(Case conteneur) {
         this.conteneur = conteneur;
     }
@@ -263,5 +286,61 @@ public abstract class Animal extends ElementDynamique {
 
     public void setSexe(boolean sexe) {
         this.sexe = sexe;
+    }
+
+    public IntValMax getRepro() {
+        return repro;
+    }
+
+    public void setRepro(IntValMax repro) {
+        this.repro = repro;
+    }
+
+    public void setCompetence(CaracteristiqueAnimale competence) {
+        this.competence = competence;
+    }
+
+    public Boolean getaBouge() {
+        return aBouge;
+    }
+
+    public void setaBouge(Boolean aBouge) {
+        this.aBouge = aBouge;
+    }
+
+    public Animal getPere() {
+        return pere;
+    }
+
+    public void setPere(Animal pere) {
+        this.pere = pere;
+    }
+
+    public Animal getMere() {
+        return mere;
+    }
+
+    public void setMere(Animal mere) {
+        this.mere = mere;
+    }
+
+    public boolean isSexe() {
+        return sexe;
+    }
+
+    public boolean isMort() {
+        return mort;
+    }
+
+    public void setMort(boolean mort) {
+        this.mort = mort;
+    }
+
+    public int getNbEnfants() {
+        return nbEnfants;
+    }
+
+    public void setNbEnfants(int nbEnfants) {
+        this.nbEnfants = nbEnfants;
     }
 }

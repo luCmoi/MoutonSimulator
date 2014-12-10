@@ -11,6 +11,7 @@ public class Images {
 
     public static BufferedImage herbe;
     public static BufferedImage mouton;
+    public static BufferedImage mouton1;
     public static BufferedImage loup;
     public static BufferedImage buisson;
     public static BufferedImage eau;
@@ -37,6 +38,7 @@ public class Images {
             Images.eau = ImageIO.read(new File("Ressources/Images/eau.gif"));
             Images.herbe = ImageIO.read(new File("Ressources/Images/herbe.jpg"));
             Images.mouton = ImageIO.read(new File("Ressources/Images/mouton.png"));
+            Images.mouton1 = ImageIO.read(new File("Ressources/Images/mouton1.png"));
             Images.loup = ImageIO.read(new File("Ressources/Images/loup.gif"));
             Images.buisson = ImageIO.read(new File("Ressources/Images/buisson.png"));
         } catch (IOException ex) {
@@ -45,7 +47,8 @@ public class Images {
         //
          Images.banqueImage.put(0,Images.loup);
          Images.banqueImage.put(1,Images.mouton);
-         compteurImage = 2;
+         Images.banqueImage.put(2,Images.mouton1);
+         compteurImage = 3;
         
         //
     }

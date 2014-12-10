@@ -74,7 +74,7 @@ public class Case implements Comparable {
     }
 
     public void render(Graphics2D batch) {
-       // batch.drawImage(sol.getImage(), (x * Config.coteCase) - (ViewPort.x), (y * Config.coteCase) - (ViewPort.y), Config.coteCase, Config.coteCase, null);
+        batch.drawImage(sol.getImage(), (x * Config.coteCase) - (ViewPort.x), (y * Config.coteCase) - (ViewPort.y), Config.coteCase, Config.coteCase, null);
         if (this.getPlante() != null) {
             this.getPlante().render(batch);
         }

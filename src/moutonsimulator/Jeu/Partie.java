@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Stack;
 import javax.swing.JPanel;
-import moutonsimulator.Config;
 import moutonsimulator.Elements.Animal;
 import moutonsimulator.Elements.Eau;
 import moutonsimulator.Elements.Loup;
@@ -55,14 +54,14 @@ public class Partie {
         int loup = init.getNbLoup();
         while (mouton > 0 && !caseLibre.empty()) {
             Case tmp = caseLibre.pop();
-            Mouton moutmout = new Mouton(tmp, null);
+            Mouton moutmout = new Mouton(tmp);
             tmp.setAnimal(moutmout);
             setMouton.add(moutmout);
             mouton--;
         }
         while (loup > 0 && !caseLibre.empty()) {
             Case tmp = caseLibre.pop();
-            Loup loupe = new Loup(tmp, null);
+            Loup loupe = new Loup(tmp);
             tmp.setAnimal(loupe);
             setLoup.add(loupe);
             loup--;
