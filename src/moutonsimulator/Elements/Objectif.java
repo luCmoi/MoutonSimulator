@@ -17,6 +17,7 @@ public class Objectif {
     }
 
     public int evaluation() {
+
         int valeurAnimal = Integer.MAX_VALUE;
         int valeurPlante = Integer.MAX_VALUE;
         if (cible.getAnimal() != null) {

@@ -30,6 +30,16 @@ public abstract class Animal extends ElementDynamique {
         this.conteneur = c;
         this.sexe = (int) (Math.random() * 2) == 0;
     }
+    public Animal(Case c, Arbre arbre,CaracteristiqueAnimale specs) {
+        this.priorite = new HashMap<>();
+        this.competence = specs;
+        this.arbreGene = arbre;
+        this.vie = competence.getVie();
+        this.age = competence.getAge();
+        this.repro = competence.getReproduction();
+        this.conteneur = c;
+        this.sexe = (int) (Math.random() * 2) == 0;
+    }
 
     @Override
     public void update() {
