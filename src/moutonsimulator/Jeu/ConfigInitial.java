@@ -4,7 +4,7 @@ public class ConfigInitial {
 
     public static int width = 100;
     public static int heigth = 50;
-    public int nbMouton = 150;
+    public int nbMouton = 0;
     public int nbLoup = 0;
     private int probaPlante = 10000;//sur 1000
     public int nbFamillePlante = 100;
@@ -12,10 +12,10 @@ public class ConfigInitial {
     public static boolean modeMinimal = true;
 
     public ConfigInitial(int caseX, int caseY, int mouton, int loup) {
-        width=caseX;
-        heigth=caseY;
-        nbMouton=mouton;
-        nbLoup=loup;
+        width = caseX;
+        heigth = caseY;
+        nbMouton = mouton;
+        nbLoup = loup;
     }
 
     public int getWidth() {

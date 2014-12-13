@@ -21,12 +21,22 @@ public class CaracteristiqueAnimale {
     }
 
     public static CaracteristiqueAnimale randomCompetences() {
-        int vieMax = 5+(int)(Math.random()*11);
-        int ageMax= 70+(int)(Math.random()*41);
-        int engrais= 1+(int)(Math.random()*2);
-        int vue= 7+(int)(Math.random()*9);
-        int puissance= 5+(int)(Math.random()*5);
-        int repro= 15+(int)(Math.random()*10);
+        int vieMax = 5 + (int) (Math.random() * 11);
+        int ageMax = 70 + (int) (Math.random() * 41);
+        int engrais = 1 + (int) (Math.random() * 2);
+        int vue = 7 + (int) (Math.random() * 9);
+        int puissance = 5 + (int) (Math.random() * 5);
+        int repro = 15 + (int) (Math.random() * 10);
+        return new CaracteristiqueAnimale(vieMax, ageMax, engrais, vue, puissance, repro);
+    }
+
+    public static CaracteristiqueAnimale specsEnfant(CaracteristiqueAnimale specsPere, CaracteristiqueAnimale specsMere) {
+        int vieMax = (specsPere.getVie().getVal()+specsMere.getVie().getVal())/2;
+        int ageMax = (specsPere.getAge().getVal()+specsMere.getAge().getVal())/2;
+        int engrais = (specsPere.getEngrais()+specsMere.getEngrais())/2;
+        int vue = (specsPere.getVue()+specsMere.getVue())/2;
+        int puissance = (specsPere.getPuissance()+specsMere.getPuissance())/2;
+        int repro = (specsPere.getReproduction().getVal()+specsMere.getReproduction().getVal())/2;
         return new CaracteristiqueAnimale(vieMax, ageMax, engrais, vue, puissance, repro);
     }
     

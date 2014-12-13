@@ -54,14 +54,14 @@ public class Partie {
         int loup = init.getNbLoup();
         while (mouton > 0 && !caseLibre.empty()) {
             Case tmp = caseLibre.pop();
-            Mouton moutmout = new Mouton(tmp, null);
+            Mouton moutmout = new Mouton(tmp);
             tmp.setAnimal(moutmout);
             setMouton.add(moutmout);
             mouton--;
         }
         while (loup > 0 && !caseLibre.empty()) {
             Case tmp = caseLibre.pop();
-            Loup loupe = new Loup(tmp, null);
+            Loup loupe = new Loup(tmp);
             tmp.setAnimal(loupe);
             setLoup.add(loupe);
             loup--;
@@ -168,7 +168,9 @@ public class Partie {
             a.setABouge(false);
         }
         if(jours%20==0){
-            System.gc();
+            System.out.println("Memory "+(Runtime.getRuntime().totalMemory()/1000000));
+            //System.gc();
+            
         }
     }
 
