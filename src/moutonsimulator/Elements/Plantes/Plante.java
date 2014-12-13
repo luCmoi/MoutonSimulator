@@ -5,6 +5,7 @@ import java.util.Stack;
 import moutonsimulator.Elements.ElementDynamique;
 import moutonsimulator.IntValMax;
 import moutonsimulator.Jeu.Case;
+import moutonsimulator.Jeu.ConfigInitial;
 
 public class Plante extends ElementDynamique {
 
@@ -32,19 +33,21 @@ public class Plante extends ElementDynamique {
 
     @Override
     public void update() {
-        if (countDownRepro.decremente()) {
-            reproduction();
-            countDownRepro.setVal(famille.getSpecs().getIntervalReproduction());
-            //System.out.println("Reproduction");
+        if (!ConfigInitial.modeMinimal) {
+            if (countDownRepro.decremente()) {
+                reproduction();
+                countDownRepro.setVal(famille.getSpecs().getIntervalReproduction());
+                //System.out.println("Reproduction");
+            }
+            super.update();
         }
-        super.update();
     }
 
     public void reproduction() {
         Stack<Case> casePossible = new Stack<>();
         for (int x = Math.max(0, conteneur.getX() - famille.getSpecs().getPorteSpore()); x < Math.min(conteneur.getX() + famille.getSpecs().getPorteSpore(), conteneur.getContainer().getPlateau().length); x++) {
             for (int y = Math.max(0, conteneur.getY() - (famille.getSpecs().getPorteSpore() - Math.abs(conteneur.getX() - x))); y < Math.min(conteneur.getY() + (famille.getSpecs().getPorteSpore() - Math.abs(conteneur.getX() - x)), conteneur.getContainer().getPlateau()[0].length); y++) {
-                if (conteneur.getContainer().getPlateau()[x][y].isTraversable() && conteneur.getContainer().getPlateau()[x][y]!=conteneur  && conteneur.getContainer().getPlateau()[x][y].getPlante()==null) {
+                if (conteneur.getContainer().getPlateau()[x][y].isTraversable() && conteneur.getContainer().getPlateau()[x][y] != conteneur && conteneur.getContainer().getPlateau()[x][y].getPlante() == null) {
                     casePossible.add(conteneur.getContainer().getPlateau()[x][y]);
                 }
             }
@@ -64,7 +67,7 @@ public class Plante extends ElementDynamique {
                 } else {
                     //System.out.println("Reprod : NORMAL");
                     c.getGraines().add(new Graine(famille));
-                    famille.setCompteurGraines(famille.getCompteurGraines()+1);
+                    famille.setCompteurGraines(famille.getCompteurGraines() + 1);
                 }
             }
         }

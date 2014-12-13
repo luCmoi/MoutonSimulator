@@ -29,6 +29,26 @@ public class CaracteristiqueAnimale {
         int repro= 15+(int)(Math.random()*10);
         return new CaracteristiqueAnimale(vieMax, ageMax, engrais, vue, puissance, repro);
     }
+    
+    public static CaracteristiqueAnimale minimumSpecsMouton() {
+        int vieMax = 5;
+        int ageMax= 50;
+        int engrais= 1;
+        int vue= 7+(int)(Math.random()*9);
+        int puissance= 5;
+        int repro= 15+(int)(Math.random()*10);
+        return new CaracteristiqueAnimale(vieMax, ageMax, engrais, vue, puissance, repro);
+    }
+    
+    public static CaracteristiqueAnimale minimumSpecsLoup() {
+        int vieMax = 10;
+        int ageMax= 50;
+        int engrais= 1;
+        int vue= 7+(int)(Math.random()*9);
+        int puissance= 5;
+        int repro= 15+(int)(Math.random()*10);
+        return new CaracteristiqueAnimale(vieMax, ageMax, engrais, vue, puissance, repro);
+    }
 
     public int getEngrais() {
         return engrais;

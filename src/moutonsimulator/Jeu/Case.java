@@ -66,7 +66,11 @@ public class Case implements Comparable {
         if (this.plante != null) {
             plante.update();
         } else {//if (this.engrais > 0)
-            updateGraine();
+            if(ConfigInitial.modeMinimal){
+                updateGraine();
+            }else if(engrais>0){
+                container.getPartie().getFamillesPlante().add(new FamillePlante((int) (Math.random() * 2), this));
+            }
         }
         if (this.getAnimal() != null) {
             this.getAnimal().update();

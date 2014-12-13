@@ -30,6 +30,18 @@ public class CaracteristiquePlante {
         int tauxMutation = 1+(int)(Math.random()*2);
         return new CaracteristiquePlante(vieMax, ageMax, dureePousse, porteSpore, intervaleReproduction, proliferation,tauxMutation);
     }
+    
+     public static CaracteristiquePlante minimalSpecs() {
+        int vieMax = 5;
+        int ageMax = 1000;
+        int dureePousse = 1;
+        int porteSpore = 0;
+        int intervaleReproduction = ageMax;
+        int proliferation = 0;
+        int tauxMutation = 0;
+        return new CaracteristiquePlante(vieMax, ageMax, dureePousse, porteSpore, intervaleReproduction, proliferation,tauxMutation);
+    }
+    
 
     public int getDureePousse() {
         return dureePousse;

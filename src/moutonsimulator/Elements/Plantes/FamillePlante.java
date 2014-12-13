@@ -3,6 +3,7 @@ package moutonsimulator.Elements.Plantes;
 import GUI.Images;
 import java.util.ArrayList;
 import moutonsimulator.Jeu.Case;
+import moutonsimulator.Jeu.ConfigInitial;
 import moutonsimulator.Jeu.Partie;
 
 public class FamillePlante {
@@ -16,7 +17,11 @@ public class FamillePlante {
 
     public FamillePlante(int espece, Case c) {
         this.espece = espece;
-        this.specs = CaracteristiquePlante.randomSpecs();
+        if (ConfigInitial.modeMinimal) {
+            this.specs = CaracteristiquePlante.minimalSpecs();
+        } else {
+            this.specs = CaracteristiquePlante.randomSpecs();
+        }
         this.idImage = Images.nouvelleImage(espece);
         this.compteurGraines = 0;
         switch (espece) {
