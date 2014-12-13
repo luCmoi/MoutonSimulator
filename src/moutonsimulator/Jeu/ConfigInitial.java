@@ -9,7 +9,7 @@ public class ConfigInitial {
     private int probaPlante = 10000;//sur 1000
     public int nbFamillePlante = 100;
     private int eau = 40000;
-    public static boolean modeMinimal = false;
+    public static boolean modeMinimal = true;
 
     public ConfigInitial(int caseX, int caseY, int mouton, int loup) {
         width = caseX;

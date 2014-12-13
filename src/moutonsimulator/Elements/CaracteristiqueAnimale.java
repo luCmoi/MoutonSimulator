@@ -52,7 +52,7 @@ public class CaracteristiqueAnimale {
     
     public static CaracteristiqueAnimale minimumSpecsLoup() {
         int vieMax = 10;
-        int ageMax= 50;
+        int ageMax= 60;
         int engrais= 1;
         int vue= 7+(int)(Math.random()*9);
         int puissance= 5;
