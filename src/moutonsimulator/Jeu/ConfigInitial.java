@@ -6,8 +6,8 @@ public class ConfigInitial {
     public static int heigth = 50;
     public int nbMouton = 0;
     public int nbLoup = 0;
-    private int probaPlante = 10000;//sur 1000
-    public int nbFamillePlante = 100;
+    private int probaPlante = 100;//sur 1000
+    public int nbFamillePlante = 50;
 
     private int eau = 40000;
 
