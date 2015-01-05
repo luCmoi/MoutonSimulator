@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Stack;
 import moutonsimulator.IntValMax;
 import moutonsimulator.Jeu.Case;
+import moutonsimulator.Jeu.ConfigInitial;
 
 public abstract class Animal extends ElementDynamique {
 
@@ -24,7 +25,15 @@ public abstract class Animal extends ElementDynamique {
 
     public Animal(Case c) {
         this.priorite = new HashMap<>();
-        this.competence = CaracteristiqueAnimale.randomCompetences();
+        if(ConfigInitial.modeMinimal){
+            if(this instanceof Mouton){
+                this.competence = CaracteristiqueAnimale.minimumSpecsMouton();
+            }else{
+                this.competence = CaracteristiqueAnimale.minimumSpecsLoup();
+            }
+        }else{
+          this.competence = CaracteristiqueAnimale.randomCompetences();  
+        }
         this.vie = competence.getVie();
         this.age = competence.getAge();
         this.repro = competence.getReproduction();

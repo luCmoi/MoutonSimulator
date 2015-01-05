@@ -59,4 +59,5 @@ public class Mouton extends Herbivore {
         getPriorite().put(Mouton.class, (vie.getMax() - vie.getVal()));
 
     }
+
 }
