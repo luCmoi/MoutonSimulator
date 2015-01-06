@@ -18,7 +18,8 @@ public class Partie {
     private JPanel pan;
     private ArrayList<Animal> setMouton;
     private ArrayList<Animal> setLoup;
-    public ArrayList<FamillePlante> famillesPlante;
+    private ArrayList<FamillePlante> famillesPlante;
+    public static boolean pause;
 
     public Partie(ConfigInitial init, JPanel pan) {
         this.jours = 0;
@@ -27,6 +28,7 @@ public class Partie {
         this.setMouton = new ArrayList<>();
         this.famillesPlante = new ArrayList<>();
         initPlateau(init);
+        pause = false;
     }
 
     private void initPlateau(ConfigInitial init) {
@@ -107,7 +109,7 @@ public class Partie {
             }
         }
         Collections.shuffle(casesLibres);
-        int f = Math.min(init.getNbFamillePlante(),casesLibres.size());
+        int f = Math.min(init.getNbFamillePlante(), casesLibres.size());
         while (f-- > 0) {
             famillesPlante.add(new FamillePlante((int) (Math.random() * 2), casesLibres.pop()));
         }
@@ -159,18 +161,15 @@ public class Partie {
     }
 
     public void update() {
-        plateau.update();
-        jours++;
-        for (Animal a : setMouton) {
-            a.setABouge(false);
-        }
-        for (Animal a : setLoup) {
-            a.setABouge(false);
-        }
-        if(jours%20==0){
-            System.out.println("Memory "+(Runtime.getRuntime().totalMemory()/1000000));
-            //System.gc();
-            
+        if (!pause) {
+            plateau.update();
+            jours++;
+            for (Animal a : setMouton) {
+                a.setABouge(false);
+            }
+            for (Animal a : setLoup) {
+                a.setABouge(false);
+            }
         }
     }
 
@@ -224,5 +223,13 @@ public class Partie {
 
     public void setFamillesPlante(ArrayList<FamillePlante> famillesPlante) {
         this.famillesPlante = famillesPlante;
+    }
+
+    public boolean isPause() {
+        return pause;
+    }
+
+    public void setPause(boolean pause) {
+        this.pause = pause;
     }
 }

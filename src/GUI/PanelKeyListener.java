@@ -4,6 +4,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import moutonsimulator.Config;
 import moutonsimulator.Jeu.ConfigInitial;
+import moutonsimulator.Jeu.Partie;
 
 public class PanelKeyListener implements KeyListener {
 
@@ -17,7 +18,7 @@ public class PanelKeyListener implements KeyListener {
             ViewPort.y = ViewPort.y - 1;
             ViewPort.panel.repaint();
         }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN && ViewPort.y < ((ConfigInitial.heigth) * Config.coteCase) -ViewPort.height) {
+        if (e.getKeyCode() == KeyEvent.VK_DOWN && ViewPort.y < ((ConfigInitial.heigth) * Config.coteCase) - ViewPort.height) {
             ViewPort.y = ViewPort.y + 1;
             ViewPort.panel.repaint();
         }
@@ -25,9 +26,16 @@ public class PanelKeyListener implements KeyListener {
             ViewPort.x = ViewPort.x - 1;
             ViewPort.panel.repaint();
         }
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT && ViewPort.x < ((ConfigInitial.width) * Config.coteCase)-ViewPort.width) {
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT && ViewPort.x < ((ConfigInitial.width) * Config.coteCase) - ViewPort.width) {
             ViewPort.x = ViewPort.x + 1;
             ViewPort.panel.repaint();
+        }
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            if (Partie.pause) {
+                Partie.pause = false;
+            }else{
+               Partie.pause = true; 
+            }
         }
     }
 
