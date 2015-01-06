@@ -1,5 +1,6 @@
 package GUI;
 
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -49,6 +50,7 @@ public class FenetreCreation extends JFrame {
         this.add(labelCaseX, contraintes);
         nombreCaseX = new JFormattedTextField(formatter);
         nombreCaseX.setText("100");
+        nombreCaseX.setPreferredSize(new Dimension(75, 20));
         contraintes.gridx = 1;
         this.add(nombreCaseX, contraintes);
 

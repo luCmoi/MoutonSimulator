@@ -28,6 +28,7 @@ public class PanelPartie extends JPanel {
     public void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         partie.render(g2d);
+        g.finalize();
         g.dispose();
     }
 
