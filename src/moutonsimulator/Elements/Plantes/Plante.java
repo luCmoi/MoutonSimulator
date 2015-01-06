@@ -1,6 +1,5 @@
 package moutonsimulator.Elements.Plantes;
 
-import GUI.Images;
 import java.util.Stack;
 import moutonsimulator.Elements.ElementDynamique;
 import moutonsimulator.IntValMax;
@@ -37,7 +36,6 @@ public class Plante extends ElementDynamique {
             if (countDownRepro.decremente()) {
                 reproduction();
                 countDownRepro.setVal(famille.getSpecs().getIntervalReproduction());
-                //System.out.println("Reproduction");
             }
             super.update();
         }
@@ -56,16 +54,13 @@ public class Plante extends ElementDynamique {
             if ((int) (Math.random() * 101) <= famille.getSpecs().getProliferation()) {
                 if ((int) (Math.random() * 10001) <= famille.getSpecs().getTauxMutationPlante()) {
                     if (this instanceof Herbe) {
-                        //System.out.println("Reprod : new Famille");
                         FamillePlante fp = new FamillePlante(0, c);
                         conteneur.getContainer().getPartie().getFamillesPlante().add(fp);
                     } else {
-                        //System.out.println("Reprod : new Famille");
                         FamillePlante fp = new FamillePlante(1, c);
                         conteneur.getContainer().getPartie().getFamillesPlante().add(fp);
                     }
                 } else {
-                    //System.out.println("Reprod : NORMAL");
                     c.getGraines().add(new Graine(famille));
                     famille.setCompteurGraines(famille.getCompteurGraines() + 1);
                 }
