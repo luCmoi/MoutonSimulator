@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JRadioButton;
 import javax.swing.text.NumberFormatter;
 import moutonsimulator.Jeu.ConfigInitial;
 import moutonsimulator.MoutonSimulator;
@@ -21,6 +22,10 @@ public class FenetreCreation extends JFrame {
     JFormattedTextField nombreCaseY;
     JFormattedTextField nombreMouton;
     JFormattedTextField nombreLoup;
+    JFormattedTextField nombreEau;
+    JFormattedTextField nombreFamilleP;
+    JFormattedTextField nombreProbaP;
+    JRadioButton choixNormal;
 
     public FenetreCreation() {
         super("Creation de la carte");
@@ -49,7 +54,7 @@ public class FenetreCreation extends JFrame {
         contraintes.gridwidth = 1;
         this.add(labelCaseX, contraintes);
         nombreCaseX = new JFormattedTextField(formatter);
-        nombreCaseX.setText("100");
+        nombreCaseX.setText("40");
         nombreCaseX.setPreferredSize(new Dimension(75, 20));
         contraintes.gridx = 1;
         this.add(nombreCaseX, contraintes);
@@ -59,11 +64,11 @@ public class FenetreCreation extends JFrame {
         contraintes.gridy = 2;
         this.add(labelCaseY, contraintes);
         nombreCaseY = new JFormattedTextField(formatter);
-        nombreCaseY.setText("50");
+        nombreCaseY.setText("40");
         contraintes.gridx = 1;
         this.add(nombreCaseY, contraintes);
         try {
-            formatter= (NumberFormatter)formatter.clone();
+            formatter = (NumberFormatter) formatter.clone();
         } catch (CloneNotSupportedException ex) {
         }
         formatter.setMinimum(0);
@@ -86,6 +91,38 @@ public class FenetreCreation extends JFrame {
         contraintes.gridx = 1;
         this.add(nombreLoup, contraintes);
 
+        JLabel labelProbaPlante = new JLabel("Proportion de plante sur mille");
+        contraintes.gridx = 0;
+        contraintes.gridy = 5;
+        this.add(labelProbaPlante, contraintes);
+        nombreProbaP = new JFormattedTextField(formatter);
+        nombreProbaP.setText("100");
+        contraintes.gridx = 1;
+        this.add(nombreProbaP, contraintes);
+
+        JLabel labelNombreFamilleP = new JLabel("Nombre de famille de Plante");
+        contraintes.gridx = 0;
+        contraintes.gridy = 6;
+        this.add(labelNombreFamilleP, contraintes);
+        nombreFamilleP = new JFormattedTextField(formatter);
+        nombreFamilleP.setText("50");
+        contraintes.gridx = 1;
+        this.add(nombreFamilleP, contraintes);
+
+        JLabel labelEau = new JLabel("Cases d'eau");
+        contraintes.gridx = 0;
+        contraintes.gridy = 7;
+        this.add(labelEau, contraintes);
+        nombreEau = new JFormattedTextField(formatter);
+        nombreEau.setText("200");
+        contraintes.gridx = 1;
+        this.add(nombreEau, contraintes);
+
+        choixNormal = new JRadioButton("Mode Minimal", false);
+        contraintes.gridx = 0;
+        contraintes.gridy = 8;
+        this.add(choixNormal, contraintes);
+
         JButton creer = new JButton(new AbstractAction() {
 
             @Override
@@ -94,15 +131,18 @@ public class FenetreCreation extends JFrame {
                 int caseY = Integer.parseInt(nombreCaseY.getText().replaceAll(" ", ""));
                 int mout = Integer.parseInt(nombreMouton.getText().replaceAll(" ", ""));
                 int loup = Integer.parseInt(nombreLoup.getText().replaceAll(" ", ""));
-                MoutonSimulator.nouveau(new ConfigInitial(caseX, caseY, mout, loup));
+                int probaPlante = Integer.parseInt(nombreProbaP.getText().replaceAll(" ", ""));
+                int famillePlante = Integer.parseInt(nombreFamilleP.getText().replaceAll(" ", ""));
+                int eau = Integer.parseInt(nombreEau.getText().replaceAll(" ", ""));
+                MoutonSimulator.nouveau(new ConfigInitial(caseX, caseY, mout, loup, probaPlante, famillePlante, eau, choixNormal.isSelected()));
                 dispose();
             }
         });
         creer.setText("Valider");
         contraintes.gridx = 0;
-        contraintes.gridy = 5;
-        this.add(creer,contraintes);
-        
+        contraintes.gridy = 9;
+        this.add(creer, contraintes);
+
         this.setResizable(false);
         this.pack();
         this.setVisible(true);

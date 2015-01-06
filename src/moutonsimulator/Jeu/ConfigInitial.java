@@ -18,6 +18,17 @@ public class ConfigInitial {
         nbLoup = loup;
     }
 
+    public ConfigInitial(int caseX, int caseY, int mout, int loup, int probaPlante, int famillePlante, int eau, boolean selected) {
+        width = caseX;
+        heigth = caseY;
+        nbMouton = mout;
+        nbLoup = loup;
+        modeMinimal=selected;
+        this.probaPlante=probaPlante;
+        nbFamillePlante=famillePlante;
+        this.eau=eau;
+    }
+
     public int getWidth() {
         return width;
     }
