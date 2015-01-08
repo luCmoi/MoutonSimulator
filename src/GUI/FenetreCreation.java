@@ -13,8 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.text.NumberFormatter;
+import moutonsimulator.BigBoss;
 import moutonsimulator.Jeu.ConfigInitial;
-import moutonsimulator.MoutonSimulator;
 
 /**
  * Fenêtre affichée lors du lancement du programme permettant d'en choisir les réglages
@@ -137,7 +137,7 @@ public class FenetreCreation extends JFrame {
                 int probaPlante = Integer.parseInt(nombreProbaP.getText().replaceAll(" ", ""));
                 int famillePlante = Integer.parseInt(nombreFamilleP.getText().replaceAll(" ", ""));
                 int eau = Integer.parseInt(nombreEau.getText().replaceAll(" ", ""));
-                MoutonSimulator.nouveau(new ConfigInitial(caseX, caseY, mout, loup, probaPlante, famillePlante, eau, choixNormal.isSelected()));
+                BigBoss boss = new BigBoss(new ConfigInitial(caseX, caseY, mout, loup, probaPlante, famillePlante, eau, choixNormal.isSelected()));
                 dispose();
             }
         });

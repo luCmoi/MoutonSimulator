@@ -8,7 +8,7 @@ import moutonsimulator.Jeu.Partie;
 
 public class FamillePlante {
 
-    private ArrayList representants;
+    private ArrayList<Plante> representants = new ArrayList<>();
     private int idImage;
     private CaracteristiquePlante specs;
     private int espece;
@@ -26,7 +26,6 @@ public class FamillePlante {
         this.compteurGraines = 0;
         switch (espece) {
             case 0:
-                this.representants = new ArrayList<Herbe>();
                 if (c != null) {
                     Herbe h = new Herbe(c, this);
                     c.setPlante(h);
@@ -34,7 +33,6 @@ public class FamillePlante {
                 }
                 break;
             default:
-                this.representants = new ArrayList<Buisson>();
                 if (c != null) {
                     Buisson b = new Buisson(c, this);
                     c.setPlante(b);

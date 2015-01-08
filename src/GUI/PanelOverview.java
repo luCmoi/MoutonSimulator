@@ -19,6 +19,7 @@ public class PanelOverview extends JPanel {
     private final JLabel nombreMouton = new JLabel();
     private final JLabel nombreFamillePlante = new JLabel();
     private final JLabel nombrePlante = new JLabel();
+    private final JLabel nombreJour = new JLabel();
     private int largeur;
 
     public PanelOverview(PanelPartie pan) {
@@ -43,6 +44,8 @@ public class PanelOverview extends JPanel {
         this.add(nombreFamillePlante, contraintes);
         contraintes.gridy = 5;
         this.add(nombrePlante, contraintes);
+        contraintes.gridy = 6;
+        this.add(nombreJour, contraintes);
         this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
@@ -60,6 +63,7 @@ public class PanelOverview extends JPanel {
             comptePlante += fp.getRepresentants().size();
         }
         this.nombrePlante.setText("Nombre de Plantes : " + comptePlante);
+        this.nombreJour.setText("Jours écoulés : " + pan.getPartie().getJours());
         this.repaint();
         this.validate();
     }

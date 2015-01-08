@@ -251,7 +251,7 @@ public abstract class Animal extends ElementDynamique {
     public void mouvementBasique() {
         if (!aBouge) {
             aBouge = true;
-            ArrayList<Objectif> objectifs = new ArrayList();
+            ArrayList<Objectif> objectifs = new ArrayList<>();
             for (int x = Math.max(0, conteneur.getX() - competence.getVue()); x < Math.min(conteneur.getX() + competence.getVue(), conteneur.getContainer().getPlateau().length); x++) {
                 for (int y = Math.max(0, conteneur.getY() - (competence.getVue() - Math.abs(conteneur.getX() - x))); y < Math.min(conteneur.getY() + (competence.getVue() - Math.abs(conteneur.getX() - x)), conteneur.getContainer().getPlateau()[0].length); y++) {
                     //On regarde pas notre case ici
