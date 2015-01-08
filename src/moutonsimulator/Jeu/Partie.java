@@ -11,14 +11,18 @@ import moutonsimulator.Elements.Loup;
 import moutonsimulator.Elements.Mouton;
 import moutonsimulator.Elements.Plantes.FamillePlante;
 
+/**
+ * La partie est l'élément contenant la grille de jeu ainsi que chaque elementdynamique en présence
+ * et les coordonne entre eux ainsi qu'avec les "tick"
+ */
 public class Partie {
 
     private Grille plateau;
     private int jours;
-    private JPanel pan;
-    private ArrayList<Animal> setMouton;
-    private ArrayList<Animal> setLoup;
-    private ArrayList<FamillePlante> famillesPlante;
+    private final JPanel pan;
+    private final ArrayList<Animal> setMouton;
+    private final ArrayList<Animal> setLoup;
+    private final ArrayList<FamillePlante> famillesPlante;
     public static boolean pause;
 
     public Partie(ConfigInitial init, JPanel pan) {
@@ -197,39 +201,27 @@ public class Partie {
         return pan;
     }
 
-    public void setPan(JPanel pan) {
-        this.pan = pan;
-    }
 
     public ArrayList<Animal> getSetMouton() {
         return setMouton;
     }
 
-    public void setSetMouton(ArrayList<Animal> setMouton) {
-        this.setMouton = setMouton;
-    }
 
     public ArrayList<Animal> getSetLoup() {
         return setLoup;
     }
 
-    public void setSetLoup(ArrayList<Animal> setLoup) {
-        this.setLoup = setLoup;
-    }
 
     public ArrayList<FamillePlante> getFamillesPlante() {
         return famillesPlante;
     }
 
-    public void setFamillesPlante(ArrayList<FamillePlante> famillesPlante) {
-        this.famillesPlante = famillesPlante;
-    }
 
     public boolean isPause() {
         return pause;
     }
 
     public void setPause(boolean pause) {
-        this.pause = pause;
+        Partie.pause = pause;
     }
 }

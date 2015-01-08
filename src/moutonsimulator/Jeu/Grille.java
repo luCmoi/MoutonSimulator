@@ -6,10 +6,13 @@ import java.awt.Graphics2D;
 import moutonsimulator.Config;
 import moutonsimulator.Elements.Plaine;
 
+/**
+ * La grille contient un tableau de cases représentant le plateau de la partie
+ */
 public class Grille {
 
-    private Case[][] plateau;
-    private Partie partie;
+    private final Case[][] plateau;
+    private final Partie partie;
 
     public Grille(int width, int height,Partie p) {
         this.partie = p;
@@ -21,6 +24,9 @@ public class Grille {
         }
     }
 
+    /**
+     * Met a jour toutes les cases de la partie
+     */
     public void update() {
         for (Case[] plateau1 : plateau) {
             for (Case caseTmp : plateau1) {
@@ -29,6 +35,10 @@ public class Grille {
         }
     }
 
+    /**
+     * Préviens les cases présentes dans le ViewPort de s'afficher
+     * @param batch 
+     */
     public void render(Graphics2D batch) {
         batch.setColor(Color.DARK_GRAY);
         batch.fillRect(0, 0, partie.getPan().getWidth(), partie.getPan().getHeight());
@@ -55,16 +65,8 @@ public class Grille {
         return plateau;
     }
 
-    public void setPlateau(Case[][] plateau) {
-        this.plateau = plateau;
-    }
-
     public Partie getPartie() {
         return partie;
-    }
-
-    public void setPartie(Partie partie) {
-        this.partie = partie;
     }
 
 }

@@ -6,10 +6,14 @@ import javax.swing.JFrame;
 import moutonsimulator.Jeu.ConfigInitial;
 import moutonsimulator.Jeu.Partie;
 
+/**
+ * Class gérant tous les élément du programme ainsi que le multiThreading
+ * (thread principal et celui des "tick" de la partie
+ */
 public class BigBoss {
 
-    Partie partie;
-    FenetrePrincipale fenetre;
+    private final Partie partie;
+    private final FenetrePrincipale fenetre;
 
     public BigBoss(ConfigInitial conf) {
         this.fenetre = new FenetrePrincipale();

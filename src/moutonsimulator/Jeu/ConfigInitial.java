@@ -1,22 +1,18 @@
 package moutonsimulator.Jeu;
 
+/**
+ * Configuration d'une partie crée a partir du formulaire initial
+ */
 public class ConfigInitial {
 
     public static int width = 100;
     public static int heigth = 50;
-    public int nbMouton = 0;
-    public int nbLoup = 0;
-    private int probaPlante = 100;//sur 1000
-    public int nbFamillePlante = 50;
-    private int eau = 40000;
-    public static boolean modeMinimal = false;
-
-    public ConfigInitial(int caseX, int caseY, int mouton, int loup) {
-        width = caseX;
-        heigth = caseY;
-        nbMouton = mouton;
-        nbLoup = loup;
-    }
+    public final int nbMouton;
+    public final int nbLoup;
+    private final int probaPlante;
+    public final int nbFamillePlante;
+    private final int eau;
+    public static boolean modeMinimal;
 
     public ConfigInitial(int caseX, int caseY, int mout, int loup, int probaPlante, int famillePlante, int eau, boolean selected) {
         width = caseX;
@@ -49,40 +45,23 @@ public class ConfigInitial {
         return nbMouton;
     }
 
-    public void setNbMouton(int nbMouton) {
-        this.nbMouton = nbMouton;
-    }
-
     public int getNbLoup() {
         return nbLoup;
-    }
-
-    public void setNbLoup(int nbLoup) {
-        this.nbLoup = nbLoup;
     }
 
     public int getProbaPlante() {
         return probaPlante;
     }
 
-    public void setProbaPlante(int probaPlante) {
-        this.probaPlante = probaPlante;
-    }
 
     public int getEau() {
         return eau;
     }
 
-    public void setEau(int eau) {
-        this.eau = eau;
-    }
 
     public int getNbFamillePlante() {
         return nbFamillePlante;
     }
 
-    public void setNbFamillePlante(int nbFamillePlante) {
-        this.nbFamillePlante = nbFamillePlante;
-    }
 
 }

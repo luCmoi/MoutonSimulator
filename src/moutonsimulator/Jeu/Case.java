@@ -10,10 +10,13 @@ import moutonsimulator.Elements.Plantes.Graine;
 import moutonsimulator.Elements.Plantes.Plante;
 import moutonsimulator.Elements.Sol;
 
+/**
+ * Composant de base de la grille composé de sol, plantes, animaux et/ou engrais
+ */
 public class Case implements Comparable {
 
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
     private Animal animal;
     private Plante plante;
     private int engrais;
@@ -38,11 +41,19 @@ public class Case implements Comparable {
         this.graines = new HashSet<>();
     }
 
+    /**
+     * Informe si la case est déja occupé par une plante ou un animal
+     *
+     * @return
+     */
     public boolean presence() {
         return this.animal != null || this.plante != null;
     }
 
-    public void updateGraine() {
+    /**
+     * Met a jour les graines pour la germination de plante
+     */
+    private void updateGraine() {
         boolean germe = false;
         for (Graine g : graines) {
             if (g.getCountDown().decremente()) {
@@ -66,6 +77,10 @@ public class Case implements Comparable {
         }
     }
 
+    /**
+     * Met a jour la case et donc ses plantes animaux engrais ou graines(a
+     * chaque "tick")
+     */
     public void update() {
         if (this.plante != null) {
             plante.update();
@@ -82,6 +97,11 @@ public class Case implements Comparable {
         }
     }
 
+    /**
+     * La case se déssine a ses coordonnées
+     *
+     * @param batch
+     */
     public void render(Graphics2D batch) {
         batch.drawImage(sol.getImage(), (x * Config.coteCase) - (ViewPort.x), (y * Config.coteCase) - (ViewPort.y), Config.coteCase, Config.coteCase, null);
         if (this.getPlante() != null) {
@@ -96,16 +116,8 @@ public class Case implements Comparable {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
     public int getY() {
         return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 
     public Plante getPlante() {
