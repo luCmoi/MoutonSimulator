@@ -7,10 +7,13 @@ import javax.swing.JFrame;
 import moutonsimulator.Config;
 import moutonsimulator.Jeu.ConfigInitial;
 
+/**
+ * Fenêtre principale du programme qui affiche continent l'affichage de la grille a l'aide d'un ViewPort et un panel Overview
+ */
 public class FenetrePrincipale extends JFrame {
 
-    private PanelSplit split;
-    private PanelOverview over;
+    private final PanelSplit split;
+    private final PanelOverview over;
     private PanelPartie pan;
     
     public FenetrePrincipale() {
@@ -38,16 +41,8 @@ public class FenetrePrincipale extends JFrame {
         return split;
     }
 
-    public void setSplit(PanelSplit split) {
-        this.split = split;
-    }
-
     public PanelOverview getOver() {
         return over;
-    }
-
-    public void setOver(PanelOverview over) {
-        this.over = over;
     }
 
 }

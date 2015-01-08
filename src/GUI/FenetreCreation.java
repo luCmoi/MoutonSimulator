@@ -16,16 +16,19 @@ import javax.swing.text.NumberFormatter;
 import moutonsimulator.Jeu.ConfigInitial;
 import moutonsimulator.MoutonSimulator;
 
+/**
+ * Fenêtre affichée lors du lancement du programme permettant d'en choisir les réglages
+ */
 public class FenetreCreation extends JFrame {
 
-    JFormattedTextField nombreCaseX;
-    JFormattedTextField nombreCaseY;
-    JFormattedTextField nombreMouton;
-    JFormattedTextField nombreLoup;
-    JFormattedTextField nombreEau;
-    JFormattedTextField nombreFamilleP;
-    JFormattedTextField nombreProbaP;
-    JRadioButton choixNormal;
+    private final JFormattedTextField nombreCaseX;
+    private final JFormattedTextField nombreCaseY;
+    private final JFormattedTextField nombreMouton;
+    private final JFormattedTextField nombreLoup;
+    private final JFormattedTextField nombreEau;
+    private final JFormattedTextField nombreFamilleP;
+    private final JFormattedTextField nombreProbaP;
+    private final JRadioButton choixNormal;
 
     public FenetreCreation() {
         super("Creation de la carte");

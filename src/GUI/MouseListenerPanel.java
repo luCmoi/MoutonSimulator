@@ -9,16 +9,22 @@ import moutonsimulator.Config;
 import moutonsimulator.Jeu.Case;
 import moutonsimulator.Jeu.ConfigInitial;
 
+/**
+ * Listener de la sourie sur le panel de la partie
+ */
 public class MouseListenerPanel implements MouseMotionListener, MouseListener, MouseWheelListener {
 
-    public static int xPressed = 0;
-    public static int yPressed = 0;
-    public static int xV = 0;
-    public static int yV = 0;
-    public static boolean inMoove = false;
+    private int xPressed = 0;
+    private int yPressed = 0;
+    private int xV = 0;
+    private int yV = 0;
+    private boolean inMoove = false;
 
+    /**
+     * Gère les déplacements du Viewport
+     * @param me 
+     */
     @Override
-
     public void mouseDragged(MouseEvent me) {
         if (inMoove) {
             int nX = xV + (xPressed - me.getX());
@@ -42,6 +48,10 @@ public class MouseListenerPanel implements MouseMotionListener, MouseListener, M
     public void mouseClicked(MouseEvent me) {
     }
 
+    /**
+     * Gère l'affichage des fenetres spécifiques aux élément sur lesquels on clique
+     * @param me 
+     */
     @Override
     public void mousePressed(MouseEvent me) {
         if (me.getButton() == MouseEvent.BUTTON1) {
@@ -78,6 +88,10 @@ public class MouseListenerPanel implements MouseMotionListener, MouseListener, M
     public void mouseExited(MouseEvent me) {
     }
 
+    /**
+     * Gère le zoom a l'aide du ViewPort
+     * @param mwe 
+     */
     @Override
     public void mouseWheelMoved(MouseWheelEvent mwe) {
         ViewPort.zoom(mwe.getWheelRotation(), inMoove);

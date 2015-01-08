@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import javax.imageio.ImageIO;
 
+/**
+ * Class a éléments static qui sert de banque d'image au programme
+ */
 public class Images {
 
     public static BufferedImage herbe;

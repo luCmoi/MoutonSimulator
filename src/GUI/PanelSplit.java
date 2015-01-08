@@ -4,9 +4,12 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import javax.swing.JSplitPane;
 
+/**
+ * Panel contenant les deux autres et permettant de resize les deux Panels manuellement
+¨ */
 public class PanelSplit extends JSplitPane {
 
-    PanelOverview overview;
+    private final PanelOverview overview;
 
     public PanelSplit(PanelPartie partie, final PanelOverview overview, int width) {
         super(JSplitPane.HORIZONTAL_SPLIT, partie, overview);

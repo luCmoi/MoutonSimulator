@@ -15,11 +15,14 @@ import moutonsimulator.Elements.Animal;
 import moutonsimulator.Elements.ElementDynamique;
 import moutonsimulator.Elements.Plantes.Plante;
 
+/**
+ * Fenetre donnant les informations sur un élément dynamique précis
+ */
 public class FenetreElement extends JFrame {
 
-    int taille;
-    Animal info;
-    Plante info2;
+    private int taille;
+    private Animal info;
+    private Plante info2;
 
     public FenetreElement(ElementDynamique... reçu) {
         super(reçu[0].getClass().getSimpleName());

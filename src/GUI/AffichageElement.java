@@ -10,9 +10,12 @@ import javax.swing.JPanel;
 import moutonsimulator.Config;
 import moutonsimulator.Elements.ElementDynamique;
 
+/**
+ * Panel affichant l'image d'un ElementDynamique précis
+ */
 public class AffichageElement extends JPanel {
 
-    ElementDynamique element;
+    private final ElementDynamique element;
 
     public AffichageElement(ElementDynamique elem) {
         element = elem;

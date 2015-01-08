@@ -9,6 +9,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import moutonsimulator.Elements.Plantes.FamillePlante;
 
+/**
+ * Panel qui affiche des informations sur les entitées présente sur la partie
+ */
 public class PanelOverview extends JPanel {
 
     private PanelPartie pan;
@@ -16,7 +19,6 @@ public class PanelOverview extends JPanel {
     private final JLabel nombreMouton = new JLabel();
     private final JLabel nombreFamillePlante = new JLabel();
     private final JLabel nombrePlante = new JLabel();
-
     private int largeur;
 
     public PanelOverview(PanelPartie pan) {

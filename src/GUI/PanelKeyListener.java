@@ -6,12 +6,20 @@ import moutonsimulator.Config;
 import moutonsimulator.Jeu.ConfigInitial;
 import moutonsimulator.Jeu.Partie;
 
+/**
+ * Listener des touches de clavier pressé associé au panel de la partie
+ */
 public class PanelKeyListener implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
     }
 
+    /**
+     * Gère les déplacements de ViewPort a l'aide des touches directionelles
+     * ainsi que la pause a l'aide de la touche espace
+     * @param e 
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_UP && ViewPort.y != 0) {

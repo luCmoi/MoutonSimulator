@@ -7,9 +7,12 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 import moutonsimulator.Jeu.Partie;
 
+/**
+ * Panel qui contient l'affichage de la partie(la grille)
+ */
 public class PanelPartie extends JPanel {
 
-    public Partie partie;
+    private Partie partie;
 
     public PanelPartie() {
         super();

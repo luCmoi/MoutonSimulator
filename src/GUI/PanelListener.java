@@ -5,6 +5,9 @@ import java.awt.event.ComponentListener;
 import moutonsimulator.Config;
 import moutonsimulator.Jeu.ConfigInitial;
 
+/**
+ * Listener associé au panel split afin de gérer les resized
+ */
 public class PanelListener implements ComponentListener {
     
     @Override

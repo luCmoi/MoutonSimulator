@@ -3,6 +3,9 @@ package GUI;
 import moutonsimulator.Config;
 import moutonsimulator.Jeu.ConfigInitial;
 
+/**
+ * Gère le placement de "camera" au dessus de la partie afin de n'en dessiner que la zone visible a l'écran
+ */
 public class ViewPort {
 
     public static int x = 0;
@@ -13,6 +16,11 @@ public class ViewPort {
     public static int heightMax = ConfigInitial.heigth * Config.coteCase;
     public static PanelPartie panel;
 
+    /**
+     * Recalcul la camera avec de nouvelles dimensions
+     * @param width
+     * @param height 
+     */
     public static void resize(int width, int height) {
         if (ViewPort.x + width > ViewPort.widthMax) {
             if (width > ViewPort.widthMax) {
@@ -41,6 +49,11 @@ public class ViewPort {
         ViewPort.panel.repaint();
     }
 
+    /**
+     * Recalcul la camera a la suite d'un zoom
+     * @param wheel
+     * @param inMoove 
+     */
     public static void zoom(int wheel, boolean inMoove) {
         int nC = Config.coteCase - 2 * wheel;
         if (nC >= 16 && nC <= 64 && !inMoove) {
@@ -72,6 +85,11 @@ public class ViewPort {
 
     }
 
+    /**
+     * Déplace le ViewPort au dessus d'une zone spécifique
+     * @param x
+     * @param y 
+     */
     static void setVue(int x, int y) {
         x = x - (ViewPort.width / 2);
         y = y - (ViewPort.height / 2);
