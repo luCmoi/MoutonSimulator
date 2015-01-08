@@ -27,6 +27,10 @@ public class Images {
     public static HashMap<Integer, BufferedImage> banqueImage;
     public static int compteurImage;
 
+    /** 
+     * Charge les images necessaire au jeu
+     * Creer la banque d'image et y met l'image du loup, des moutons males et femelle
+     */
     public static void init() {
         Images.banqueImage = new HashMap<>();
         Images.compteurImage = 0;
@@ -55,7 +59,15 @@ public class Images {
         
         //
     }
-
+    
+    /**
+     * A partir du modele en noir et blanc,
+     * Genere une nouvelle image avec des couleur differente mais coherentes
+     * Donne un id a cette image et la place dans la banque
+     * Renvoi l'id
+     * @param model
+     * @return 
+     */
     public static int nouvelleImage(int model) {
         BufferedImage imgModel;
         switch (model) {
@@ -76,6 +88,14 @@ public class Images {
         return compteurImage++;
     }
 
+    /**
+     * Genere la nouvelle imagea partir du model et des trois couleurs
+     * @param model
+     * @param c1
+     * @param c2
+     * @param c3
+     * @return 
+     */
     public static BufferedImage conversionModel(BufferedImage model, Color c1, Color c2, Color c3) {
         BufferedImage img = new BufferedImage(64, 64, 2);
         for (int x = 0; x < 64; x++) {

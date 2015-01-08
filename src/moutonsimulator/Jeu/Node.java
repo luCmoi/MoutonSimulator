@@ -15,7 +15,12 @@ public class Node {
         this.racine = true;
         this.eau = false;
     }
-
+    /**
+     * Regarde si de l'eau peut etre placer sur cette case
+     * @param init
+     * @param tab
+     * @return 
+     */
     public boolean testValide(ConfigInitial init, Node[][] tab) {
         //But : savoir si tout les pere peuvent se remettre a true en passsant par quelq'un d'autre
         for (int x2 = Math.max(0, self.getX() - 1); x2 < Math.min(self.getX() + 2, init.getWidth()); x2++) {

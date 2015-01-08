@@ -45,6 +45,12 @@ public class FamillePlante {
         this.partie = c.getContainer().getPartie();
     }
 
+    /**
+     * Ajout d'une plante a la famille Met a jours ses representents.
+     *
+     * @param c
+     * @return
+     */
     public Plante add(Case c) {
         switch (espece) {
             case 0:
@@ -60,6 +66,10 @@ public class FamillePlante {
         }
     }
 
+    /**
+     * Si la famille n'as plus de representant, elle efface ses champs et met a
+     * jours la partie et la banque d'image
+     */
     public void mort() {
         try {
             Images.banqueImage.get(idImage).flush();
@@ -73,6 +83,11 @@ public class FamillePlante {
         System.gc();
     }
 
+    /**
+     *  Met a jour les representant quand une plante meurt
+     *
+     *
+     */
     public void supGraine() {
         this.compteurGraines--;
         if (this.representants.isEmpty() && compteurGraines <= 0) {
@@ -80,6 +95,11 @@ public class FamillePlante {
         }
     }
 
+    /**
+     * Met a jour les representant quand une plante meurt
+     *
+     * @param p
+     */
     public void remove(Plante p) {
         this.representants.remove(p);
         if (this.representants.isEmpty() && compteurGraines <= 0) {
