@@ -35,6 +35,11 @@ public class Partie {
         pause = false;
     }
 
+    /**
+     * Regarde si les parametres initiaux sont valide et genere la carte
+     * 
+     * @param init 
+     */
     private void initPlateau(ConfigInitial init) {
         this.plateau = new Grille(init.getWidth(), init.getHeigth(), this);
         //Placement de l'eau + verification nombre animaux;
@@ -77,6 +82,12 @@ public class Partie {
         triInsert(setLoup);
 
     }
+    
+    /**
+     * Place les sols, herbe d'abbord, puis de l'eau de maniere a ce que la terre reste connexe
+     * @param init
+     * @return 
+     */
 
     public int placementSol(ConfigInitial init) {
         Node tab[][] = initTabNode(init);
@@ -102,6 +113,11 @@ public class Partie {
         return compteurEau;
     }
 
+    /**
+     * Place des plantes en fonction de parametres initiaux
+     * @param init
+     * @return 
+     */
     public int placementPlante(ConfigInitial init) {
         int cmp = 0;
         Stack<Case> casesLibres = new Stack<>();
@@ -129,7 +145,12 @@ public class Partie {
 
         return cmp;
     }
-
+    /**
+     * Associe un Node a chaque case et calcul ses peres
+     * Utiliser pour le placements de l'eau
+     * @param init
+     * @return 
+     */
     public Node[][] initTabNode(ConfigInitial init) {
         Node tab[][] = new Node[init.getWidth()][init.getHeigth()];
         for (int x = 0; x < init.getWidth(); x++) {
@@ -150,7 +171,7 @@ public class Partie {
         }
         return tab;
     }
-
+    //Tri les sets de moutons et de loup selon leurs coordonees
     public void triInsert(ArrayList<Animal> list) {
 
         for (int i = 1; i < list.size(); i++) {
@@ -164,6 +185,9 @@ public class Partie {
         }
     }
 
+    /**
+     * Lance la mise a jour sur toutes les cases
+     */
     public void update() {
         if (!pause) {
             plateau.update();
@@ -177,6 +201,10 @@ public class Partie {
         }
     }
 
+    /**
+     * Lance la mise a jour d'affichage sur toutes les cases du plateau
+     * @param batch 
+     */
     public void render(Graphics2D batch) {
         plateau.render(batch);
     }
