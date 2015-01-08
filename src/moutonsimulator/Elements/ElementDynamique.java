@@ -12,9 +12,12 @@ public abstract class ElementDynamique {
 
     protected IntValMax vie;
     protected IntValMax age;
-    protected int idImage;
+    protected int idImage;//Numero de l'image dans la banque image
     protected Case conteneur;
 
+    /**Mise a jour minimal :
+     * Meurt si plus de vie ou trop vieux
+     */
     public void update() {
         if (this instanceof Animal) {
             if (this.vie.decremente()) {
@@ -28,6 +31,11 @@ public abstract class ElementDynamique {
 
     public abstract void mort();
 
+    /**
+     * Baisse la vie quand mange
+     * @param puissance
+     * @return 
+     */
     public int estMange(int puissance){
         int retour;
         if (this.vie.getVal()<=puissance){
@@ -40,6 +48,10 @@ public abstract class ElementDynamique {
         return retour;
     }
     
+    /**
+     * Dessine son image sur le batch
+     * @param batch 
+     */
     public void render(Graphics2D batch) {
         batch.drawImage(Images.banqueImage.get(idImage), (conteneur.getX() * Config.coteCase) - (ViewPort.x), (conteneur.getY() * Config.coteCase) - (ViewPort.y), Config.coteCase, Config.coteCase, null);
     }

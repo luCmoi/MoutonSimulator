@@ -4,12 +4,12 @@ import moutonsimulator.IntValMax;
 
 public class CaracteristiqueAnimale {
 
-    private IntValMax vie;
-    private IntValMax age;
-    public IntValMax reproduction;
-    private int engrais;
-    private int vue;
-    private int puissance;
+    private IntValMax vie;//Compteur de vie
+    private IntValMax age;//Compteur d'age
+    public IntValMax reproduction;//Compteur de reproduction
+    private int engrais;//Quantite d'engrais depose a la mort
+    private int vue;//Portee de vue
+    private int puissance;//Quantite de vie enlever a une cible pendant une interaction
 
     public CaracteristiqueAnimale(int vieMax, int ageMax, int engrais, int vue, int puissance, int repro) {
         this.vie = new IntValMax(vieMax);
@@ -30,6 +30,12 @@ public class CaracteristiqueAnimale {
         return new CaracteristiqueAnimale(vieMax, ageMax, engrais, vue, puissance, repro);
     }
 
+    /**
+     * Genere une spec a partir de celles des parents
+     * @param specsPere
+     * @param specsMere
+     * @return 
+     */
     public static CaracteristiqueAnimale specsEnfant(CaracteristiqueAnimale specsPere, CaracteristiqueAnimale specsMere) {
         int vieMax = (specsPere.getVie().getVal()+specsMere.getVie().getVal())/2;
         int ageMax = (specsPere.getAge().getVal()+specsMere.getAge().getVal())/2;
@@ -40,6 +46,9 @@ public class CaracteristiqueAnimale {
         return new CaracteristiqueAnimale(vieMax, ageMax, engrais, vue, puissance, repro);
     }
     
+    /**
+     * Specs pour version minimal
+     */
     public static CaracteristiqueAnimale minimumSpecsMouton() {
         int vieMax = 5;
         int ageMax= 50;

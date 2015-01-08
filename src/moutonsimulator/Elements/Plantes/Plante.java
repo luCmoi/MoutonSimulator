@@ -9,7 +9,7 @@ import moutonsimulator.Jeu.ConfigInitial;
 public class Plante extends ElementDynamique {
 
     public FamillePlante famille;
-    public IntValMax countDownRepro;
+    public IntValMax countDownRepro;//Compteur de reproduction
 
     public Plante(Case c, FamillePlante famille) {
         this.famille = famille;
@@ -19,7 +19,10 @@ public class Plante extends ElementDynamique {
         this.countDownRepro = new IntValMax(famille.getSpecs().getIntervalReproduction());
         this.idImage = famille.getIdImage();
     }
-
+    /**
+     * Meurt en se supprimant de sa case.
+     * Met a jour sa famille
+     */
     @Override
     public void mort() {
         this.famille.remove(this);
@@ -30,6 +33,10 @@ public class Plante extends ElementDynamique {
         this.countDownRepro = null;
     }
 
+    /**
+     * Mise a jour,
+     * se reproduit uniquement si le monde minimal n'est pas activer
+     */
     @Override
     public void update() {
         if (!ConfigInitial.modeMinimal) {
@@ -41,6 +48,12 @@ public class Plante extends ElementDynamique {
         }
     }
 
+    /**
+     * Reproduction :
+     * Selectionne les case alentour fertilizable,
+     * Ensuite la fertilise ou pas selon sa probabilite de reproduction
+     * Et pose une graine sur la/les cases.
+     */
     public void reproduction() {
         Stack<Case> casePossible = new Stack<>();
         for (int x = Math.max(0, conteneur.getX() - famille.getSpecs().getPorteSpore()); x < Math.min(conteneur.getX() + famille.getSpecs().getPorteSpore(), conteneur.getContainer().getPlateau().length); x++) {

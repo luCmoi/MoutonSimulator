@@ -20,19 +20,19 @@ public abstract class Animal extends ElementDynamique {
     protected boolean sexe;
     protected boolean mort;
     private int nbEnfants;
-    
+
     public abstract void updatePriorite();
 
     public Animal(Case c) {
         this.priorite = new HashMap<>();
-        if(ConfigInitial.modeMinimal){
-            if(this instanceof Mouton){
+        if (ConfigInitial.modeMinimal) {
+            if (this instanceof Mouton) {
                 this.competence = CaracteristiqueAnimale.minimumSpecsMouton();
-            }else{
+            } else {
                 this.competence = CaracteristiqueAnimale.minimumSpecsLoup();
             }
-        }else{
-          this.competence = CaracteristiqueAnimale.randomCompetences();  
+        } else {
+            this.competence = CaracteristiqueAnimale.randomCompetences();
         }
         this.vie = competence.getVie();
         this.age = competence.getAge();
@@ -43,8 +43,8 @@ public abstract class Animal extends ElementDynamique {
         this.pere = null;
         this.mere = null;
     }
-    
-    public Animal(Case c,Animal pere,Animal mere) {
+
+    public Animal(Case c, Animal pere, Animal mere) {
         this.priorite = new HashMap<>();
         this.competence = CaracteristiqueAnimale.specsEnfant(pere.getCompetence(), mere.getCompetence());
         this.vie = competence.getVie();
@@ -56,7 +56,7 @@ public abstract class Animal extends ElementDynamique {
         this.pere = pere;
         this.mere = mere;
     }
-    
+
     public Animal(Case c, CaracteristiqueAnimale specs) {
         this.priorite = new HashMap<>();
         this.competence = specs;
@@ -70,12 +70,18 @@ public abstract class Animal extends ElementDynamique {
         this.mere = null;
     }
 
+    /**
+     * -Mise a jour de l'animal : Met a jour de : -ses parents -son compteur de
+     * reproduction -ses priorites
+     *
+     * -Effecute un deplacement
+     */
     @Override
     public void update() {
-        if(mere != null && mere.isMort()){
+        if (mere != null && mere.isMort()) {
             mere = null;
         }
-        if(pere != null && pere.isMort()){
+        if (pere != null && pere.isMort()) {
             pere = null;
         }
         repro.decremente();
@@ -84,10 +90,23 @@ public abstract class Animal extends ElementDynamique {
         super.update();
     }
 
+    /**
+     * Augmente la vie de l'animal de celle preleve de la cible
+     *
+     * @param el
+     */
     public void mange(ElementDynamique el) {
         this.vie.setVal(this.vie.getVal() + el.estMange(this.competence.getPuissance()));
     }
 
+    /**
+     * Permet a deux animaux de ce reproduire : -Identifie le pere et la mere
+     * -Cherche une case libre autours de la mere -Creer un nouvel animal sur
+     * une case libre
+     *
+     * @param p1
+     * @param p2
+     */
     public void reproduction(Animal p1, Animal p2) {
         Animal mere, pere;
         if (p1.sexe) {
@@ -112,20 +131,27 @@ public abstract class Animal extends ElementDynamique {
         Case tmp = caseLibre.pop();
         Animal fils;
         if (mere.getClass() == Mouton.class) {
-            fils = new Mouton(tmp,pere,mere);
+            fils = new Mouton(tmp, pere, mere);
             mere.getConteneur().getContainer().getPartie().getSetMouton().add(fils);
         } else {
-            fils = new Loup(tmp,pere,mere);
+            fils = new Loup(tmp, pere, mere);
             mere.getConteneur().getContainer().getPartie().getSetLoup().add(fils);
         }
         fils.setMere(mere);
         fils.setPere(pere);
-        pere.setNbEnfants(pere.getNbEnfants()+1);
-        mere.setNbEnfants(mere.getNbEnfants()+1);
+        pere.setNbEnfants(pere.getNbEnfants() + 1);
+        mere.setNbEnfants(mere.getNbEnfants() + 1);
         tmp.setAnimal(fils);
         caseLibre.clear();
     }
 
+    /**
+     * Fait interagir l'animal et son objectifs: -si c'est une plante ou un
+     * animal de classe diferente(pour le loup) il le mange -sinon si possible,
+     * ce reproduit avec
+     *
+     * @param but
+     */
     public void interaction(Objectif but) {
         //Nourriture
         if (but.isSuperpose()) {
@@ -142,6 +168,9 @@ public abstract class Animal extends ElementDynamique {
         }
     }
 
+    /**
+     * L'animal devient mort et pose des sediments sur sa case
+     */
     @Override
     public void mort() {
         this.conteneur.setAnimal(null);
@@ -149,6 +178,9 @@ public abstract class Animal extends ElementDynamique {
         this.mort = true;
     }
 
+    /**
+     * Choisi une case alentour possible et ce deplace dessus
+     */
     public void mouvementAleatoire() {
         Stack<Case> casePossible = new Stack<>();
         for (int x = Math.max(0, conteneur.getX() - 1); x < Math.min(conteneur.getX() + 2, conteneur.getContainer().getPlateau().length); x++) {
@@ -168,20 +200,28 @@ public abstract class Animal extends ElementDynamique {
         this.conteneur = tmp;
     }
 
+    /**
+     *PathFinding vers un objectif predefini
+     * @param o
+     */
     public void mouvementDirige(Objectif o) {
         if (o.getCible() != this.conteneur) {
             Point cible = new Point(o.getCible().getX(), o.getCible().getY());
             Point courant = new Point(conteneur.getX(), conteneur.getY());
+            
             HashMap<Point, Noeud> listeFermee = new HashMap<>();
             HashMap<Point, Noeud> listeOuverte = new HashMap<>();
+            
             listeOuverte.put(courant, new Noeud());
             listeOuverte.get(courant).cout_f = (float) PathFinding.distance(courant, cible);
+            
             PathFinding.ajoutListeFermee(courant, listeFermee, listeOuverte);
-            PathFinding.ajoutCaseVoisines(courant, cible, listeOuverte, listeFermee, conteneur.getContainer().getPlateau(),this.competence.getVue());
+            PathFinding.ajoutCaseVoisines(courant, cible, listeOuverte, listeFermee, conteneur.getContainer().getPlateau(), this.competence.getVue());
+            
             while (!((courant.x == cible.x) && (courant.y == cible.y)) && (!listeOuverte.isEmpty())) {
                 courant = PathFinding.meilleurNoeud(listeOuverte);
                 PathFinding.ajoutListeFermee(courant, listeFermee, listeOuverte);
-                PathFinding.ajoutCaseVoisines(courant, cible, listeOuverte, listeFermee, conteneur.getContainer().getPlateau(),this.competence.getVue());
+                PathFinding.ajoutCaseVoisines(courant, cible, listeOuverte, listeFermee, conteneur.getContainer().getPlateau(), this.competence.getVue());
             }
             if ((courant.x == cible.x) && (courant.y == cible.y)) {
                 Point tmp = PathFinding.retrouver_chemin(cible, new Point(conteneur.getX(), conteneur.getY()), listeFermee, o);
@@ -189,6 +229,7 @@ public abstract class Animal extends ElementDynamique {
                 Case caseTmp = conteneur.getContainer().getPlateau()[tmp.x][tmp.y];
                 caseTmp.setAnimal(this);
                 this.conteneur = caseTmp;
+                
                 if (cible.equals(tmp) && o.isSuperpose()) {
                     this.interaction(o);
                 } else if (listeFermee.get(cible).parent.equals(tmp) && !o.isSuperpose()) {
@@ -201,7 +242,12 @@ public abstract class Animal extends ElementDynamique {
             this.interaction(o);
         }
     }
-
+    /**
+     *Choisi un objectif parmi les case alentour en fonction de la vue et des
+     *priorite.
+     *Si un objectif est trouver, lance le mouvement diriger vers lui,
+     * sinon, lance un mouvement aleatoire
+     */
     public void mouvementBasique() {
         if (!aBouge) {
             aBouge = true;
